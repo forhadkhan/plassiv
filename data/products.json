@@ -1,0 +1,160 @@
+[
+  {
+    "id": "p1",
+    "sku": "PLV-BLZ-001",
+    "name": "Elegant Peach Blazer",
+    "category": "Blazers",
+    "priceCents": 15080,
+    "image": "assets/img/p1.jpg",
+    "width": 1112,
+    "height": 1192,
+    "alt": "Man in a cream blazer and trousers against a peach studio backdrop",
+    "description": "A softly structured single-breasted blazer in a light stone weave. Easy enough for weekends, sharp enough for the office.",
+    "details": [
+      "Fabric: 55% linen, 45% cotton, half-lined",
+      "Fit: tailored through the chest, natural shoulder",
+      "Two-button front, flap pockets, functional cuffs",
+      "Care: dry clean only"
+    ],
+    "sizes": ["S", "M", "L", "XL", "XXL"],
+    "soldOut": ["S", "XXL"],
+    "colors": [
+      { "name": "Stone Cream", "hex": "#ddd6c8" },
+      { "name": "Peach", "hex": "#e8c4a8" },
+      { "name": "Sand", "hex": "#c9b48f" },
+      { "name": "Navy", "hex": "#25324a" }
+    ],
+    "fits": ["Regular", "Slim"]
+  },
+  {
+    "id": "p2",
+    "sku": "PLV-JKT-002",
+    "name": "Classic Light Denim Jacket",
+    "category": "Jackets",
+    "priceCents": 12080,
+    "image": "assets/img/p2.jpg",
+    "width": 1112,
+    "height": 1192,
+    "alt": "Man in a light-wash denim jacket",
+    "description": "The trucker jacket you will reach for all year. Light-wash rigid denim that softens and fades with every wear.",
+    "details": [
+      "Fabric: 100% cotton denim, 13 oz",
+      "Fit: classic straight body, hits at the hip",
+      "Button front, two chest flap pockets, adjustable waist tabs",
+      "Care: machine wash cold inside out, line dry"
+    ],
+    "sizes": ["S", "M", "L", "XL", "XXL"],
+    "soldOut": ["XL"],
+    "colors": [
+      { "name": "Light Wash", "hex": "#9fb6cc" },
+      { "name": "Mid Wash", "hex": "#5b7898" },
+      { "name": "Black Denim", "hex": "#2b2d31" }
+    ],
+    "fits": []
+  },
+  {
+    "id": "p3",
+    "sku": "PLV-JKT-003",
+    "name": "Premium Black Leather Jacket",
+    "category": "Jackets",
+    "priceCents": 16055,
+    "image": "assets/img/p3.jpg",
+    "width": 1112,
+    "height": 1192,
+    "alt": "Bearded man in a black leather biker jacket and sunglasses",
+    "description": "A biker jacket cut from supple lambskin, with an asymmetric zip and a quilted lining that keeps its shape.",
+    "details": [
+      "Fabric: 100% lambskin leather, polyester lining",
+      "Fit: close to the body, cropped at the waist",
+      "Asymmetric zip, zipped cuffs, three outer pockets",
+      "Care: specialist leather clean only"
+    ],
+    "sizes": ["S", "M", "L", "XL", "XXL"],
+    "soldOut": ["M", "XXL"],
+    "colors": [
+      { "name": "Black", "hex": "#1c1c1c" },
+      { "name": "Cognac", "hex": "#8a4b2a" },
+      { "name": "Dark Brown", "hex": "#4a3226" }
+    ],
+    "fits": []
+  },
+  {
+    "id": "p4",
+    "sku": "PLV-SHT-004",
+    "name": "Olive Green Premium Casual Shirt",
+    "category": "Shirts",
+    "priceCents": 10020,
+    "image": "assets/img/p4.jpg",
+    "width": 1112,
+    "height": 1424,
+    "alt": "Man in a relaxed sage green linen shirt",
+    "description": "A breathable linen shirt in a muted sage. Wear it buttoned up, open over a tee, or tucked with tailoring.",
+    "details": [
+      "Fabric: 100% European linen, garment washed",
+      "Fit: relaxed through the body, straight hem",
+      "Camp collar, mother-of-pearl buttons",
+      "Care: machine wash 30°C, hang to dry"
+    ],
+    "sizes": ["S", "M", "L", "XL", "XXL"],
+    "soldOut": ["L"],
+    "colors": [
+      { "name": "Sage", "hex": "#a3ad8f" },
+      { "name": "Olive", "hex": "#6b6f45" },
+      { "name": "Off White", "hex": "#efece4" },
+      { "name": "Sky", "hex": "#a9c3d9" }
+    ],
+    "fits": ["Regular", "Slim"]
+  },
+  {
+    "id": "p5",
+    "sku": "PLV-SHT-005",
+    "name": "Urban Check Flannel Shirt",
+    "category": "Shirts",
+    "priceCents": 10066,
+    "image": "assets/img/p5.jpg",
+    "width": 1112,
+    "height": 1424,
+    "alt": "Young man in a green and tan check overshirt over a black tee",
+    "description": "A brushed cotton flannel in a green and tan check, heavy enough to layer as an overshirt on cooler days.",
+    "details": [
+      "Fabric: 100% brushed cotton flannel",
+      "Fit: easy through the chest, curved hem",
+      "Two button-flap chest pockets",
+      "Care: machine wash cold, tumble dry low"
+    ],
+    "sizes": ["S", "M", "L", "XL", "XXL"],
+    "soldOut": ["S", "XL"],
+    "colors": [
+      { "name": "Forest Check", "hex": "#4d5a3c" },
+      { "name": "Rust Check", "hex": "#9a4f2e" },
+      { "name": "Navy Check", "hex": "#2c3a55" }
+    ],
+    "fits": ["Regular", "Slim"]
+  },
+  {
+    "id": "p6",
+    "sku": "PLV-BLZ-006",
+    "name": "Summer Beige Smart Blazer Set",
+    "category": "Blazers",
+    "priceCents": 15080,
+    "image": "assets/img/p6.jpg",
+    "width": 1112,
+    "height": 1424,
+    "alt": "Man in a beige blazer set, navy knit and sunglasses",
+    "description": "A lightweight blazer and trouser set in warm beige, made for summer weddings, travel and long city evenings.",
+    "details": [
+      "Fabric: 70% cotton, 30% linen, unlined",
+      "Fit: soft shoulder, trousers with a tapered leg",
+      "Set includes blazer and matching trousers",
+      "Care: dry clean recommended"
+    ],
+    "sizes": ["S", "M", "L", "XL", "XXL"],
+    "soldOut": ["XXL"],
+    "colors": [
+      { "name": "Beige", "hex": "#cbb69a" },
+      { "name": "Taupe", "hex": "#9c8b78" },
+      { "name": "Ivory", "hex": "#f1ebdf" }
+    ],
+    "fits": ["Regular", "Slim"]
+  }
+]
