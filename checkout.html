@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Checkout — Plassiv</title>
+  <meta name="description" content="Check out your Plassiv order and pay cash on delivery.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#345a41">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23345a41'/%3E%3Cpath d='M10 7h3v15h9v3H10z' fill='%23fff'/%3E%3C/svg%3E">
+  <link rel="preload" href="assets/fonts/anton-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/sora-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="dist/styles.css">
+  <script>document.documentElement.classList.add('js')</script>
+</head>
+<body class="overflow-x-hidden antialiased">
+<svg xmlns="http://www.w3.org/2000/svg" class="hidden" aria-hidden="true">
+  <symbol id="i-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34" /> <circle cx="11" cy="11" r="8" /></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /> <circle cx="12" cy="7" r="4" /></symbol>
+  <symbol id="i-shopping-cart" viewBox="0 0 24 24"><path d="m2.05 2.05 1.099-.028a1 1 0 0 1 1.008.815l2.69 14.347A1 1 0 0 0 7.83 18H18" /> <path d="M4.563 5h16.435a1 1 0 0 1 .981 1.204l-1.026 6.226A2 2 0 0 1 18.962 14H6.25" /> <circle cx="18" cy="20" r="2" /> <circle cx="8" cy="20" r="2" /></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" /></symbol>
+  <symbol id="i-chevron-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6" /></symbol>
+  <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6" /></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 5h16" /> <path d="M4 12h16" /> <path d="M4 19h16" /></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18" /> <path d="m6 6 12 12" /></symbol>
+  <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14" /></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14" /> <path d="M12 5v14" /></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M10 11v6" /> <path d="M14 11v6" /> <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" /> <path d="M3 6h18" /> <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /></symbol>
+  <symbol id="i-truck" viewBox="0 0 24 24"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2" /> <path d="M15 18H9" /> <path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14" /> <circle cx="17" cy="18" r="2" /> <circle cx="7" cy="18" r="2" /></symbol>
+  <symbol id="i-tag" viewBox="0 0 24 24"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z" /> <circle cx="7.5" cy="7.5" r=".5" fill="currentColor" /></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5" /></symbol>
+  <symbol id="i-circle-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="m16 9-5.5 5.5L8 12" /></symbol>
+  <symbol id="i-circle-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <line x1="12" x2="12" y1="8" y2="12" /> <line x1="12" x2="12.01" y1="16" y2="16" /></symbol>
+  <symbol id="i-shield-check" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /> <path d="m9 12 2 2 4-4" /></symbol>
+  <symbol id="i-package" viewBox="0 0 24 24"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z" /> <path d="M12 22V12" /> <polyline points="3.29 7 12 12 20.71 7" /> <path d="m7.5 4.27 9 5.15" /></symbol>
+  <symbol id="i-banknote" viewBox="0 0 24 24"><rect width="20" height="12" x="2" y="6" rx="2" /> <circle cx="12" cy="12" r="2" /> <path d="M6 12h.01M18 12h.01" /></symbol>
+  <symbol id="b-facebook" viewBox="0 0 24 24"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></symbol>
+  <symbol id="b-x-brand" viewBox="0 0 24 24"><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"/></symbol>
+  <symbol id="b-instagram" viewBox="0 0 24 24"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></symbol>
+  <symbol id="b-linkedin" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></symbol>
+</svg>
+
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:text-ink">Skip to content</a>
+
+<header id="top" class="relative bg-brand text-white">
+  <nav class="container-x relative z-30 grid grid-cols-[1fr_auto_1fr] items-center py-5 lg:py-7" aria-label="Primary">
+    <ul class="hidden items-center gap-8 text-[0.8125rem] font-medium md:flex">
+      <li><a href="index.html" class="opacity-90 transition hover:opacity-100">Home</a></li>
+      <li><a href="index.html#shop" class="opacity-90 transition hover:opacity-100">Shop</a></li>
+      <li><a href="index.html#collections" class="opacity-90 transition hover:opacity-100">Collections</a></li>
+      <li><a href="index.html#about" class="opacity-90 transition hover:opacity-100">About</a></li>
+      <li><a href="index.html#contact" class="opacity-90 transition hover:opacity-100">Contact</a></li>
+    </ul>
+    <button type="button" id="menu-btn" class="inline-flex size-10 items-center justify-center rounded-full md:hidden -ml-2" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <svg class="icon" data-open><use href="#i-menu"/></svg>
+      <svg class="icon hidden" data-close><use href="#i-x"/></svg>
+    </button>
+    <a href="index.html" class="font-display text-xl font-bold tracking-tight lg:text-2xl">Plassiv</a>
+    <div class="flex items-center justify-end gap-4 lg:gap-5">
+      <button type="button" class="transition hover:opacity-75" aria-label="Search"><svg class="icon"><use href="#i-search"/></svg></button>
+      <button type="button" class="transition hover:opacity-75" aria-label="Account"><svg class="icon"><use href="#i-user"/></svg></button>
+      <button type="button" data-cart-open class="relative -m-2 grid size-9 place-items-center transition hover:opacity-75" aria-label="Cart" aria-haspopup="dialog" aria-controls="cart-drawer">
+        <svg class="icon"><use href="#i-shopping-cart"/></svg>
+        <span data-cart-count class="absolute right-0 top-0 hidden h-[1.125rem] min-w-[1.125rem] place-items-center rounded-full bg-white px-1 text-[0.625rem] font-bold leading-none text-ink" aria-hidden="true"></span>
+      </button>
+    </div>
+  </nav>
+  <div id="mobile-menu" class="absolute inset-x-0 top-[4.25rem] z-30 hidden bg-brand-deep/95 px-4 py-4 backdrop-blur md:hidden">
+    <ul class="flex flex-col text-base font-medium">
+      <li><a href="index.html" class="block py-3">Home</a></li>
+      <li><a href="index.html#shop" class="block py-3">Shop</a></li>
+      <li><a href="index.html#collections" class="block py-3">Collections</a></li>
+      <li><a href="index.html#about" class="block py-3">About</a></li>
+      <li><a href="index.html#contact" class="block py-3">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="main" class="container-x pt-6 lg:pt-10">
+  <a href="index.html#shop" class="inline-flex items-center gap-1 text-xs text-muted transition hover:text-ink"><svg class="icon size-3.5"><use href="#i-chevron-left"/></svg>Continue shopping</a>
+  <h1 class="heading mt-4 text-[clamp(1.75rem,3vw,2.5rem)]">Checkout</h1>
+
+  <section data-checkout-empty class="hidden py-12 text-center lg:py-20" aria-labelledby="empty-title">
+    <span class="mx-auto grid size-16 place-items-center rounded-full bg-brand/10 text-brand"><svg class="icon size-7"><use href="#i-shopping-cart"/></svg></span>
+    <h2 id="empty-title" class="heading mt-6 text-2xl">Your cart is empty</h2>
+    <p class="mx-auto mt-3 max-w-sm text-sm text-muted">Add a few pieces to your cart and come back here to check out.</p>
+    <a href="index.html#shop" class="mt-7 inline-flex h-11 items-center gap-2 rounded-full bg-ink px-6 text-sm font-semibold text-white transition hover:bg-ink/85">Start shopping <svg class="icon size-4"><use href="#i-chevron-right"/></svg></a>
+  </section>
+
+  <form data-checkout class="mt-8 hidden grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_25rem] lg:gap-14" novalidate>
+    <div class="space-y-10">
+      <div data-error-summary class="hidden rounded-2xl border border-danger/40 bg-danger/5 p-4 sm:p-5" tabindex="-1" aria-labelledby="error-summary-title">
+        <h2 id="error-summary-title" class="flex items-center gap-2 text-sm font-bold text-danger"><svg class="icon size-[1.125rem]"><use href="#i-circle-alert"/></svg><span></span></h2>
+        <ul class="mt-2 list-disc space-y-1 pl-9 text-sm"></ul>
+      </div>
+      <p class="text-xs text-muted">Fields marked <span class="text-danger">*</span> are required.</p>
+
+      <fieldset class="-mt-6 min-w-0">
+        <legend class="font-display text-lg font-bold">Contact</legend>
+        <div class="mt-4 grid gap-5 sm:grid-cols-2">
+          <div class="sm:col-span-2">
+            <label for="f-name" class="text-sm font-semibold">Full name <span class="text-danger" aria-hidden="true">*</span></label>
+            <input id="f-name" name="name" class="input" autocomplete="name" maxlength="80" required aria-describedby="f-name-error">
+            <p id="f-name-error" class="field-error"></p>
+          </div>
+          <div>
+            <label for="f-phone" class="text-sm font-semibold">Phone <span class="text-danger" aria-hidden="true">*</span></label>
+            <input id="f-phone" name="phone" type="tel" class="input" autocomplete="tel" inputmode="tel" maxlength="24" required aria-describedby="f-phone-hint f-phone-error">
+            <p id="f-phone-hint" class="mt-1.5 text-xs text-muted">For the courier. Digits, spaces, dashes, brackets and a leading + are fine.</p>
+            <p id="f-phone-error" class="field-error"></p>
+          </div>
+          <div>
+            <label for="f-email" class="text-sm font-semibold">Email <span class="font-normal text-muted">(optional)</span></label>
+            <input id="f-email" name="email" type="email" class="input" autocomplete="email" maxlength="120" aria-describedby="f-email-error">
+            <p id="f-email-error" class="field-error"></p>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="min-w-0">
+        <legend class="font-display text-lg font-bold">Delivery address</legend>
+        <div class="mt-4 grid gap-5 sm:grid-cols-2">
+          <div class="sm:col-span-2">
+            <label for="f-address" class="text-sm font-semibold">Street address <span class="text-danger" aria-hidden="true">*</span></label>
+            <input id="f-address" name="address" class="input" autocomplete="street-address" maxlength="200" required aria-describedby="f-address-error">
+            <p id="f-address-error" class="field-error"></p>
+          </div>
+          <div>
+            <label for="f-city" class="text-sm font-semibold">City <span class="text-danger" aria-hidden="true">*</span></label>
+            <input id="f-city" name="city" class="input" autocomplete="address-level2" maxlength="60" required aria-describedby="f-city-error">
+            <p id="f-city-error" class="field-error"></p>
+          </div>
+          <div>
+            <label for="f-area" class="text-sm font-semibold">Area / district <span class="text-danger" aria-hidden="true">*</span></label>
+            <input id="f-area" name="area" class="input" autocomplete="address-level3" maxlength="60" required aria-describedby="f-area-error">
+            <p id="f-area-error" class="field-error"></p>
+          </div>
+          <div>
+            <label for="f-postal" class="text-sm font-semibold">Postal code <span class="font-normal text-muted">(optional)</span></label>
+            <input id="f-postal" name="postal" class="input" autocomplete="postal-code" maxlength="10" aria-describedby="f-postal-error">
+            <p id="f-postal-error" class="field-error"></p>
+          </div>
+          <div class="sm:col-span-2">
+            <label for="f-notes" class="text-sm font-semibold">Order notes <span class="font-normal text-muted">(optional)</span></label>
+            <textarea id="f-notes" name="notes" class="input" rows="3" maxlength="300" placeholder="Landmark, delivery time, gate code…"></textarea>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="min-w-0">
+        <legend class="font-display text-lg font-bold">Payment</legend>
+        <label class="mt-4 flex cursor-pointer gap-3.5 rounded-2xl border-2 border-ink p-4">
+          <input type="radio" name="payment" value="cod" checked class="mt-0.5 size-[1.125rem] accent-brand" aria-labelledby="cod-label" aria-describedby="cod-note">
+          <span>
+            <span id="cod-label" class="flex items-center gap-2 text-sm font-semibold"><svg class="icon size-[1.125rem] text-brand"><use href="#i-banknote"/></svg>Cash on Delivery</span>
+            <span id="cod-note" class="mt-1 block text-xs leading-relaxed text-muted">Pay when your order arrives. Have the exact amount ready for the courier; no card or online payment needed.</span>
+          </span>
+        </label>
+      </fieldset>
+    </div>
+
+    <aside class="self-start rounded-2xl border border-line p-5 lg:sticky lg:top-8 lg:p-6" aria-labelledby="summary-title">
+      <h2 id="summary-title" class="font-display text-lg font-bold">Order summary</h2>
+      <ul data-summary-lines class="mt-4 divide-y divide-line" aria-label="Items"></ul>
+      <div data-coupon class="mt-5 border-t border-line pt-5"></div>
+      <dl data-summary-totals class="mt-5 space-y-2 text-sm"></dl>
+      <button type="submit" class="mt-6 flex h-13 w-full items-center justify-center gap-2.5 rounded-full bg-ink text-sm font-semibold text-white transition hover:bg-ink/85 disabled:cursor-wait disabled:opacity-60">
+        <svg class="icon size-[1.125rem]"><use href="#i-shield-check"/></svg><span data-submit-label>Place order</span>
+      </button>
+      <p class="mt-3 text-center text-xs leading-relaxed text-muted">Demo shop: your order is saved in this browser only and is not sent to any server.</p>
+    </aside>
+  </form>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer id="contact" class="mt-20 bg-brand text-white lg:mt-[9.5rem]">
+  <div class="container-x pt-16 lg:pt-28">
+    <div class="text-center">
+      <a href="#top" class="font-display text-base font-bold tracking-tight">Plassiv</a>
+      <p class="mt-3 text-xs font-medium uppercase tracking-[0.12em] text-white/80">Designed for modern you</p>
+      <ul class="mt-5 flex justify-center gap-3">
+        <li><a href="#" class="grid size-8 place-items-center rounded-lg border border-white/60 transition hover:bg-white hover:text-brand" aria-label="Facebook"><svg class="icon icon-brand size-3.5"><use href="#b-facebook"/></svg></a></li>
+        <li><a href="#" class="grid size-8 place-items-center rounded-lg border border-white/60 transition hover:bg-white hover:text-brand" aria-label="X"><svg class="icon icon-brand size-3.5"><use href="#b-x-brand"/></svg></a></li>
+        <li><a href="#" class="grid size-8 place-items-center rounded-lg border border-white/60 transition hover:bg-white hover:text-brand" aria-label="Instagram"><svg class="icon icon-brand size-3.5"><use href="#b-instagram"/></svg></a></li>
+        <li><a href="#" class="grid size-8 place-items-center rounded-lg border border-white/60 transition hover:bg-white hover:text-brand" aria-label="LinkedIn"><svg class="icon icon-brand size-3.5"><use href="#b-linkedin"/></svg></a></li>
+      </ul>
+    </div>
+
+    <ul class="mt-12 flex flex-wrap justify-between gap-x-6 gap-y-3 text-[0.8125rem] font-medium lg:mt-20">
+      <li><a href="index.html#about" class="transition hover:opacity-70">About</a></li>
+      <li><a href="index.html#shop" class="transition hover:opacity-70">Service</a></li>
+      <li><a href="#contact" class="transition hover:opacity-70">Contact</a></li>
+      <li><a href="#contact" class="transition hover:opacity-70">Support</a></li>
+      <li><a href="index.html#reviews" class="transition hover:opacity-70">Community</a></li>
+    </ul>
+
+    <div class="poster-wrap mt-8 lg:mt-10" aria-hidden="true">
+      <div class="poster poster-fit text-center">Plassiv</div>
+    </div>
+
+    <div class="mt-8 flex flex-wrap items-center justify-between gap-x-6 gap-y-2 pb-6 text-[0.6875rem] text-white/80 lg:pb-8">
+      <p>©2026 Plassiv. All Rights Reserved.</p>
+      <p class="flex items-center gap-2"><a href="#" class="transition hover:text-white">Terms &amp; Conditions</a><span class="h-3 w-px bg-white/60" aria-hidden="true"></span><a href="#" class="transition hover:text-white">Privacy Policy</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ CART DRAWER (filled by js/cart-drawer.js) ============ -->
+<dialog id="cart-drawer" class="cart-drawer" aria-labelledby="cart-title">
+  <div class="flex h-full flex-col">
+    <div class="flex items-center justify-between border-b border-line px-5 py-4">
+      <h2 id="cart-title" class="heading text-xl">Your cart <span data-cart-heading-count class="font-sans text-sm font-medium tracking-normal text-muted"></span></h2>
+      <button type="button" data-cart-close class="-mr-2 grid size-10 place-items-center rounded-full transition hover:bg-ink/5" aria-label="Close cart"><svg class="icon"><use href="#i-x"/></svg></button>
+    </div>
+    <p id="cart-live" class="sr-only" role="status"></p>
+    <div data-cart-empty class="hidden flex-1 flex-col items-center justify-center px-5 text-center">
+      <span class="grid size-16 place-items-center rounded-full bg-brand/10 text-brand"><svg class="icon size-7"><use href="#i-shopping-cart"/></svg></span>
+      <p class="mt-5 font-display text-lg font-bold">Your cart is empty</p>
+      <p class="mt-1.5 text-sm text-muted">Find something you love and it will wait for you here.</p>
+      <a href="index.html#shop" class="mt-6 inline-flex h-11 items-center gap-2 rounded-full bg-ink px-6 text-sm font-semibold text-white transition hover:bg-ink/85">Start shopping <svg class="icon size-4"><use href="#i-chevron-right"/></svg></a>
+    </div>
+    <ul data-cart-lines class="flex-1 divide-y divide-line overflow-y-auto overscroll-contain px-5" aria-label="Items in your cart"></ul>
+    <div data-cart-foot class="border-t border-line px-5 pb-5 pt-4">
+      <div data-coupon></div>
+      <dl data-totals class="mt-4 space-y-2 text-sm"></dl>
+      <a href="checkout.html" class="mt-4 flex h-12 items-center justify-center gap-2 rounded-full bg-ink text-sm font-semibold text-white transition hover:bg-ink/85">Checkout <svg class="icon size-4"><use href="#i-chevron-right"/></svg></a>
+      <p class="mt-2.5 flex items-center justify-center gap-1.5 text-xs text-muted"><svg class="icon size-4"><use href="#i-banknote"/></svg> Cash on delivery: pay when your order arrives</p>
+    </div>
+  </div>
+</dialog>
+
+<script src="js/main.js" defer></script>
+<script type="module" src="js/cart-drawer.js"></script>
+<script type="module" src="js/checkout.js"></script>
+</body>
+</html>

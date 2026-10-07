@@ -5,12 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Plassiv — Modern Menswear</title>
   <meta name="description" content="Plassiv is modern menswear: elegant, trendy and comfortable pieces designed to make you feel confident every single day.">
-  <meta name="theme-color" content="#345a41">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23345a41'/%3E%3Cpath d='M10 7h3v15h9v3H10z' fill='%23fff'/%3E%3C/svg%3E">
-  <link rel="preload" href="assets/fonts/anton-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/fonts/sora-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="dist/styles.css">
-  <script>document.documentElement.classList.add('js')</script>
+<!--HEAD-->
 </head>
 <body class="overflow-x-hidden antialiased">
 <!--SPRITE-->
@@ -20,34 +15,7 @@
 <!-- ============ HERO ============ -->
 <header id="top" class="relative isolate overflow-hidden bg-brand text-white h-[clamp(40rem,76.5vw,72rem)]">
   <!-- nav -->
-  <nav class="container-x absolute inset-x-0 top-0 z-30 grid grid-cols-[1fr_auto_1fr] items-center py-5 lg:py-7" aria-label="Primary">
-    <ul class="hidden items-center gap-8 text-[0.8125rem] font-medium md:flex">
-      <li><a href="#top" class="opacity-90 transition hover:opacity-100">Home</a></li>
-      <li><a href="#shop" class="opacity-90 transition hover:opacity-100">Shop</a></li>
-      <li><a href="#collections" class="opacity-90 transition hover:opacity-100">Collections</a></li>
-      <li><a href="#about" class="opacity-90 transition hover:opacity-100">About</a></li>
-      <li><a href="#contact" class="opacity-90 transition hover:opacity-100">Contact</a></li>
-    </ul>
-    <button type="button" id="menu-btn" class="inline-flex size-10 items-center justify-center rounded-full md:hidden -ml-2" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
-      <svg class="icon" data-open><use href="#i-menu"/></svg>
-      <svg class="icon hidden" data-close><use href="#i-x"/></svg>
-    </button>
-    <a href="#top" class="font-display text-xl font-bold tracking-tight lg:text-2xl">Plassiv</a>
-    <div class="flex items-center justify-end gap-4 lg:gap-5">
-      <button type="button" class="transition hover:opacity-75" aria-label="Search"><svg class="icon"><use href="#i-search"/></svg></button>
-      <button type="button" class="transition hover:opacity-75" aria-label="Account"><svg class="icon"><use href="#i-user"/></svg></button>
-      <button type="button" class="transition hover:opacity-75" aria-label="Cart"><svg class="icon"><use href="#i-shopping-cart"/></svg></button>
-    </div>
-  </nav>
-  <div id="mobile-menu" class="absolute inset-x-0 top-[4.25rem] z-30 hidden bg-brand-deep/95 px-4 py-4 backdrop-blur md:hidden">
-    <ul class="flex flex-col text-base font-medium">
-      <li><a href="#top" class="block py-3">Home</a></li>
-      <li><a href="#shop" class="block py-3">Shop</a></li>
-      <li><a href="#collections" class="block py-3">Collections</a></li>
-      <li><a href="#about" class="block py-3">About</a></li>
-      <li><a href="#contact" class="block py-3">Contact</a></li>
-    </ul>
-  </div>
+<!--NAV-->
 
   <!-- poster wordmark (sits behind the model) -->
   <div class="poster-wrap absolute inset-x-[6%] top-[19%] z-0 hero-fade" aria-hidden="true">
@@ -183,14 +151,17 @@
     </button>
   </div>
 
-  <figure class="reveal mx-auto mt-10 max-w-[75rem] text-center" aria-live="polite" id="t-figure">
-    <blockquote class="heading text-balance text-[clamp(1.25rem,2.2vw,2rem)] font-semibold leading-snug tracking-tight">
-      <p id="t-quote">“I’m truly impressed with the quality and perfect fit. The fabric feels premium, and I’ve received countless compliments wearing it. Amazing value for the price — I’ll definitely shop here again.”</p>
-    </blockquote>
-    <figcaption class="mt-6">
-      <span id="t-name" class="block text-lg font-bold">James Carter</span>
-      <span class="mt-0.5 block text-xs text-muted">Happy Customer</span>
-    </figcaption>
+  <!-- every review sits in the same grid cell, so the box is always as tall as the longest one -->
+  <figure class="reveal mx-auto mt-10 grid max-w-[75rem] text-center" aria-live="polite" id="t-figure">
+    <div data-t-slide class="col-start-1 row-start-1 transition-opacity duration-200">
+      <blockquote class="heading text-balance text-[clamp(1.25rem,2.2vw,2rem)] font-semibold leading-snug tracking-tight">
+        <p data-t-quote>“I’m truly impressed with the quality and perfect fit. The fabric feels premium, and I’ve received countless compliments wearing it. Amazing value for the price — I’ll definitely shop here again.”</p>
+      </blockquote>
+      <figcaption class="mt-6">
+        <span data-t-name class="block text-lg font-bold">James Carter</span>
+        <span class="mt-0.5 block text-xs text-muted">Happy Customer</span>
+      </figcaption>
+    </div>
   </figure>
 
   <div class="mt-8 flex items-center justify-center gap-3.5">
@@ -200,39 +171,11 @@
 </section>
 </main>
 
-<!-- ============ FOOTER ============ -->
-<footer id="contact" class="mt-20 bg-brand text-white lg:mt-[9.5rem]">
-  <div class="container-x pt-16 lg:pt-28">
-    <div class="text-center">
-      <a href="#top" class="font-display text-base font-bold tracking-tight">Plassiv</a>
-      <p class="mt-3 text-xs font-medium uppercase tracking-[0.12em] text-white/80">Designed for modern you</p>
-      <ul class="mt-5 flex justify-center gap-3">
-        <li><a href="#" class="grid size-8 place-items-center rounded-lg border border-white/60 transition hover:bg-white hover:text-brand" aria-label="Facebook"><svg class="icon icon-brand size-3.5"><use href="#b-facebook"/></svg></a></li>
-        <li><a href="#" class="grid size-8 place-items-center rounded-lg border border-white/60 transition hover:bg-white hover:text-brand" aria-label="X"><svg class="icon icon-brand size-3.5"><use href="#b-x-brand"/></svg></a></li>
-        <li><a href="#" class="grid size-8 place-items-center rounded-lg border border-white/60 transition hover:bg-white hover:text-brand" aria-label="Instagram"><svg class="icon icon-brand size-3.5"><use href="#b-instagram"/></svg></a></li>
-        <li><a href="#" class="grid size-8 place-items-center rounded-lg border border-white/60 transition hover:bg-white hover:text-brand" aria-label="LinkedIn"><svg class="icon icon-brand size-3.5"><use href="#b-linkedin"/></svg></a></li>
-      </ul>
-    </div>
+<!--FOOTER-->
 
-    <ul class="mt-12 flex flex-wrap justify-between gap-x-6 gap-y-3 text-[0.8125rem] font-medium lg:mt-20">
-      <li><a href="#about" class="transition hover:opacity-70">About</a></li>
-      <li><a href="#shop" class="transition hover:opacity-70">Service</a></li>
-      <li><a href="#contact" class="transition hover:opacity-70">Contact</a></li>
-      <li><a href="#contact" class="transition hover:opacity-70">Support</a></li>
-      <li><a href="#reviews" class="transition hover:opacity-70">Community</a></li>
-    </ul>
-
-    <div class="poster-wrap mt-8 lg:mt-10" aria-hidden="true">
-      <div class="poster poster-fit text-center">Plassiv</div>
-    </div>
-
-    <div class="mt-8 flex flex-wrap items-center justify-between gap-x-6 gap-y-2 pb-6 text-[0.6875rem] text-white/80 lg:pb-8">
-      <p>©2026 Plassiv. All Rights Reserved.</p>
-      <p class="flex items-center gap-2"><a href="#" class="transition hover:text-white">Terms &amp; Conditions</a><span class="h-3 w-px bg-white/60" aria-hidden="true"></span><a href="#" class="transition hover:text-white">Privacy Policy</a></p>
-    </div>
-  </div>
-</footer>
+<!--CART-->
 
 <script src="js/main.js" defer></script>
+<script type="module" src="js/cart-drawer.js"></script>
 </body>
 </html>

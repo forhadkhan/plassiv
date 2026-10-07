@@ -1,37 +1,50 @@
 #!/usr/bin/env python3
-"""Assemble index.html from src/index.template.html + src/sprite.html + the product list below."""
+"""Assemble the root HTML pages from src/*.template.html, the shared partials and data/products.json."""
+import json
 from pathlib import Path
 from html import escape
 
 ROOT = Path(__file__).resolve().parent.parent
-# (image, name, price, alt)
-PRODUCTS = [
-    ("p1", "Elegant Peach Blazer", "150.80", "Man in a cream blazer and trousers against a peach studio backdrop"),
-    ("p2", "Classic Light Denim Jacket", "120.80", "Man in a light-wash denim jacket"),
-    ("p3", "Premium Black Leather Jacket", "160.55", "Bearded man in a black leather biker jacket and sunglasses"),
-    ("p4", "Olive Green Premium Casual Shirt", "100.20", "Man in a relaxed sage green linen shirt"),
-    ("p5", "Urban Check Flannel Shirt", "100.66", "Young man in a green and tan check overshirt over a black tee"),
-    ("p6", "Summer Beige Smart Blazer Set", "150.80", "Man in a beige blazer set, navy knit and sunglasses"),
-]
+SRC = ROOT / "src"
+PRODUCTS = json.loads((ROOT / "data/products.json").read_text())
+
+
+def money(cents):
+    return f"${cents // 100:,}.{cents % 100:02d}"
+
 
 def card(i, p):
-    key, name, price, alt = p
-    h = 1192 if i < 3 else 1424
     ratio = "lg:aspect-[139/149]" if i < 3 else "lg:aspect-[139/178]"
+    name = escape(p["name"])
+    # the name link stretches over the whole card; the wishlist button sits above it (z-10) so it stays separate
     return f'''    <li class="reveal snap-start" style="--d:{(i % 3) * 80}ms">
-      <article class="group">
+      <article class="group relative">
         <div class="relative overflow-hidden rounded-2xl">
-          <img src="assets/img/{key}.jpg" width="1112" height="{h}" alt="{escape(alt)}" class="aspect-[3/4] {ratio} w-full object-cover transition duration-700 group-hover:scale-105">
+          <img src="{escape(p["image"])}" width="{p["width"]}" height="{p["height"]}" alt="{escape(p["alt"])}" class="aspect-[3/4] {ratio} w-full object-cover transition duration-700 group-hover:scale-105">
           <span class="absolute left-3 top-3 rounded-full bg-ink/55 px-3 py-1.5 text-[0.6875rem] font-medium leading-none text-white backdrop-blur-sm sm:text-xs">New Collection</span>
-          <button type="button" class="wish absolute right-3 top-3 grid size-8 place-items-center rounded-full bg-ink/25 text-white backdrop-blur-sm transition hover:scale-110" aria-pressed="false" aria-label="Add {escape(name)} to wishlist"><svg class="icon size-[1.125rem] transition"><use href="#i-heart"/></svg></button>
+          <button type="button" class="wish absolute right-3 top-3 z-10 grid size-8 place-items-center rounded-full bg-ink/25 text-white backdrop-blur-sm transition hover:scale-110" aria-pressed="false" aria-label="Add {name} to wishlist"><svg class="icon size-[1.125rem] transition"><use href="#i-heart"/></svg></button>
         </div>
-        <h3 class="mt-3.5 text-[0.8125rem] text-muted">{escape(name)}</h3>
-        <p class="mt-1 text-base font-bold">${price}</p>
+        <h3 class="mt-3.5 text-[0.8125rem] text-muted"><a href="product.html?p={escape(p["id"])}" class="after:absolute after:inset-0 after:rounded-2xl hover:text-ink">{name}</a></h3>
+        <p class="mt-1 text-base font-bold">{money(p["priceCents"])}</p>
       </article>
     </li>'''
 
-tpl = (ROOT / "src/index.template.html").read_text()
-out = tpl.replace("<!--SPRITE-->", (ROOT / "src/sprite.html").read_text()) \
-         .replace("    <!--PRODUCTS-->", "\n".join(card(i, p) for i, p in enumerate(PRODUCTS)))
-(ROOT / "index.html").write_text(out)
-print("index.html written", len(out), "bytes")
+
+# page -> (link base for other-page anchors, home link, nav positioning)
+PAGES = {
+    "index": ("", "#top", "absolute inset-x-0 top-0"),
+    "product": ("index.html", "index.html", "relative"),
+    "checkout": ("index.html", "index.html", "relative"),
+    "order": ("index.html", "index.html", "relative"),
+}
+partial = {name: (SRC / f"partials/{name}.html").read_text() for name in ("head", "nav", "footer", "cart")}
+
+for page, (base, home, navpos) in PAGES.items():
+    out = (SRC / f"{page}.template.html").read_text()
+    for name, text in partial.items():
+        out = out.replace(f"<!--{name.upper()}-->", text.rstrip("\n"))
+    out = out.replace("<!--SPRITE-->", (SRC / "sprite.html").read_text()) \
+             .replace("    <!--PRODUCTS-->", "\n".join(card(i, p) for i, p in enumerate(PRODUCTS))) \
+             .replace("%BASE%", base).replace("%HOME%", home).replace("%NAVPOS%", navpos)
+    (ROOT / f"{page}.html").write_text(out)
+    print(f"{page}.html written", len(out), "bytes")

@@ -1,0 +1,31 @@
+  <nav class="container-x %NAVPOS% z-30 grid grid-cols-[1fr_auto_1fr] items-center py-5 lg:py-7" aria-label="Primary">
+    <ul class="hidden items-center gap-8 text-[0.8125rem] font-medium md:flex">
+      <li><a href="%HOME%" class="opacity-90 transition hover:opacity-100">Home</a></li>
+      <li><a href="%BASE%#shop" class="opacity-90 transition hover:opacity-100">Shop</a></li>
+      <li><a href="%BASE%#collections" class="opacity-90 transition hover:opacity-100">Collections</a></li>
+      <li><a href="%BASE%#about" class="opacity-90 transition hover:opacity-100">About</a></li>
+      <li><a href="%BASE%#contact" class="opacity-90 transition hover:opacity-100">Contact</a></li>
+    </ul>
+    <button type="button" id="menu-btn" class="inline-flex size-10 items-center justify-center rounded-full md:hidden -ml-2" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <svg class="icon" data-open><use href="#i-menu"/></svg>
+      <svg class="icon hidden" data-close><use href="#i-x"/></svg>
+    </button>
+    <a href="%HOME%" class="font-display text-xl font-bold tracking-tight lg:text-2xl">Plassiv</a>
+    <div class="flex items-center justify-end gap-4 lg:gap-5">
+      <button type="button" class="transition hover:opacity-75" aria-label="Search"><svg class="icon"><use href="#i-search"/></svg></button>
+      <button type="button" class="transition hover:opacity-75" aria-label="Account"><svg class="icon"><use href="#i-user"/></svg></button>
+      <button type="button" data-cart-open class="relative -m-2 grid size-9 place-items-center transition hover:opacity-75" aria-label="Cart" aria-haspopup="dialog" aria-controls="cart-drawer">
+        <svg class="icon"><use href="#i-shopping-cart"/></svg>
+        <span data-cart-count class="absolute right-0 top-0 hidden h-[1.125rem] min-w-[1.125rem] place-items-center rounded-full bg-white px-1 text-[0.625rem] font-bold leading-none text-ink" aria-hidden="true"></span>
+      </button>
+    </div>
+  </nav>
+  <div id="mobile-menu" class="absolute inset-x-0 top-[4.25rem] z-30 hidden bg-brand-deep/95 px-4 py-4 backdrop-blur md:hidden">
+    <ul class="flex flex-col text-base font-medium">
+      <li><a href="%HOME%" class="block py-3">Home</a></li>
+      <li><a href="%BASE%#shop" class="block py-3">Shop</a></li>
+      <li><a href="%BASE%#collections" class="block py-3">Collections</a></li>
+      <li><a href="%BASE%#about" class="block py-3">About</a></li>
+      <li><a href="%BASE%#contact" class="block py-3">Contact</a></li>
+    </ul>
+  </div>
