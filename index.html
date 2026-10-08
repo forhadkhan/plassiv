@@ -385,39 +385,46 @@
 
 <!-- ============ LOGIN (behaviour in js/login.js; there is no account system yet, so every sign-in is refused) ============ -->
 <dialog id="login-dialog" class="login-dialog" aria-labelledby="login-title">
-  <div class="relative bg-[#2a0309] px-7 pb-8 pt-9 text-center text-white">
-    <button type="button" data-login-close class="absolute right-3 top-3 grid size-10 place-items-center rounded-full text-white/80 transition hover:bg-white/10 hover:text-white" aria-label="Close sign in"><svg class="icon"><use href="#i-x"/></svg></button>
-    <span class="mx-auto grid size-14 place-items-center rounded-full bg-white/10 ring-1 ring-white/25"><svg class="icon size-6"><use href="#i-user"/></svg></span>
-    <h2 id="login-title" class="heading mt-5 text-2xl">Welcome back</h2>
-    <p class="mt-1.5 text-sm text-white/70">Sign in to track orders and check out faster.</p>
+  <div class="login-card relative isolate overflow-hidden">
+    <div class="hero-noise pointer-events-none absolute inset-0 -z-10 opacity-[.07] mix-blend-screen" aria-hidden="true"></div>
+    <button type="button" data-login-close class="absolute right-4 top-4 z-10 grid size-10 place-items-center rounded-full text-[#e9cf9c]/70 transition hover:bg-white/5 hover:text-[#f6e3b8]" aria-label="Close sign in"><svg class="icon"><use href="#i-x"/></svg></button>
+
+    <header class="px-8 pb-2 pt-12 text-center">
+      <p class="text-[.6875rem] font-semibold uppercase tracking-[.42em] text-[#e9cf9c]/70">Members</p>
+      <p class="poster login-gold mt-4 text-[2.5rem] tracking-[.08em]" aria-hidden="true">Plassiv</p>
+      <div class="login-rule mx-auto mt-6" aria-hidden="true"><i></i></div>
+      <h2 id="login-title" class="heading mt-6 text-2xl font-semibold text-[#fbf1dc]">Welcome back</h2>
+      <p class="mx-auto mt-2 max-w-[17rem] text-sm text-[#fbf1dc]/60">Sign in to track your orders and check out faster.</p>
+    </header>
+
+    <form data-login-form novalidate class="grid gap-6 px-8 pb-10 pt-7">
+      <p data-login-alert role="alert" hidden class="login-alert flex items-start gap-2.5 rounded-lg px-4 py-3 text-sm font-medium">
+        <svg class="icon mt-0.5 size-5"><use href="#i-circle-alert"/></svg>
+        <span>Wrong credentials. Check your email and password and try again.</span>
+      </p>
+      <div>
+        <label for="login-email" class="text-[.6875rem] font-semibold uppercase tracking-[.24em] text-[#e9cf9c]/80">Email</label>
+        <div class="relative">
+          <svg class="icon login-icon pointer-events-none absolute left-4 top-1/2 mt-[.1875rem] size-[1.125rem] -translate-y-1/2" aria-hidden="true"><use href="#i-mail"/></svg>
+          <input id="login-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" class="login-input !pl-11">
+        </div>
+        <p data-error-for="email" class="field-error"></p>
+      </div>
+      <div>
+        <label for="login-password" class="text-[.6875rem] font-semibold uppercase tracking-[.24em] text-[#e9cf9c]/80">Password</label>
+        <div class="relative">
+          <svg class="icon login-icon pointer-events-none absolute left-4 top-1/2 mt-[.1875rem] size-[1.125rem] -translate-y-1/2" aria-hidden="true"><use href="#i-lock"/></svg>
+          <input id="login-password" name="password" type="password" autocomplete="current-password" placeholder="Your password" class="login-input !pl-11 !pr-12">
+          <button type="button" data-login-reveal class="login-icon absolute right-1.5 top-1/2 mt-[.1875rem] grid size-9 -translate-y-1/2 place-items-center rounded-full transition hover:!text-[#f6e3b8]" aria-label="Show password" aria-pressed="false">
+            <svg class="icon" data-eye><use href="#i-eye"/></svg>
+            <svg class="icon hidden" data-eye-off><use href="#i-eye-off"/></svg>
+          </button>
+        </div>
+        <p data-error-for="password" class="field-error"></p>
+      </div>
+      <button type="submit" data-login-submit class="login-submit mt-2 h-13 rounded-lg text-sm font-bold uppercase tracking-[.24em] disabled:cursor-wait disabled:opacity-70">Sign in</button>
+    </form>
   </div>
-  <form data-login-form novalidate class="grid gap-5 px-7 pb-8 pt-7">
-    <p data-login-alert role="alert" hidden class="flex items-start gap-2.5 rounded-xl bg-danger/10 px-4 py-3 text-sm font-medium text-danger">
-      <svg class="icon mt-0.5 size-5"><use href="#i-circle-alert"/></svg>
-      <span>Wrong credentials. Check your email and password and try again.</span>
-    </p>
-    <div>
-      <label for="login-email" class="text-sm font-semibold">Email</label>
-      <div class="relative">
-        <svg class="icon pointer-events-none absolute left-3.5 top-1/2 mt-[.1875rem] size-5 -translate-y-1/2 text-muted" aria-hidden="true"><use href="#i-mail"/></svg>
-        <input id="login-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" class="input !pl-11">
-      </div>
-      <p data-error-for="email" class="field-error"></p>
-    </div>
-    <div>
-      <label for="login-password" class="text-sm font-semibold">Password</label>
-      <div class="relative">
-        <svg class="icon pointer-events-none absolute left-3.5 top-1/2 mt-[.1875rem] size-5 -translate-y-1/2 text-muted" aria-hidden="true"><use href="#i-lock"/></svg>
-        <input id="login-password" name="password" type="password" autocomplete="current-password" placeholder="Your password" class="input !pl-11 !pr-12">
-        <button type="button" data-login-reveal class="absolute right-1.5 top-1/2 mt-[.1875rem] grid size-9 -translate-y-1/2 place-items-center rounded-full text-muted transition hover:text-ink" aria-label="Show password" aria-pressed="false">
-          <svg class="icon" data-eye><use href="#i-eye"/></svg>
-          <svg class="icon hidden" data-eye-off><use href="#i-eye-off"/></svg>
-        </button>
-      </div>
-      <p data-error-for="password" class="field-error"></p>
-    </div>
-    <button type="submit" data-login-submit class="mt-1 h-12 rounded-xl bg-[#c4121f] font-display text-base font-bold text-white transition hover:bg-[#e11d2e] disabled:cursor-wait disabled:opacity-70">Sign in</button>
-  </form>
 </dialog>
 
 <script src="js/main.js" defer></script>
