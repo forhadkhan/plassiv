@@ -42,9 +42,12 @@
 
 <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:text-ink">Skip to content</a>
 
-<header id="top" class="relative bg-brand text-white">
-  <nav class="container-x relative z-30 grid grid-cols-[1fr_auto_1fr] items-center py-5 lg:py-7" aria-label="Primary">
-    <ul class="hidden items-center gap-8 text-[0.8125rem] font-medium md:flex">
+  <div id="site-nav" class="site-nav fixed inset-x-0 top-0 z-40 bg-[#2a0309] text-white" >
+  <!-- same red satin as the hero (js/nav.js); it fades out while the hero itself is behind the bar -->
+  <canvas id="nav-mesh" class="site-nav-bg absolute inset-0 size-full" aria-hidden="true"></canvas>
+  <div class="site-nav-bg hero-noise pointer-events-none absolute inset-0 opacity-[.32] mix-blend-overlay" aria-hidden="true"></div>
+  <nav class="site-nav-bar container-x relative z-10 grid grid-cols-[1fr_auto_1fr] items-center" aria-label="Primary">
+    <ul class="hidden items-center gap-8 text-[0.9375rem] font-medium md:flex">
       <li><a href="index.html" class="opacity-90 transition hover:opacity-100">Home</a></li>
       <li><a href="index.html#shop" class="opacity-90 transition hover:opacity-100">Shop</a></li>
       <li><a href="index.html#collections" class="opacity-90 transition hover:opacity-100">Collections</a></li>
@@ -61,20 +64,22 @@
       <button type="button" class="transition hover:opacity-75" aria-label="Account"><svg class="icon"><use href="#i-user"/></svg></button>
       <button type="button" data-cart-open class="relative -m-2 grid size-9 place-items-center transition hover:opacity-75" aria-label="Cart" aria-haspopup="dialog" aria-controls="cart-drawer">
         <svg class="icon"><use href="#i-shopping-cart"/></svg>
-        <span data-cart-count class="absolute right-0 top-0 hidden h-[1.125rem] min-w-[1.125rem] place-items-center rounded-full bg-white px-1 text-[0.625rem] font-bold leading-none text-ink" aria-hidden="true"></span>
+        <span data-cart-count class="absolute right-0 top-0 hidden h-[1.125rem] min-w-[1.125rem] place-items-center rounded-full bg-white px-1 text-[0.75rem] font-bold leading-none text-ink" aria-hidden="true"></span>
       </button>
     </div>
   </nav>
-  <div id="mobile-menu" class="absolute inset-x-0 top-[4.25rem] z-30 hidden bg-brand-deep/95 px-4 py-4 backdrop-blur md:hidden">
-    <ul class="flex flex-col text-base font-medium">
-      <li><a href="index.html" class="block py-3">Home</a></li>
-      <li><a href="index.html#shop" class="block py-3">Shop</a></li>
-      <li><a href="index.html#collections" class="block py-3">Collections</a></li>
-      <li><a href="index.html#about" class="block py-3">About</a></li>
-      <li><a href="index.html#contact" class="block py-3">Contact</a></li>
+  <div id="mobile-menu" class="fixed inset-0 z-0 hidden overflow-y-auto bg-black md:hidden">
+    <canvas id="menu-silk" class="absolute inset-0 size-full" aria-hidden="true"></canvas>
+    <ul class="menu-links container-x relative flex min-h-full flex-col justify-center py-28 text-right font-display text-4xl font-bold tracking-tight">
+      <li class="w-full"><a href="index.html" class="block py-5">Home</a></li>
+      <li class="w-full"><a href="index.html#shop" class="block py-5">Shop</a></li>
+      <li class="w-full"><a href="index.html#collections" class="block py-5">Collections</a></li>
+      <li class="w-full"><a href="index.html#about" class="block py-5">About</a></li>
+      <li class="w-full"><a href="index.html#contact" class="block py-5">Contact</a></li>
     </ul>
   </div>
-</header>
+  </div>
+<div class="nav-spacer bg-[#2a0309]" aria-hidden="true"></div>
 
 <main id="main" class="container-x pt-10 lg:pt-16" data-order-root>
   <p data-order-loading class="py-16 text-center text-sm text-muted">Loading your order…</p>
@@ -82,27 +87,28 @@
 
   <section data-order-missing class="hidden py-12 text-center lg:py-20" aria-labelledby="missing-title">
     <span class="mx-auto grid size-16 place-items-center rounded-full bg-brand/10 text-brand"><svg class="icon size-7"><use href="#i-package"/></svg></span>
-    <h1 id="missing-title" class="heading mt-6 text-[clamp(1.5rem,2.5vw,2.25rem)]">We couldn’t find that order</h1>
+    <h1 id="missing-title" class="heading mt-6 text-[clamp(1.75rem,2.8vw,2.5rem)]">We couldn’t find that order</h1>
     <p class="mx-auto mt-3 max-w-md text-sm text-muted">Orders in this demo shop are saved in the browser they were placed in, so the link only works there. It may also have been cleared with your browsing data.</p>
     <a href="index.html#shop" class="mt-7 inline-flex h-11 items-center gap-2 rounded-full bg-ink px-6 text-sm font-semibold text-white transition hover:bg-ink/85">Back to the shop <svg class="icon size-4"><use href="#i-chevron-right"/></svg></a>
   </section>
 </main>
 
 <!-- ============ FOOTER ============ -->
-<footer id="contact" class="mt-20 bg-brand text-white lg:mt-[9.5rem]">
-  <div class="container-x pt-16 lg:pt-28">
+<footer id="contact" class="footer-silk-fallback relative [--fade:22rem] isolate mt-20 overflow-hidden bg-black text-white lg:mt-[9.5rem]">
+  <canvas id="footer-silk" class="absolute inset-0 -z-10 h-full w-full" aria-hidden="true"></canvas>
+  <div class="container-x pt-[calc(var(--fade)*.7+2rem)] lg:pt-[calc(var(--fade)*.7+4rem)]">
     <div class="text-center">
       <a href="#top" class="font-display text-base font-bold tracking-tight">Plassiv</a>
       <p class="mt-3 text-xs font-medium uppercase tracking-[0.12em] text-white/80">Designed for modern you</p>
       <ul class="mt-5 flex justify-center gap-3">
-        <li><a href="#" class="grid size-8 place-items-center rounded-lg border border-white/60 transition hover:bg-white hover:text-brand" aria-label="Facebook"><svg class="icon icon-brand size-3.5"><use href="#b-facebook"/></svg></a></li>
-        <li><a href="#" class="grid size-8 place-items-center rounded-lg border border-white/60 transition hover:bg-white hover:text-brand" aria-label="X"><svg class="icon icon-brand size-3.5"><use href="#b-x-brand"/></svg></a></li>
-        <li><a href="#" class="grid size-8 place-items-center rounded-lg border border-white/60 transition hover:bg-white hover:text-brand" aria-label="Instagram"><svg class="icon icon-brand size-3.5"><use href="#b-instagram"/></svg></a></li>
-        <li><a href="#" class="grid size-8 place-items-center rounded-lg border border-white/60 transition hover:bg-white hover:text-brand" aria-label="LinkedIn"><svg class="icon icon-brand size-3.5"><use href="#b-linkedin"/></svg></a></li>
+        <li><a href="#" class="grid size-8 place-items-center rounded-lg border border-white/60 transition hover:bg-white hover:text-black" aria-label="Facebook"><svg class="icon icon-brand size-3.5"><use href="#b-facebook"/></svg></a></li>
+        <li><a href="#" class="grid size-8 place-items-center rounded-lg border border-white/60 transition hover:bg-white hover:text-black" aria-label="X"><svg class="icon icon-brand size-3.5"><use href="#b-x-brand"/></svg></a></li>
+        <li><a href="#" class="grid size-8 place-items-center rounded-lg border border-white/60 transition hover:bg-white hover:text-black" aria-label="Instagram"><svg class="icon icon-brand size-3.5"><use href="#b-instagram"/></svg></a></li>
+        <li><a href="#" class="grid size-8 place-items-center rounded-lg border border-white/60 transition hover:bg-white hover:text-black" aria-label="LinkedIn"><svg class="icon icon-brand size-3.5"><use href="#b-linkedin"/></svg></a></li>
       </ul>
     </div>
 
-    <ul class="mt-12 flex flex-wrap justify-between gap-x-6 gap-y-3 text-[0.8125rem] font-medium lg:mt-20">
+    <ul class="mt-12 flex flex-wrap justify-between gap-x-6 gap-y-3 text-[0.9375rem] font-medium lg:mt-20">
       <li><a href="index.html#about" class="transition hover:opacity-70">About</a></li>
       <li><a href="index.html#shop" class="transition hover:opacity-70">Service</a></li>
       <li><a href="#contact" class="transition hover:opacity-70">Contact</a></li>
@@ -111,10 +117,10 @@
     </ul>
 
     <div class="poster-wrap mt-8 lg:mt-10" aria-hidden="true">
-      <div class="poster poster-fit text-center">Plassiv</div>
+      <div class="poster poster-fit poster-ink">Plassiv</div>
     </div>
 
-    <div class="mt-8 flex flex-wrap items-center justify-between gap-x-6 gap-y-2 pb-6 text-[0.6875rem] text-white/80 lg:pb-8">
+    <div class="mt-8 flex flex-wrap items-center justify-between gap-x-6 gap-y-2 pb-6 text-[0.8125rem] text-white/80 lg:pb-8">
       <p>©2026 Plassiv. All Rights Reserved.</p>
       <p class="flex items-center gap-2"><a href="#" class="transition hover:text-white">Terms &amp; Conditions</a><span class="h-3 w-px bg-white/60" aria-hidden="true"></span><a href="#" class="transition hover:text-white">Privacy Policy</a></p>
     </div>
@@ -147,6 +153,8 @@
 
 <script src="js/main.js" defer></script>
 <script type="module" src="js/cart-drawer.js"></script>
+<script type="module" src="js/nav.js"></script>
+<script type="module" src="js/footer-silk.js"></script>
 <script type="module" src="js/order.js"></script>
 </body>
 </html>

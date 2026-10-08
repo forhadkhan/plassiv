@@ -13,13 +13,12 @@
 
 <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:text-ink">Skip to content</a>
 
-<header id="top" class="relative bg-brand text-white">
 <!--NAV-->
-</header>
+<div class="nav-spacer bg-[#2a0309]" aria-hidden="true"></div>
 
 <main id="main" class="container-x pt-6 lg:pt-10">
   <a href="index.html#shop" class="inline-flex items-center gap-1 text-xs text-muted transition hover:text-ink"><svg class="icon size-3.5"><use href="#i-chevron-left"/></svg>Continue shopping</a>
-  <h1 class="heading mt-4 text-[clamp(1.75rem,3vw,2.5rem)]">Checkout</h1>
+  <h1 class="heading mt-4 text-[clamp(2rem,3.3vw,2.75rem)]">Checkout</h1>
 
   <section data-checkout-empty class="hidden py-12 text-center lg:py-20" aria-labelledby="empty-title">
     <span class="mx-auto grid size-16 place-items-center rounded-full bg-brand/10 text-brand"><svg class="icon size-7"><use href="#i-shopping-cart"/></svg></span>
@@ -100,7 +99,7 @@
       </fieldset>
     </div>
 
-    <aside class="self-start rounded-2xl border border-line p-5 lg:sticky lg:top-8 lg:p-6" aria-labelledby="summary-title">
+    <aside class="self-start rounded-2xl border border-line p-5 lg:sticky lg:top-24 lg:p-6" aria-labelledby="summary-title">
       <h2 id="summary-title" class="font-display text-lg font-bold">Order summary</h2>
       <ul data-summary-lines class="mt-4 divide-y divide-line" aria-label="Items"></ul>
       <div data-coupon class="mt-5 border-t border-line pt-5"></div>
@@ -119,6 +118,8 @@
 
 <script src="js/main.js" defer></script>
 <script type="module" src="js/cart-drawer.js"></script>
+<script type="module" src="js/nav.js"></script>
+<script type="module" src="js/footer-silk.js"></script>
 <script type="module" src="js/checkout.js"></script>
 </body>
 </html>
