@@ -165,3 +165,13 @@
 @media (prefers-reduced-motion: no-preference) {
   .search-dialog[open] { animation: fade .25s ease both; }
 }
+
+/* login: a solid wine veil at partial opacity behind a white card */
+.login-dialog { width: min(100% - 2rem, 26rem); max-width: none; max-height: calc(100dvh - 2rem); margin: auto; padding: 0; border: 0; border-radius: 1.25rem; overflow-y: auto; overscroll-behavior: contain; color: var(--color-ink); background: #fff; box-shadow: 0 2rem 4rem -1rem rgb(0 0 0 / .5); }
+.login-dialog::backdrop { background: rgb(42 3 9 / .72); }
+@media (prefers-reduced-motion: no-preference) {
+  .login-dialog[open] { animation: rise .45s cubic-bezier(.2,.7,.2,1) both; }
+  .login-dialog[open]::backdrop { animation: fade .3s ease both; }
+  .login-shake { animation: login-shake .4s cubic-bezier(.36,.07,.19,.97) both; }
+  @keyframes login-shake { 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
+}
