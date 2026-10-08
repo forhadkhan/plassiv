@@ -6,6 +6,7 @@
   const menuBtn = $('#menu-btn'), menu = $('#mobile-menu');
   const setMenu = (open) => {
     menu.classList.toggle('hidden', !open);
+    document.documentElement.classList.toggle('overflow-hidden', open);
     $('[data-open]', menuBtn).classList.toggle('hidden', open);
     $('[data-close]', menuBtn).classList.toggle('hidden', !open);
     menuBtn.setAttribute('aria-expanded', String(open));
@@ -14,6 +15,7 @@
   menuBtn.addEventListener('click', () => setMenu(menu.classList.contains('hidden')));
   $$('a', menu).forEach((a) => a.addEventListener('click', () => setMenu(false)));
   addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
+  matchMedia('(min-width: 48rem)').addEventListener('change', (e) => { if (e.matches) setMenu(false); });
 
   /* scroll reveal */
   const revealEls = $$('.reveal');

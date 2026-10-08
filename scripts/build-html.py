@@ -30,21 +30,21 @@ def card(i, p):
     </li>'''
 
 
-# page -> (link base for other-page anchors, home link, nav positioning)
+# page -> (link base for other-page anchors, home link, nav attribute: the home bar is see-through over the hero)
 PAGES = {
-    "index": ("", "#top", "absolute inset-x-0 top-0"),
-    "product": ("index.html", "index.html", "relative"),
-    "checkout": ("index.html", "index.html", "relative"),
-    "order": ("index.html", "index.html", "relative"),
+    "index": ("", "#top", "data-clear-top"),
+    "product": ("index.html", "index.html", ""),
+    "checkout": ("index.html", "index.html", ""),
+    "order": ("index.html", "index.html", ""),
 }
 partial = {name: (SRC / f"partials/{name}.html").read_text() for name in ("head", "nav", "footer", "cart")}
 
-for page, (base, home, navpos) in PAGES.items():
+for page, (base, home, navtop) in PAGES.items():
     out = (SRC / f"{page}.template.html").read_text()
     for name, text in partial.items():
         out = out.replace(f"<!--{name.upper()}-->", text.rstrip("\n"))
     out = out.replace("<!--SPRITE-->", (SRC / "sprite.html").read_text()) \
              .replace("    <!--PRODUCTS-->", "\n".join(card(i, p) for i, p in enumerate(PRODUCTS))) \
-             .replace("%BASE%", base).replace("%HOME%", home).replace("%NAVPOS%", navpos)
+             .replace("%BASE%", base).replace("%HOME%", home).replace("%NAVTOP%", navtop)
     (ROOT / f"{page}.html").write_text(out)
     print(f"{page}.html written", len(out), "bytes")
