@@ -171,6 +171,11 @@ const menuOpen = () => !!menu && !menu.classList.contains('hidden');
 const kickMenu = silk(document.getElementById('menu-silk'), MENU_FRAG, menuOpen);
 if (menu) new MutationObserver(kickMenu).observe(menu, { attributes: true, attributeFilter: ['class'] });
 
+/* the search sheet wears the same silk */
+const searchSheet = document.getElementById('search-dialog');
+const kickSearch = silk(document.getElementById('search-silk'), MENU_FRAG, () => !!searchSheet?.open);
+if (searchSheet) new MutationObserver(kickSearch).observe(searchSheet, { attributes: true, attributeFilter: ['open'] });
+
 /* ---------- hide on scroll down, show on scroll up ---------- */
 
 const clearTop = bar?.hasAttribute('data-clear-top');   // home page: see-through over the hero until you scroll
