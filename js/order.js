@@ -25,7 +25,7 @@ export function renderOrder(root, order, { persisted = true } = {}) {
   root.append(el('div', { class: 'mx-auto max-w-3xl pb-4' },
     el('div', { class: 'text-center' },
       el('span', { class: 'mx-auto grid size-16 place-items-center rounded-full bg-brand text-white' }, icon('i-circle-check', 'icon size-8')),
-      el('h1', { class: 'heading mt-6 text-[clamp(1.75rem,3vw,2.5rem)]', tabindex: '-1' }, firstName ? `Thank you, ${firstName}. Your order is placed.` : 'Your order is placed.'),
+      el('h1', { class: 'heading mt-6 text-[clamp(2rem,3.3vw,2.75rem)]', tabindex: '-1' }, firstName ? `Thank you, ${firstName}. Your order is placed.` : 'Your order is placed.'),
       el('p', { class: 'mt-3 text-sm text-muted' }, 'Order number ', el('strong', { class: 'font-bold text-ink' }, order.id),
         Number.isNaN(placed.getTime()) ? '' : `, placed ${day(placed)}`)),
 

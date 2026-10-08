@@ -26,7 +26,7 @@ function relatedCard(p) {
     el('article', { class: 'group relative' },
       el('div', { class: 'overflow-hidden rounded-2xl' },
         el('img', { src: p.image, alt: p.alt, width: String(p.width), height: String(p.height), loading: 'lazy', class: 'aspect-[3/4] w-full object-cover transition duration-700 group-hover:scale-105' })),
-      el('h3', { class: 'mt-3 text-[0.8125rem] text-muted' },
+      el('h3', { class: 'mt-3 text-[0.9375rem] text-muted' },
         el('a', { href: `product.html?p=${encodeURIComponent(p.id)}`, class: 'after:absolute after:inset-0 after:rounded-2xl hover:text-ink' }, p.name)),
       el('p', { class: 'mt-1 text-base font-bold' }, money(p.priceCents))));
 }
