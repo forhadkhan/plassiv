@@ -157,3 +157,11 @@
   ::-webkit-scrollbar-thumb:active { background: #ff2a3a; }
   ::-webkit-scrollbar-corner { background: #000; }
 }
+
+/* search: full-screen dark sheet in the footer's black-and-wine palette */
+.search-dialog { position: fixed; inset: 0; width: 100%; max-width: none; height: 100dvh; max-height: none; margin: 0; padding: 0; border: 0; overflow-y: auto; overscroll-behavior: contain; color: #fff; background: #000; }
+.search-dialog::backdrop { background: #000; }
+.search-field input::-webkit-search-cancel-button, .search-field input::-webkit-search-decoration { appearance: none; display: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .search-dialog[open] { animation: fade .25s ease both; }
+}

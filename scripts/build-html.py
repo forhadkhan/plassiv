@@ -37,7 +37,7 @@ PAGES = {
     "checkout": ("index.html", "index.html", ""),
     "order": ("index.html", "index.html", ""),
 }
-partial = {name: (SRC / f"partials/{name}.html").read_text() for name in ("head", "nav", "footer", "cart")}
+partial = {name: (SRC / f"partials/{name}.html").read_text() for name in ("head", "nav", "footer", "cart", "search")}
 
 for page, (base, home, navtop) in PAGES.items():
     out = (SRC / f"{page}.template.html").read_text()
