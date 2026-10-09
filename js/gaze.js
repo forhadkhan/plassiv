@@ -1,8 +1,9 @@
-/* Hero model: hover him (mouse), or tap him (touch), and he turns to look at you, Thanos-snap style: the photo breaks
-   into dust that blows away while the camera-facing photo forms out of dust flying in. Each ~3px cell of the photo is one
-   grain, drawn on the GPU. The grains are the photo's own pixels, so both ends are exactly the two photos. A timeline
-   value t (0 = original, 1 = camera-facing) drives everything, so he can change his mind half-way and the dust flows back.
-   Without WebGL2, or with reduced motion, it is a plain cross-fade. */
+/* Hero model: hover him (mouse), or tap him (touch), and he turns to look at you. The photo shatters into a few thousand
+   triangles that tumble off, gather into a spinning ball and, on the other side of it, fall back into place as the
+   camera-facing photo (after Szenia Zadvornykh's "THREE Text Animation #5": every face of the mesh flies to a point on a
+   sphere on its own axis, delayed by its distance from the centre). Every triangle carries its own piece of the photo, so
+   both ends are exactly the two photos. A timeline value t (0 = original, 1 = camera-facing) drives everything, so he can
+   change his mind half-way and the shards fly back. Without WebGL2 it is a plain cross-fade; with reduced motion a quick one. */
 
 import { afterPaint } from './silk.js';
 
@@ -12,77 +13,83 @@ const canvas = document.getElementById('hero-gaze');
 const base = fig?.querySelector('img');
 if (hero && fig && canvas && base && !navigator.connection?.saveData) afterPaint(start);
 
-const W = 900, H = 1254, CELL = 3;   // photo space (the two photos are registered in it), and the size of one grain
-const COLS = Math.ceil(W / CELL), ROWS = Math.ceil(H / CELL);
+const W = 900, H = 1254;             // photo space (the two photos are registered in it)
+const COLS = 45, ROWS = 63;          // the mesh: ~20px cells, two triangles each
 const still = matchMedia('(prefers-reduced-motion: reduce)');
 
-const COMMON = `#version 300 es
+/* No attributes: triangle number and corner come from gl_VertexID. Grid nodes are nudged by a hash so the shards are
+   irregular, but the nodes are shared, so at rest the mesh is seamless; the border nodes stay put. */
+const VERT = `#version 300 es
 precision highp float;
-const vec2 PH = vec2(${W}., ${H}.);
-const float CELL = ${CELL}., FLY = .34;
+const int COLS = ${COLS}, ROWS = ${ROWS};
+const vec2 PH = vec2(${W}., ${H}.), CEN = vec2(450., 610.);
+const float R = 400., D = 1800.;     // radius of the ball, and the camera distance (photo px)
+uniform float uT, uCalm;
+uniform vec4 uFig;                   // where the photo sits in the canvas (canvas uv: x, y, width, height)
+out vec2 vUv; flat out float vNew; out vec3 vLit;
+
 float hash(vec2 p){ vec3 q = fract(vec3(p.xyx) * .1031); q += dot(q, q.yzx + 33.33); return fract((q.x + q.y) * q.z); }
 vec3 rnd(vec2 c){ return vec3(hash(c), hash(c + 17.3), hash(c + 53.1)); }
-// the old photo goes first on the right and top and the new one forms first on the left and bottom, so the dust
-// streams across him rather than everything happening at once
-float sweep(vec2 uv){ return clamp((1. - uv.x) * .78 + uv.y * .22, 0., 1.); }
-float leaves(vec2 uv, float h){ return sweep(uv) * .42 + h * .16; }            // when a grain of the old photo lets go
-float settles(vec2 uv, float h){ return .42 + (1. - sweep(uv)) * .4 + h * .16; } // when a grain of the new photo lands
-const vec2 WIND = vec2(1., -.38);`;
+vec2 node(ivec2 g){
+  vec2 cell = PH / vec2(float(COLS), float(ROWS)), p = vec2(g) * cell;
+  if (g.x > 0 && g.y > 0 && g.x < COLS && g.y < ROWS) p += (vec2(hash(vec2(g)), hash(vec2(g) + 9.1)) - .5) * cell * .75;
+  return p;
+}
+ivec2 corner(int s, int k){
+  if (s == 0) return k == 0 ? ivec2(0,0) : k == 1 ? ivec2(1,0) : ivec2(0,1);
+  if (s == 1) return k == 0 ? ivec2(1,0) : k == 1 ? ivec2(1,1) : ivec2(0,1);
+  if (s == 2) return k == 0 ? ivec2(0,0) : k == 1 ? ivec2(1,0) : ivec2(1,1);
+  return k == 0 ? ivec2(0,0) : k == 1 ? ivec2(1,1) : ivec2(0,1);
+}
+vec3 spin(vec3 v, vec3 ax, float a){ return v * cos(a) + cross(ax, v) * sin(a) + ax * dot(ax, v) * (1. - cos(a)); }
 
-const QUAD_VERT = `#version 300 es
-in vec2 p; out vec2 vUv;
-void main(){ vUv = vec2(p.x * .5 + .5, .5 - p.y * .5); gl_Position = vec4(p, 0., 1.); }`;
-
-/* the parts of each photo that have not broken up yet, or have already settled */
-const QUAD_FRAG = `${COMMON}
-uniform sampler2D uTex; uniform float uT, uCalm; uniform int uLayer;
-in vec2 vUv; out vec4 o;
 void main(){
-  vec2 c = floor(vUv * PH / CELL), uvc = (c + .5) * CELL / PH;
-  float h = hash(c), vis;
-  if (uCalm > .5) vis = uLayer == 0 ? step(uT, .9999) : uT;
-  else vis = uLayer == 0 ? step(uT, leaves(uvc, h)) : step(settles(uvc, h), uT);
-  o = texture(uTex, vUv) * vis;
+  int tri = gl_VertexID / 3, k = gl_VertexID % 3, cell = tri / 2, hf = tri % 2;
+  ivec2 g = ivec2(cell % COLS, cell / COLS);
+  int sub = (hash(vec2(g) + 3.7) > .5 ? 2 : 0) + hf;                        // which way the cell is split, and which half
+  vec2 p0 = node(g + corner(sub, 0)), p1 = node(g + corner(sub, 1)), p2 = node(g + corner(sub, 2));
+  vec2 mid = (p0 + p1 + p2) / 3., pk = k == 0 ? p0 : k == 1 ? p1 : p2;
+
+  vec3 r = rnd(vec2(float(tri), 1.3));
+  // outer triangles leave first and land first; the delays are short enough that for a moment they are all in the ball
+  float delay = (1. - clamp(length((mid - CEN) / (PH * .5)) / 1.15, 0., 1.)) * .12 + r.x * .04;
+  float u = clamp((uT - delay) / .84, 0., 1.);
+  float a = smoothstep(0., .3, u) - smoothstep(.7, 1., u);                     // 0 at home, 1 in the ball
+  float ang = 6.2832 * (1. + floor(r.y * 2.)) * (r.z < .5 ? -1. : 1.) * smoothstep(0., 1., u);   // whole turns: upright again at home
+  if (uCalm > .5) { a = 0.; ang = 0.; }
+  vec3 ax = normalize(rnd(vec2(float(tri), 5.9)) * 2. - 1. + .001);
+
+  // its place on the ball: a fibonacci sphere in triangle order, so the ball is the photo wrapped round it; the ball spins
+  float n = float(COLS * ROWS * 2), yy = 1. - 2. * (float(tri) + .5) / n, rr = sqrt(1. - yy * yy), th = float(tri) * 2.39996;
+  float ph = 6.2832 * smoothstep(0., 1., uT);
+  vec3 e = vec3(cos(th) * rr, -yy, sin(th) * rr) * R;
+  e = vec3(e.x * cos(ph) + e.z * sin(ph), e.y, -e.x * sin(ph) + e.z * cos(ph));
+
+  vec3 off = spin(vec3(pk - mid, 0.) * (1. - .22 * a), ax, ang);
+  vec3 P = mix(vec3(mid, 0.), vec3(CEN, 0.) + e, a) + off;
+  float s = D / (D - P.z);
+  vec2 q = CEN + (P.xy - CEN) * s;
+
+  vec3 nrm = spin(vec3(0., 0., 1.), ax, ang);
+  vec3 L = normalize(vec3(-.45, .55, .7)), Hh = normalize(L + vec3(0., 0., 1.));
+  vLit = vec3(abs(dot(nrm, L)), pow(abs(dot(nrm, Hh)), 28.), smoothstep(0., .25, a));
+  vUv = pk / PH;
+  vNew = step(.5, u);
+  vec2 c = uFig.xy + uFig.zw * (q / PH);
+  gl_Position = vec4(c.x * 2. - 1., 1. - c.y * 2., clamp(-P.z / 1400., -.95, .95), 1.);
 }`;
 
-const DUST_VERT = `${COMMON}
-uniform sampler2D uTex; uniform float uT, uScale; uniform int uLayer;
-out vec4 vCol; out float vDust;
-void main(){
-  vec2 c = vec2(float(gl_VertexID % ${COLS}), float(gl_VertexID / ${COLS}));
-  vec2 uvc = (c + .5) * CELL / PH;
-  vec4 s = textureLod(uTex, uvc, 1.5);                                         // premultiplied
-  vCol = vec4(0.); vDust = 0.; gl_PointSize = 0.; gl_Position = vec4(2., 2., 2., 1.);
-  if (s.a < .35) return;
-  vec3 r = rnd(c);
-  float d, a, k;                                                               // dust amount, opacity, path position
-  if (uLayer == 0) {
-    k = clamp((uT - leaves(uvc, r.x)) / FLY, 0., 1.);
-    if (k <= 0. || k >= 1.) return;
-    d = k; a = 1. - smoothstep(.45, 1., k); k = pow(k, 1.7);
-  } else {
-    float l = clamp((uT - (settles(uvc, r.x) - FLY)) / FLY, 0., 1.);
-    if (l <= 0. || l >= 1.) return;
-    d = 1. - l; a = smoothstep(0., .45, l); k = -pow(1. - l, 1.7);              // flies in along the same wind, backwards
-  }
-  float reach = 120. + 360. * r.y;
-  vec2 side = vec2(-WIND.y, WIND.x);
-  vec2 off = WIND * reach * k + side * sin(abs(k) * 5. + r.z * 6.283) * 46. * abs(k) + (r.xz - .5) * 36. * abs(k);
-  vec2 q = uvc + off / PH;
-  gl_Position = vec4(q.x * 2. - 1., 1. - q.y * 2., 0., 1.);
-  gl_PointSize = max(1.5, CELL * uScale * (1.4 - .65 * d));
-  vec3 col = s.rgb / s.a;
-  col = mix(col, vec3(.93, .72, .36), .5 * step(.87, r.z) * d);                // a few grains catch the gold
-  vCol = vec4(col, a); vDust = d;
-}`;
-const DUST_FRAG = `#version 300 es
+const FRAG = `#version 300 es
 precision highp float;
-in vec4 vCol; in float vDust; out vec4 o;
+uniform sampler2D uA, uB;
+uniform float uT, uCalm;
+in vec2 vUv; flat in float vNew; in vec3 vLit;
+out vec4 o;
 void main(){
-  vec2 q = gl_PointCoord - .5;
-  float shape = mix(max(abs(q.x), abs(q.y)) * 2., length(q) * 2., vDust);     // square grains turn into round specks
-  float a = vCol.a * (1. - smoothstep(.7, 1., shape));
-  o = vec4(vCol.rgb * a, a);
+  vec4 t = mix(texture(uA, vUv), texture(uB, vUv), uCalm > .5 ? uT : vNew);   // premultiplied
+  if (t.a < .02) discard;
+  float shade = mix(1., .38 + .95 * vLit.x, vLit.z);                          // flat shading, only once it has left home
+  o = vec4(t.rgb * shade + vec3(1., .78, .42) * vLit.y * vLit.z * .6 * t.a, t.a);
 }`;
 
 const load = (src) => new Promise((res, rej) => {
@@ -107,32 +114,21 @@ function run(side, front) {
   mctx.drawImage(side, 0, 0, 90, 125);
   const alpha = mctx.getImageData(0, 0, 90, 125).data;
   const onFigure = (e) => {
-    const r = canvas.getBoundingClientRect();
+    const r = base.getBoundingClientRect();
     const x = Math.floor((e.clientX - r.left) / r.width * 90), y = Math.floor((e.clientY - r.top) / r.height * 125);
     return x >= 0 && y >= 0 && x < 90 && y < 125 && alpha[(y * 90 + x) * 4 + 3] > 40;
   };
 
-  const gl = canvas.getContext('webgl2', { alpha: true, premultipliedAlpha: true, antialias: false, powerPreference: 'low-power' });
-  let paint, live = true;
+  const gl = canvas.getContext('webgl2', { alpha: true, premultipliedAlpha: true, antialias: true, depth: true, powerPreference: 'low-power' });
+  let paint, place = () => {}, live = true;
   if (gl) {
-    const program = (vs, fs) => {
-      const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); return s; };
-      const pr = gl.createProgram();
-      gl.attachShader(pr, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(pr, sh(gl.FRAGMENT_SHADER, fs));
-      gl.linkProgram(pr);
-      return gl.getProgramParameter(pr, gl.LINK_STATUS) ? pr : null;
-    };
-    const quad = program(QUAD_VERT, QUAD_FRAG), dust = program(DUST_VERT, DUST_FRAG);
-    if (!quad || !dust) return;
-
-    const vaoQuad = gl.createVertexArray(), vaoDust = gl.createVertexArray();   // the dust has no attributes: grains come from gl_VertexID
-    gl.bindVertexArray(vaoQuad);
-    gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
-    const loc = gl.getAttribLocation(quad, 'p');
-    gl.enableVertexAttribArray(loc);
-    gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-    gl.bindVertexArray(null);
+    const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); return s; };
+    const prog = gl.createProgram();
+    gl.attachShader(prog, sh(gl.VERTEX_SHADER, VERT)); gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, FRAG));
+    gl.linkProgram(prog);
+    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return;
+    gl.useProgram(prog);
+    gl.bindVertexArray(gl.createVertexArray());                                // empty: the triangles come from gl_VertexID
 
     const tex = (unit, img) => {
       gl.activeTexture(gl.TEXTURE0 + unit);
@@ -146,49 +142,52 @@ function run(side, front) {
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
     };
     tex(0, side); tex(1, front);
-    gl.enable(gl.BLEND);
-    gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+    gl.enable(gl.BLEND); gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+    gl.enable(gl.DEPTH_TEST); gl.depthFunc(gl.LEQUAL);
 
-    const U = (pr, n) => gl.getUniformLocation(pr, n);
-    const qu = { tex: U(quad, 'uTex'), t: U(quad, 'uT'), calm: U(quad, 'uCalm'), layer: U(quad, 'uLayer') };
-    const du = { tex: U(dust, 'uTex'), t: U(dust, 'uT'), scale: U(dust, 'uScale'), layer: U(dust, 'uLayer') };
+    const U = (n) => gl.getUniformLocation(prog, n);
+    const uT = U('uT'), uCalm = U('uCalm'), uFig = U('uFig');
+    gl.uniform1i(U('uA'), 0); gl.uniform1i(U('uB'), 1);
+    /* the canvas is larger than the photo, so shards can fly out past his outline: say where the photo sits in it */
+    place = () => {
+      const c = canvas.getBoundingClientRect(), f = base.getBoundingClientRect();
+      gl.uniform4f(uFig, (f.left - c.left) / c.width, (f.top - c.top) / c.height, f.width / c.width, f.height / c.height);
+    };
     paint = (t, calm = still.matches) => {
       gl.viewport(0, 0, canvas.width, canvas.height);
-      gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
-      gl.useProgram(quad); gl.bindVertexArray(vaoQuad);
-      gl.uniform1f(qu.t, t); gl.uniform1f(qu.calm, calm ? 1 : 0);
-      for (let l = 0; l < 2; l++) { gl.uniform1i(qu.tex, l); gl.uniform1i(qu.layer, l); gl.drawArrays(gl.TRIANGLES, 0, 3); }
-      if (calm || t <= 0 || t >= 1) return;                                    // at either end it is just the photo
-      gl.useProgram(dust); gl.bindVertexArray(vaoDust);
-      gl.uniform1f(du.t, t); gl.uniform1f(du.scale, canvas.width / W);
-      for (let l = 0; l < 2; l++) { gl.uniform1i(du.tex, l); gl.uniform1i(du.layer, l); gl.drawArrays(gl.POINTS, 0, COLS * ROWS); }
+      gl.clearColor(0, 0, 0, 0); gl.clearDepth(1); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+      gl.uniform1f(uT, t); gl.uniform1f(uCalm, calm ? 1 : 0);
+      gl.drawArrays(gl.TRIANGLES, 0, COLS * ROWS * 6);
     };
     canvas.addEventListener('webglcontextlost', (e) => { e.preventDefault(); fig.classList.remove('gaze'); live = false; });
   } else {
     const ctx = canvas.getContext('2d');
     paint = (t) => {
+      const c = canvas.getBoundingClientRect(), f = base.getBoundingClientRect(), k = canvas.width / c.width;
+      const x = (f.left - c.left) * k, y = (f.top - c.top) * k, w = f.width * k, h = f.height * k;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.globalAlpha = 1; ctx.drawImage(side, 0, 0, canvas.width, canvas.height);
-      ctx.globalAlpha = Math.min(1, Math.max(0, t)); ctx.drawImage(front, 0, 0, canvas.width, canvas.height);
+      ctx.globalAlpha = 1; ctx.drawImage(side, x, y, w, h);
+      ctx.globalAlpha = Math.min(1, Math.max(0, t)); ctx.drawImage(front, x, y, w, h);
     };
   }
 
   const size = () => {
-    const dpr = Math.min(devicePixelRatio || 1, 2);
+    const dpr = Math.min(devicePixelRatio || 1, 1.5);
     const w = Math.max(2, Math.round(canvas.clientWidth * dpr)), h = Math.max(2, Math.round(canvas.clientHeight * dpr));
     if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; }
+    place();
   };
 
-  /* the timeline runs at a steady pace towards the target (a gentle ease at each end), so reversing half-way sends the
-     dust back the way it came. Becoming the camera-facing photo takes longer than turning back. */
+  /* the timeline runs at an almost steady pace towards the target, so reversing half-way sends the shards back the way
+     they came. Becoming the camera-facing photo takes longer than turning back. */
   let x = 0, target = 0, raf = 0, prev = 0, held = false, timer = 0, revert = 0, pend = null;
-  const eased = (u) => u * u * (3 - 2 * u) * .55 + u * .45;
+  const eased = (u) => u * u * (3 - 2 * u) * .3 + u * .7;
   const frame = (now) => {
     raf = 0;
     if (!live || document.hidden) { prev = 0; return; }
     const dt = Math.min(0.05, prev ? (now - prev) / 1000 : 0.016);
     prev = now;
-    const dur = still.matches ? .4 : target > x ? 2.1 : 1.5;
+    const dur = still.matches ? .4 : target > x ? 2.8 : 2.2;
     x = target > x ? Math.min(target, x + dt / dur) : Math.max(target, x - dt / dur);
     paint(eased(x));
     if (x === target) {
@@ -211,7 +210,8 @@ function run(side, front) {
   };
 
   size(); paint(0);   // warm up the GPU now, while the canvas is still invisible, so the first hover doesn't hitch
-  new ResizeObserver(() => { if (fig.classList.contains('gaze')) { size(); paint(eased(x)); } }).observe(canvas);
+  const ro = new ResizeObserver(() => { if (fig.classList.contains('gaze')) { size(); paint(eased(x)); } });
+  ro.observe(canvas); ro.observe(base);
   document.addEventListener('visibilitychange', () => { if (!document.hidden && !raf && x !== target) raf = requestAnimationFrame(frame); });
 
   const interactive = (e) => e.target.closest?.('a, button, input, [role=button]');
@@ -235,7 +235,7 @@ function run(side, front) {
     if (onFigure(e) && !held) {
       held = true;
       aim(1);
-      revert = setTimeout(() => { held = false; aim(0); }, 5200);
+      revert = setTimeout(() => { held = false; aim(0); }, 6200);
     } else if (held) {
       held = false;
       aim(0);
