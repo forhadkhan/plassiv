@@ -169,7 +169,7 @@
 .about-fallback { background: linear-gradient(var(--color-paper), rgb(168 13 20 / .9) calc(var(--fade) * .45), transparent var(--fade)), linear-gradient(to top, var(--color-paper), rgb(168 13 20 / .9) calc(var(--fade) * .45), transparent var(--fade)), radial-gradient(70% 60% at 25% 30%, rgb(110 8 26 / .55), transparent 70%), #0c0305; }
 
 /* footer wordmark: size and nudge it so the glyph ink (not the text box) runs edge to edge, in line with the link row */
-.poster-ink { --k: 3.2611; text-align: left; }
+.poster-ink { --k: 3.2611; text-align: left; line-height: .694; position: relative; top: .145em; }   /* line box = cap height; the shift puts the ink exactly inside it, so margins measure to the letters */
 
 #hero-word canvas { filter: drop-shadow(0 0 1.25rem rgb(255 214 150 / .38)); }
 
