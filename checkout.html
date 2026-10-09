@@ -6,10 +6,29 @@
   <title>Checkout — Plassiv</title>
   <meta name="description" content="Check out your Plassiv order and pay cash on delivery.">
   <meta name="robots" content="noindex">
-  <meta name="theme-color" content="#345a41">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23345a41'/%3E%3Cpath d='M10 7h3v15h9v3H10z' fill='%23fff'/%3E%3C/svg%3E">
-  <link rel="preload" href="assets/fonts/anton-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/fonts/sora-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <meta name="theme-color" content="#2a0309">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <link rel="canonical" href="https://forhadkhan.github.io/plassiv/checkout.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Plassiv">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Checkout — Plassiv">
+  <meta property="og:description" content="Check out your Plassiv order and pay cash on delivery.">
+  <meta property="og:url" content="https://forhadkhan.github.io/plassiv/checkout.html">
+  <meta property="og:image" content="https://forhadkhan.github.io/plassiv/assets/brand/og-image.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Plassiv, modern menswear: a man in a beige pinstripe suit against a deep red backdrop.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Checkout — Plassiv">
+  <meta name="twitter:description" content="Check out your Plassiv order and pay cash on delivery.">
+  <meta name="twitter:image" content="https://forhadkhan.github.io/plassiv/assets/brand/og-image.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/brand/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
+  <link rel="preload" href="assets/fonts/brilega-fadone.otf" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="assets/fonts/cormorant-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="dist/styles.css">
   <script>document.documentElement.classList.add('js')</script>
 </head>
@@ -44,10 +63,9 @@
   <symbol id="i-lock" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2" /> <path d="M7 11V7a5 5 0 0 1 10 0v4" /></symbol>
 </svg>
 
-<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:text-ink">Skip to content</a>
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-sm focus:bg-white focus:px-4 focus:py-2 focus:text-ink">Skip to content</a>
 
-  <div id="site-nav" class="site-nav fixed inset-x-0 top-0 z-40 bg-[#2a0309] text-white" >
-  <!-- same red satin as the hero (js/nav.js); it fades out while the hero itself is behind the bar -->
+<header id="site-nav" class="site-nav fixed inset-x-0 top-0 z-40 bg-[#2a0309] text-white" >
   <canvas id="nav-mesh" class="site-nav-bg absolute inset-0 size-full" aria-hidden="true"></canvas>
   <div class="site-nav-bg hero-noise pointer-events-none absolute inset-0 opacity-[.32] mix-blend-overlay" aria-hidden="true"></div>
   <nav class="site-nav-bar container-x relative z-10 grid grid-cols-[1fr_auto_1fr] items-center" aria-label="Primary">
@@ -59,20 +77,20 @@
       <li><a href="index.html#contact" class="opacity-90 transition hover:opacity-100">Contact</a></li>
     </ul>
     <button type="button" id="menu-btn" class="inline-flex size-10 items-center justify-center rounded-full md:hidden -ml-2" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
-      <svg class="icon" data-open><use href="#i-menu"/></svg>
-      <svg class="icon hidden" data-close><use href="#i-x"/></svg>
+      <svg class="icon" data-open aria-hidden="true"><use href="#i-menu"/></svg>
+      <svg class="icon hidden" data-close aria-hidden="true"><use href="#i-x"/></svg>
     </button>
-    <a href="index.html" class="font-display text-xl font-bold tracking-tight lg:text-2xl">Plassiv</a>
+    <a href="index.html" class="font-display text-lg font-semibold uppercase tracking-[.38em] lg:text-xl">Plassiv</a>
     <div class="flex items-center justify-end gap-4 lg:gap-5">
-      <button type="button" data-search-open class="transition hover:opacity-75" aria-label="Search" aria-haspopup="dialog" aria-controls="search-dialog"><svg class="icon"><use href="#i-search"/></svg></button>
-      <button type="button" data-login-open class="transition hover:opacity-75" aria-label="Sign in" aria-haspopup="dialog" aria-controls="login-dialog"><svg class="icon"><use href="#i-user"/></svg></button>
+      <button type="button" data-search-open class="transition hover:opacity-75" aria-label="Search" aria-haspopup="dialog" aria-controls="search-dialog"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg></button>
+      <button type="button" data-login-open class="transition hover:opacity-75" aria-label="Sign in" aria-haspopup="dialog" aria-controls="login-dialog"><svg class="icon" aria-hidden="true"><use href="#i-user"/></svg></button>
       <button type="button" data-cart-open class="relative -m-2 grid size-9 place-items-center transition hover:opacity-75" aria-label="Cart" aria-haspopup="dialog" aria-controls="cart-drawer">
-        <svg class="icon"><use href="#i-shopping-cart"/></svg>
+        <svg class="icon" aria-hidden="true"><use href="#i-shopping-cart"/></svg>
         <span data-cart-count class="absolute right-0 top-0 hidden h-[1.125rem] min-w-[1.125rem] place-items-center rounded-full bg-white px-1 text-[0.75rem] font-bold leading-none text-ink" aria-hidden="true"></span>
       </button>
     </div>
   </nav>
-  <div id="mobile-menu" class="fixed inset-0 z-0 hidden overflow-y-auto bg-black md:hidden">
+  <nav id="mobile-menu" aria-label="Mobile" class="fixed inset-0 z-0 hidden overflow-y-auto bg-black md:hidden">
     <canvas id="menu-silk" class="absolute inset-0 size-full" aria-hidden="true"></canvas>
     <ul class="menu-links container-x relative flex min-h-full flex-col justify-center py-28 text-right font-display text-4xl font-bold tracking-tight">
       <li class="w-full"><a href="index.html" class="block py-5">Home</a></li>
@@ -81,31 +99,31 @@
       <li class="w-full"><a href="index.html#about" class="block py-5">About</a></li>
       <li class="w-full"><a href="index.html#contact" class="block py-5">Contact</a></li>
     </ul>
-  </div>
-  </div>
+  </nav>
+</header>
 <div class="nav-spacer bg-[#2a0309]" aria-hidden="true"></div>
 
 <main id="main" class="container-x pt-6 lg:pt-10">
-  <a href="index.html#shop" class="inline-flex items-center gap-1 text-xs text-muted transition hover:text-ink"><svg class="icon size-3.5"><use href="#i-chevron-left"/></svg>Continue shopping</a>
-  <h1 class="heading mt-4 text-[clamp(2rem,3.3vw,2.75rem)]">Checkout</h1>
+  <a href="index.html#shop" class="inline-flex items-center gap-1 text-xs text-muted transition hover:text-ink"><svg class="icon size-3.5" aria-hidden="true"><use href="#i-chevron-left"/></svg>Continue shopping</a>
+  <h1 class="title mt-4 text-[clamp(2.25rem,4vw,3.5rem)]">Check<em>out</em></h1>
 
   <section data-checkout-empty class="hidden py-12 text-center lg:py-20" aria-labelledby="empty-title">
-    <span class="mx-auto grid size-16 place-items-center rounded-full bg-brand/10 text-brand"><svg class="icon size-7"><use href="#i-shopping-cart"/></svg></span>
-    <h2 id="empty-title" class="heading mt-6 text-2xl">Your cart is empty</h2>
+    <span class="mx-auto grid size-16 place-items-center rounded-full border border-gold/50 bg-paper-deep text-brand"><svg class="icon size-7" aria-hidden="true"><use href="#i-shopping-cart"/></svg></span>
+    <h2 id="empty-title" class="title mt-6 text-3xl">Your cart is empty</h2>
     <p class="mx-auto mt-3 max-w-sm text-sm text-muted">Add a few pieces to your cart and come back here to check out.</p>
-    <a href="index.html#shop" class="mt-7 inline-flex h-11 items-center gap-2 rounded-full bg-ink px-6 text-sm font-semibold text-white transition hover:bg-ink/85">Start shopping <svg class="icon size-4"><use href="#i-chevron-right"/></svg></a>
+    <a href="index.html#shop" class="mt-7 btn btn-ink">Start shopping <svg class="icon size-4" aria-hidden="true"><use href="#i-chevron-right"/></svg></a>
   </section>
 
   <form data-checkout class="mt-8 hidden grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_25rem] lg:gap-14" novalidate>
     <div class="space-y-10">
-      <div data-error-summary class="hidden rounded-2xl border border-danger/40 bg-danger/5 p-4 sm:p-5" tabindex="-1" aria-labelledby="error-summary-title">
-        <h2 id="error-summary-title" class="flex items-center gap-2 text-sm font-bold text-danger"><svg class="icon size-[1.125rem]"><use href="#i-circle-alert"/></svg><span></span></h2>
+      <div data-error-summary role="group" class="hidden border border-danger/40 bg-danger/5 p-4 sm:p-5" tabindex="-1" aria-labelledby="error-summary-title">
+        <h2 id="error-summary-title" class="flex items-center gap-2 text-sm font-bold text-danger"><svg class="icon size-[1.125rem]" aria-hidden="true"><use href="#i-circle-alert"/></svg><span></span></h2>
         <ul class="mt-2 list-disc space-y-1 pl-9 text-sm"></ul>
       </div>
       <p class="text-xs text-muted">Fields marked <span class="text-danger">*</span> are required.</p>
 
       <fieldset class="-mt-6 min-w-0">
-        <legend class="font-display text-lg font-bold">Contact</legend>
+        <legend class="font-serif text-2xl font-medium">Contact</legend>
         <div class="mt-4 grid gap-5 sm:grid-cols-2">
           <div class="sm:col-span-2">
             <label for="f-name" class="text-sm font-semibold">Full name <span class="text-danger" aria-hidden="true">*</span></label>
@@ -127,7 +145,7 @@
       </fieldset>
 
       <fieldset class="min-w-0">
-        <legend class="font-display text-lg font-bold">Delivery address</legend>
+        <legend class="font-serif text-2xl font-medium">Delivery address</legend>
         <div class="mt-4 grid gap-5 sm:grid-cols-2">
           <div class="sm:col-span-2">
             <label for="f-address" class="text-sm font-semibold">Street address <span class="text-danger" aria-hidden="true">*</span></label>
@@ -157,106 +175,93 @@
       </fieldset>
 
       <fieldset class="min-w-0">
-        <legend class="font-display text-lg font-bold">Payment</legend>
-        <label class="mt-4 flex cursor-pointer gap-3.5 rounded-2xl border-2 border-ink p-4">
+        <legend class="font-serif text-2xl font-medium">Payment</legend>
+        <label class="mt-4 flex cursor-pointer gap-3.5 border border-gold bg-white/50 p-4">
           <input type="radio" name="payment" value="cod" checked class="mt-0.5 size-[1.125rem] accent-brand" aria-labelledby="cod-label" aria-describedby="cod-note">
           <span>
-            <span id="cod-label" class="flex items-center gap-2 text-sm font-semibold"><svg class="icon size-[1.125rem] text-brand"><use href="#i-banknote"/></svg>Cash on Delivery</span>
+            <span id="cod-label" class="flex items-center gap-2 text-sm font-semibold"><svg class="icon size-[1.125rem] text-brand" aria-hidden="true"><use href="#i-banknote"/></svg>Cash on Delivery</span>
             <span id="cod-note" class="mt-1 block text-xs leading-relaxed text-muted">Pay when your order arrives. Have the exact amount ready for the courier; no card or online payment needed.</span>
           </span>
         </label>
       </fieldset>
     </div>
 
-    <aside class="self-start rounded-2xl border border-line p-5 lg:sticky lg:top-24 lg:p-6" aria-labelledby="summary-title">
-      <h2 id="summary-title" class="font-display text-lg font-bold">Order summary</h2>
+    <aside class="self-start border border-line bg-white/40 p-5 lg:sticky lg:top-24 lg:p-6" aria-labelledby="summary-title">
+      <h2 id="summary-title" class="font-serif text-2xl font-medium">Order summary</h2>
       <ul data-summary-lines class="mt-4 divide-y divide-line" aria-label="Items"></ul>
       <div data-coupon class="mt-5 border-t border-line pt-5"></div>
       <dl data-summary-totals class="mt-5 space-y-2 text-sm"></dl>
-      <button type="submit" class="mt-6 flex h-13 w-full items-center justify-center gap-2.5 rounded-full bg-ink text-sm font-semibold text-white transition hover:bg-ink/85 disabled:cursor-wait disabled:opacity-60">
-        <svg class="icon size-[1.125rem]"><use href="#i-shield-check"/></svg><span data-submit-label>Place order</span>
+      <button type="submit" class="btn btn-ink mt-6 h-13 w-full disabled:cursor-wait disabled:opacity-60">
+        <svg class="icon size-[1.125rem]" aria-hidden="true"><use href="#i-shield-check"/></svg><span data-submit-label>Place order</span>
       </button>
       <p class="mt-3 text-center text-xs leading-relaxed text-muted">Demo shop: your order is saved in this browser only and is not sent to any server.</p>
     </aside>
   </form>
 </main>
 
-<!-- ============ FOOTER ============ -->
 <footer id="contact" class="footer-silk-fallback relative [--fade:22rem] isolate mt-20 overflow-hidden bg-black text-white lg:mt-[9.5rem]">
   <canvas id="footer-silk" class="absolute inset-0 -z-10 h-full w-full" aria-hidden="true"></canvas>
   <div class="container-x pt-[calc(var(--fade)*.7+2rem)] lg:pt-[calc(var(--fade)*.7+4rem)]">
     <div class="text-center">
-      <a href="#top" class="font-display text-base font-bold tracking-tight">Plassiv</a>
+      <a href="#top" class="font-display text-base font-semibold uppercase tracking-[.38em]">Plassiv</a>
       <p class="mt-3 text-xs font-medium uppercase tracking-[0.12em] text-white/80">Designed for modern you</p>
       <ul class="mt-5 flex justify-center gap-3">
-        <li><a href="#" class="grid size-8 place-items-center rounded-lg border border-white/60 transition hover:bg-white hover:text-black" aria-label="Facebook"><svg class="icon icon-brand size-3.5"><use href="#b-facebook"/></svg></a></li>
-        <li><a href="#" class="grid size-8 place-items-center rounded-lg border border-white/60 transition hover:bg-white hover:text-black" aria-label="X"><svg class="icon icon-brand size-3.5"><use href="#b-x-brand"/></svg></a></li>
-        <li><a href="#" class="grid size-8 place-items-center rounded-lg border border-white/60 transition hover:bg-white hover:text-black" aria-label="Instagram"><svg class="icon icon-brand size-3.5"><use href="#b-instagram"/></svg></a></li>
-        <li><a href="#" class="grid size-8 place-items-center rounded-lg border border-white/60 transition hover:bg-white hover:text-black" aria-label="LinkedIn"><svg class="icon icon-brand size-3.5"><use href="#b-linkedin"/></svg></a></li>
+        <li><a href="#" class="grid size-9 place-items-center border border-[#e9cf9c]/40 transition hover:bg-white hover:text-black" aria-label="Facebook"><svg class="icon icon-brand size-3.5" aria-hidden="true"><use href="#b-facebook"/></svg></a></li>
+        <li><a href="#" class="grid size-9 place-items-center border border-[#e9cf9c]/40 transition hover:bg-white hover:text-black" aria-label="X"><svg class="icon icon-brand size-3.5" aria-hidden="true"><use href="#b-x-brand"/></svg></a></li>
+        <li><a href="#" class="grid size-9 place-items-center border border-[#e9cf9c]/40 transition hover:bg-white hover:text-black" aria-label="Instagram"><svg class="icon icon-brand size-3.5" aria-hidden="true"><use href="#b-instagram"/></svg></a></li>
+        <li><a href="#" class="grid size-9 place-items-center border border-[#e9cf9c]/40 transition hover:bg-white hover:text-black" aria-label="LinkedIn"><svg class="icon icon-brand size-3.5" aria-hidden="true"><use href="#b-linkedin"/></svg></a></li>
       </ul>
     </div>
 
-    <ul class="mt-12 flex flex-wrap justify-between gap-x-6 gap-y-3 text-[0.9375rem] font-medium lg:mt-20">
-      <li><a href="index.html#about" class="transition hover:opacity-70">About</a></li>
-      <li><a href="index.html#shop" class="transition hover:opacity-70">Service</a></li>
-      <li><a href="#contact" class="transition hover:opacity-70">Contact</a></li>
-      <li><a href="#contact" class="transition hover:opacity-70">Support</a></li>
-      <li><a href="index.html#reviews" class="transition hover:opacity-70">Community</a></li>
-    </ul>
-
-    <div class="poster-wrap mt-8 lg:mt-10" aria-hidden="true">
+    <div class="poster-wrap mt-12 lg:mt-20" aria-hidden="true">
       <div class="poster poster-fit poster-ink">Plassiv</div>
     </div>
 
     <div class="mt-8 flex flex-wrap items-center justify-between gap-x-6 gap-y-2 pb-6 text-[0.8125rem] text-white/80 lg:pb-8">
       <p>©2026 Plassiv. All Rights Reserved.</p>
-      <p class="flex items-center gap-2"><a href="#" class="transition hover:text-white">Terms &amp; Conditions</a><span class="h-3 w-px bg-white/60" aria-hidden="true"></span><a href="#" class="transition hover:text-white">Privacy Policy</a></p>
+      <ul class="flex items-center gap-2"><li><a href="#" class="transition hover:text-white">Terms &amp; Conditions</a></li><li class="h-3 w-px bg-white/60" aria-hidden="true"></li><li><a href="#" class="transition hover:text-white">Privacy Policy</a></li></ul>
     </div>
   </div>
 </footer>
 
-<!-- ============ CART DRAWER (filled by js/cart-drawer.js) ============ -->
 <dialog id="cart-drawer" class="cart-drawer" aria-labelledby="cart-title">
   <div class="flex h-full flex-col">
     <div class="flex items-center justify-between border-b border-line px-5 py-4">
-      <h2 id="cart-title" class="heading text-xl">Your cart <span data-cart-heading-count class="font-sans text-sm font-medium tracking-normal text-muted"></span></h2>
-      <button type="button" data-cart-close class="-mr-2 grid size-10 place-items-center rounded-full transition hover:bg-ink/5" aria-label="Close cart"><svg class="icon"><use href="#i-x"/></svg></button>
+      <h2 id="cart-title" class="title text-2xl">Your <em>cart</em> <span data-cart-heading-count class="font-sans text-sm font-medium tracking-normal text-muted"></span></h2>
+      <button type="button" data-cart-close class="-mr-2 grid size-10 place-items-center rounded-full transition hover:bg-ink/5" aria-label="Close cart"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></button>
     </div>
     <p id="cart-live" class="sr-only" role="status"></p>
     <div data-cart-empty class="hidden flex-1 flex-col items-center justify-center px-5 text-center">
-      <span class="grid size-16 place-items-center rounded-full bg-brand/10 text-brand"><svg class="icon size-7"><use href="#i-shopping-cart"/></svg></span>
-      <p class="mt-5 font-display text-lg font-bold">Your cart is empty</p>
+      <span class="grid size-16 place-items-center rounded-full border border-gold/50 bg-paper-deep text-brand"><svg class="icon size-7" aria-hidden="true"><use href="#i-shopping-cart"/></svg></span>
+      <p class="mt-5 font-serif text-2xl font-medium">Your cart is empty</p>
       <p class="mt-1.5 text-sm text-muted">Find something you love and it will wait for you here.</p>
-      <a href="index.html#shop" class="mt-6 inline-flex h-11 items-center gap-2 rounded-full bg-ink px-6 text-sm font-semibold text-white transition hover:bg-ink/85">Start shopping <svg class="icon size-4"><use href="#i-chevron-right"/></svg></a>
+      <a href="index.html#shop" class="mt-6 btn btn-ink">Start shopping <svg class="icon size-4" aria-hidden="true"><use href="#i-chevron-right"/></svg></a>
     </div>
     <ul data-cart-lines class="flex-1 divide-y divide-line overflow-y-auto overscroll-contain px-5" aria-label="Items in your cart"></ul>
     <div data-cart-foot class="border-t border-line px-5 pb-5 pt-4">
       <div data-coupon></div>
       <dl data-totals class="mt-4 space-y-2 text-sm"></dl>
-      <a href="checkout.html" class="mt-4 flex h-12 items-center justify-center gap-2 rounded-full bg-ink text-sm font-semibold text-white transition hover:bg-ink/85">Checkout <svg class="icon size-4"><use href="#i-chevron-right"/></svg></a>
-      <p class="mt-2.5 flex items-center justify-center gap-1.5 text-xs text-muted"><svg class="icon size-4"><use href="#i-banknote"/></svg> Cash on delivery: pay when your order arrives</p>
+      <a href="checkout.html" class="btn btn-ink mt-4 w-full">Checkout <svg class="icon size-4" aria-hidden="true"><use href="#i-chevron-right"/></svg></a>
+      <p class="mt-2.5 flex items-center justify-center gap-1.5 text-xs text-muted"><svg class="icon size-4" aria-hidden="true"><use href="#i-banknote"/></svg> Cash on delivery: pay when your order arrives</p>
     </div>
   </div>
 </dialog>
-<!-- ============ SEARCH (filled by js/search.js) ============ -->
 <dialog id="search-dialog" class="search-dialog" aria-label="Search the shop">
   <canvas id="search-silk" class="fixed inset-0 size-full" aria-hidden="true"></canvas>
   <div class="container-x relative pb-16 pt-5 lg:pt-8">
     <form role="search" data-search-form class="search-field flex items-center gap-3 border-b border-white/25 pb-3 transition-colors focus-within:border-white lg:gap-4 lg:pb-4">
       <svg class="icon size-6 shrink-0 text-white/70" aria-hidden="true"><use href="#i-search"/></svg>
       <input id="search-input" type="search" name="q" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" aria-label="Search products" placeholder="Search blazers, jackets, shirts" class="min-w-0 flex-1 bg-transparent font-display text-2xl font-bold tracking-tight text-white outline-none placeholder:text-white/40 lg:text-4xl">
-      <button type="button" data-search-close class="-mr-2 grid size-11 shrink-0 place-items-center rounded-full transition hover:bg-white/10" aria-label="Close search"><svg class="icon"><use href="#i-x"/></svg></button>
+      <button type="button" data-search-close class="-mr-2 grid size-11 shrink-0 place-items-center rounded-full transition hover:bg-white/10" aria-label="Close search"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></button>
     </form>
     <p id="search-status" class="sr-only" role="status"></p>
     <div id="search-results" class="mt-8 lg:mt-10"></div>
   </div>
 </dialog>
-
-<!-- ============ LOGIN (behaviour in js/login.js; there is no account system yet, so every sign-in is refused) ============ -->
 <dialog id="login-dialog" class="login-dialog" aria-labelledby="login-title">
   <div class="login-card relative isolate overflow-hidden">
     <div class="hero-noise pointer-events-none absolute inset-0 -z-10 opacity-[.07] mix-blend-screen" aria-hidden="true"></div>
-    <button type="button" data-login-close class="absolute right-4 top-4 z-10 grid size-10 place-items-center rounded-full text-[#e9cf9c]/70 transition hover:bg-white/5 hover:text-[#f6e3b8]" aria-label="Close sign in"><svg class="icon"><use href="#i-x"/></svg></button>
+    <button type="button" data-login-close class="absolute right-4 top-4 z-10 grid size-10 place-items-center rounded-full text-[#e9cf9c]/70 transition hover:bg-white/5 hover:text-[#f6e3b8]" aria-label="Close sign in"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></button>
 
     <header class="px-8 pb-2 pt-12 text-center">
       <p class="text-[.6875rem] font-semibold uppercase tracking-[.42em] text-[#e9cf9c]/70">Members</p>
@@ -268,7 +273,7 @@
 
     <form data-login-form novalidate class="grid gap-6 px-8 pb-10 pt-7">
       <p data-login-alert role="alert" hidden class="login-alert flex items-start gap-2.5 rounded-lg px-4 py-3 text-sm font-medium">
-        <svg class="icon mt-0.5 size-5"><use href="#i-circle-alert"/></svg>
+        <svg class="icon mt-0.5 size-5" aria-hidden="true"><use href="#i-circle-alert"/></svg>
         <span>Wrong credentials. Check your email and password and try again.</span>
       </p>
       <div>
@@ -285,8 +290,8 @@
           <svg class="icon login-icon pointer-events-none absolute left-4 top-1/2 mt-[.1875rem] size-[1.125rem] -translate-y-1/2" aria-hidden="true"><use href="#i-lock"/></svg>
           <input id="login-password" name="password" type="password" autocomplete="current-password" placeholder="Your password" class="login-input !pl-11 !pr-12">
           <button type="button" data-login-reveal class="login-icon absolute right-1.5 top-1/2 mt-[.1875rem] grid size-9 -translate-y-1/2 place-items-center rounded-full transition hover:!text-[#f6e3b8]" aria-label="Show password" aria-pressed="false">
-            <svg class="icon" data-eye><use href="#i-eye"/></svg>
-            <svg class="icon hidden" data-eye-off><use href="#i-eye-off"/></svg>
+            <svg class="icon" data-eye aria-hidden="true"><use href="#i-eye"/></svg>
+            <svg class="icon hidden" data-eye-off aria-hidden="true"><use href="#i-eye-off"/></svg>
           </button>
         </div>
         <p data-error-for="password" class="field-error"></p>
