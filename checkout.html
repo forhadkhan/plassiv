@@ -47,7 +47,6 @@
   <symbol id="i-trash" viewBox="0 0 24 24"><path d="M10 11v6" /> <path d="M14 11v6" /> <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" /> <path d="M3 6h18" /> <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /></symbol>
   <symbol id="i-truck" viewBox="0 0 24 24"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2" /> <path d="M15 18H9" /> <path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14" /> <circle cx="17" cy="18" r="2" /> <circle cx="7" cy="18" r="2" /></symbol>
   <symbol id="i-tag" viewBox="0 0 24 24"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z" /> <circle cx="7.5" cy="7.5" r=".5" fill="currentColor" /></symbol>
-  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5" /></symbol>
   <symbol id="i-circle-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <path d="m16 9-5.5 5.5L8 12" /></symbol>
   <symbol id="i-circle-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /> <line x1="12" x2="12" y1="8" y2="12" /> <line x1="12" x2="12.01" y1="16" y2="16" /></symbol>
   <symbol id="i-shield-check" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /> <path d="m9 12 2 2 4-4" /></symbol>
@@ -80,10 +79,10 @@
       <svg class="icon" data-open aria-hidden="true"><use href="#i-menu"/></svg>
       <svg class="icon hidden" data-close aria-hidden="true"><use href="#i-x"/></svg>
     </button>
-    <a href="index.html" class="font-display text-lg font-semibold uppercase tracking-[.3em] lg:text-xl lg:tracking-[.38em]">Plassiv</a>
+    <a href="index.html" class="font-poster text-[1.875rem] font-bold leading-none tracking-[.02em] min-[23.5rem]:text-[2.25rem] lg:text-[2.75rem]">Plassiv</a>
     <div class="flex items-center justify-end gap-4 lg:gap-5">
-      <button type="button" data-search-open class="transition hover:opacity-75" aria-label="Search" aria-haspopup="dialog" aria-controls="search-dialog"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg></button>
-      <button type="button" data-login-open class="transition hover:opacity-75" aria-label="Sign in" aria-haspopup="dialog" aria-controls="login-dialog"><svg class="icon" aria-hidden="true"><use href="#i-user"/></svg></button>
+      <button type="button" data-search-open class="-m-2 grid size-9 place-items-center transition hover:opacity-75" aria-label="Search" aria-haspopup="dialog" aria-controls="search-dialog"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg></button>
+      <button type="button" data-login-open class="-m-2 grid size-9 place-items-center transition hover:opacity-75" aria-label="Sign in" aria-haspopup="dialog" aria-controls="login-dialog"><svg class="icon" aria-hidden="true"><use href="#i-user"/></svg></button>
       <button type="button" data-cart-open class="relative -m-2 grid size-9 place-items-center transition hover:opacity-75" aria-label="Cart" aria-haspopup="dialog" aria-controls="cart-drawer">
         <svg class="icon" aria-hidden="true"><use href="#i-shopping-cart"/></svg>
         <span data-cart-count class="absolute right-0 top-0 hidden h-[1.125rem] min-w-[1.125rem] place-items-center rounded-full bg-white px-1 text-[0.75rem] font-bold leading-none text-ink" aria-hidden="true"></span>
@@ -203,7 +202,7 @@
   <canvas id="footer-silk" class="absolute inset-0 -z-10 h-full w-full" aria-hidden="true"></canvas>
   <div class="container-x pt-[calc(var(--fade)*.7+2rem)] lg:pt-[calc(var(--fade)*.7+4rem)]">
     <div class="text-center">
-      <a href="#top" class="font-display text-base font-semibold uppercase tracking-[.38em]">Plassiv</a>
+      <a href="#top" class="font-poster text-[2.5rem] font-bold leading-none tracking-[.02em]">Plassiv</a>
       <p class="mt-3 text-xs font-medium uppercase tracking-[0.12em] text-white/80">Designed for modern you</p>
       <ul class="mt-5 flex justify-center gap-3">
         <li><a href="#" class="grid size-9 place-items-center border border-[#e9cf9c]/40 transition hover:bg-white hover:text-black" aria-label="Facebook"><svg class="icon icon-brand size-3.5" aria-hidden="true"><use href="#b-facebook"/></svg></a></li>
@@ -213,7 +212,7 @@
       </ul>
     </div>
 
-    <div class="poster-wrap mt-20 lg:mt-32" aria-hidden="true">
+    <div class="poster-wrap pointer-events-none mt-20 select-none lg:mt-32" aria-hidden="true">
       <div class="poster poster-fit poster-ink">Plassiv</div>
     </div>
 
