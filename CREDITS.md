@@ -9,8 +9,6 @@ The hero cutout (`hero-model.webp`) is a background-removed image supplied by th
 
 | File | Photographer | Source |
 |---|---|---|
-| `chip-1.jpg` | Christina Victoria Craft | https://unsplash.com/photos/person-wearing-white-dress-shirt-and-black-and-white-beaded-bracelet-8QNq1440IvA |
-| `chip-2.jpg` | Robbie | https://unsplash.com/photos/black-suit-jacket-on-brown-wooden-table-YZ0WDjg4EFg |
 | `col-1.jpg` | Luiz Rogério Nunes | https://unsplash.com/photos/tortoiseshell-sunglasses-on-leather-surface-cMz5kGMmdnw |
 | `col-2.jpg` | Hermes Rivera | https://unsplash.com/photos/person-in-green-suit-jacket-YxbwyTb5ijs |
 | `col-3.jpg` | fatemeh zakeri | https://unsplash.com/photos/a-watch-on-a-rock-L_6OdCI8jSA |
