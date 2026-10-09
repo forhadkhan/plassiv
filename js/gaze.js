@@ -180,7 +180,7 @@ function run(side, front) {
     if (!live || document.hidden) { prev = 0; return; }
     const dt = Math.min(0.05, prev ? (now - prev) / 1000 : 0.016);
     prev = now;
-    const dur = target > x ? 1.1 : .9;
+    const dur = target > x ? .55 : .45;
     x = target > x ? Math.min(target, x + dt / dur) : Math.max(target, x - dt / dur);
     paint(eased(x));
     if (x === target) {
