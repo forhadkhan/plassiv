@@ -5,7 +5,7 @@ All photos come from [Unsplash](https://unsplash.com) and are used under the
 permission or attribution required. Files in `assets/img/` are cropped/resized copies; the hero
 cutout has its background removed.
 
-The hero cutout (`hero-model.webp`) is a background-removed image supplied by the site owner ("Elegant Man in Beige Pinstripe Suit"), cropped and compressed; its original source and licence are not recorded here. The p5, p14, p15, p16, p18 and p19 product photos are the earlier Unsplash picks; every other photo is listed below with its photographer.
+The hero cutout (`hero-model.webp`) is a background-removed image supplied by the site owner ("Elegant Man in Beige Pinstripe Suit"), cropped and compressed; its original source and licence are not recorded here. The p1 and p2 product photos ("Elegant Cream Blazer", "Classic Light Denim Jacket") were supplied by the site owner and are resized copies; their original source and licence are not recorded here. The p5, p14, p15, p16, p18 and p19 product photos are the earlier Unsplash picks; every other photo is listed below with its photographer.
 
 | File | Photographer | Source |
 |---|---|---|
@@ -15,8 +15,6 @@ The hero cutout (`hero-model.webp`) is a background-removed image supplied by th
 | `col-4.jpg` | saeed karimi | https://unsplash.com/photos/a-pair-of-brown-leather-belts-sitting-on-top-of-a-white-piece-of-paper-rH16wMV8ImM |
 | `feat-main.jpg` | Christian | https://unsplash.com/photos/a-man-in-a-suit-sitting-in-a-chair-HPNHsdzZKR8 |
 | `feat-small.jpg` | Salvador Godoy | https://unsplash.com/photos/person-in-black-suit-holding-brown-leather-bag-ksLWYYmK-0k |
-| `p1.jpg` | @alexandermassph | https://unsplash.com/photos/a-beige-suit-hung-on-a-black-staircase-_20qvDauzcc |
-| `p2.jpg` | @bensgrid | https://unsplash.com/photos/man-in-blue-denim-jacket-XQ7Kl0LVAnw |
 | `p3.jpg` | @antesamarzija | https://unsplash.com/photos/a-man-in-a-black-jacket-and-glasses-sitting-on-a-stool-5fCUOEuX1wI |
 | `p4.jpg` | @thisismcfollis | https://unsplash.com/photos/man-with-braided-hair-in-green-shirt-looking-down-GOoIyNfMMnw |
 | `p6.jpg` | @alexandermassph | https://unsplash.com/photos/man-in-a-tan-suit-sits-on-a-pink-chair-DJ6Nj5SJ6bA |
