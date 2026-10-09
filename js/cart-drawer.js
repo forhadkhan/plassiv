@@ -14,7 +14,6 @@ let closeTimer = 0;
 let refreshCoupon = null;
 let pendingFocus = null;
 
-/* ---------- open / close ---------- */
 export function openCart(trigger = document.activeElement, message = '') {
   if (message) announce(message);
   if (closeTimer) { clearTimeout(closeTimer); closeTimer = 0; drawer.classList.add('is-open'); return; }
@@ -58,7 +57,6 @@ drawer.addEventListener('keydown', (e) => {
   else if (!e.shiftKey && document.activeElement === f.at(-1)) { e.preventDefault(); f[0].focus(); }
 });
 
-/* ---------- rendering ---------- */
 /* messages raised in the same task (a quantity change and a dropped coupon) are read out together */
 let queued = [];
 function announce(text) {
@@ -79,20 +77,20 @@ function line(i, index) {
   };
   return el('li', { class: 'flex gap-4 py-4' },
     el('a', { href: url, class: 'shrink-0', tabindex: '-1', 'aria-hidden': 'true' },
-      el('img', { src: i.product.image, alt: '', width: '72', height: '96', loading: 'lazy', class: 'h-24 w-[4.5rem] rounded-lg object-cover' })),
+      el('img', { src: i.product.thumb, alt: '', width: '72', height: '96', loading: 'lazy', class: 'h-24 w-[4.5rem] object-cover' })),
     el('div', { class: 'flex min-w-0 flex-1 flex-col' },
       el('div', { class: 'flex items-start justify-between gap-3' },
-        el('a', { href: url, class: 'text-sm font-semibold leading-snug hover:underline', 'data-focus': `name:${index}` }, name),
-        el('p', { class: 'text-sm font-bold tabular-nums' }, money(i.total))),
+        el('a', { href: url, class: 'font-serif text-lg leading-snug hover:text-brand', 'data-focus': `name:${index}` }, name),
+        el('p', { class: 'text-sm font-medium tabular-nums' }, money(i.total))),
       el('p', { class: 'mt-1 text-xs text-muted' }, optionText(i)),
       el('p', { class: 'mt-0.5 text-xs text-muted' }, `${money(i.unit)} each`),
       el('div', { class: 'mt-auto flex items-center justify-between gap-3 pt-3' },
-        el('div', { class: 'inline-flex h-9 items-center rounded-full border border-ink/50', role: 'group', 'aria-label': `Quantity of ${name}` },
-          el('button', { type: 'button', class: 'grid size-9 place-items-center rounded-full disabled:opacity-35', 'aria-label': `Decrease quantity of ${name}`, disabled: i.qty <= 1, 'data-focus': `dec:${i.key}`, onclick: () => change(i.qty - 1, `dec:${i.key}`) }, icon('i-minus', 'icon size-4')),
+        el('div', { class: 'inline-flex h-9 items-center border border-ink/30', role: 'group', 'aria-label': `Quantity of ${name}` },
+          el('button', { type: 'button', class: 'grid size-9 place-items-center disabled:opacity-35', 'aria-label': `Decrease quantity of ${name}`, disabled: i.qty <= 1, 'data-focus': `dec:${i.key}`, onclick: () => change(i.qty - 1, `dec:${i.key}`) }, icon('i-minus', 'icon size-4')),
           el('span', { class: 'w-7 text-center text-sm font-semibold tabular-nums' }, String(i.qty)),
-          el('button', { type: 'button', class: 'grid size-9 place-items-center rounded-full disabled:opacity-35', 'aria-label': `Increase quantity of ${name}`, disabled: i.qty >= MAX_QTY, 'data-focus': `inc:${i.key}`, onclick: () => change(i.qty + 1, `inc:${i.key}`) }, icon('i-plus', 'icon size-4'))),
+          el('button', { type: 'button', class: 'grid size-9 place-items-center disabled:opacity-35', 'aria-label': `Increase quantity of ${name}`, disabled: i.qty >= MAX_QTY, 'data-focus': `inc:${i.key}`, onclick: () => change(i.qty + 1, `inc:${i.key}`) }, icon('i-plus', 'icon size-4'))),
         el('button', {
-          type: 'button', class: 'inline-flex items-center gap-1.5 rounded-full py-1.5 text-xs font-medium text-muted transition hover:text-ink',
+          type: 'button', class: 'inline-flex items-center gap-1.5 py-1.5 text-xs font-medium text-muted transition hover:text-ink',
           'aria-label': `Remove ${name}, ${optionText(i)}`,
           onclick: () => { pendingFocus = `name:${index}`; removeLine(i.key); announce(`${name} removed from your cart.`); },
         }, icon('i-trash', 'icon size-4'), 'Remove'))));

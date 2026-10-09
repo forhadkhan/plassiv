@@ -1,23 +1,22 @@
-<!-- ============ CART DRAWER (filled by js/cart-drawer.js) ============ -->
 <dialog id="cart-drawer" class="cart-drawer" aria-labelledby="cart-title">
   <div class="flex h-full flex-col">
     <div class="flex items-center justify-between border-b border-line px-5 py-4">
-      <h2 id="cart-title" class="heading text-xl">Your cart <span data-cart-heading-count class="font-sans text-sm font-medium tracking-normal text-muted"></span></h2>
-      <button type="button" data-cart-close class="-mr-2 grid size-10 place-items-center rounded-full transition hover:bg-ink/5" aria-label="Close cart"><svg class="icon"><use href="#i-x"/></svg></button>
+      <h2 id="cart-title" class="title text-2xl">Your <em>cart</em> <span data-cart-heading-count class="font-sans text-sm font-medium tracking-normal text-muted"></span></h2>
+      <button type="button" data-cart-close class="-mr-2 grid size-10 place-items-center rounded-full transition hover:bg-ink/5" aria-label="Close cart"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></button>
     </div>
     <p id="cart-live" class="sr-only" role="status"></p>
     <div data-cart-empty class="hidden flex-1 flex-col items-center justify-center px-5 text-center">
-      <span class="grid size-16 place-items-center rounded-full bg-brand/10 text-brand"><svg class="icon size-7"><use href="#i-shopping-cart"/></svg></span>
-      <p class="mt-5 font-display text-lg font-bold">Your cart is empty</p>
+      <span class="grid size-16 place-items-center rounded-full border border-gold/50 bg-paper-deep text-brand"><svg class="icon size-7" aria-hidden="true"><use href="#i-shopping-cart"/></svg></span>
+      <p class="mt-5 font-serif text-2xl font-medium">Your cart is empty</p>
       <p class="mt-1.5 text-sm text-muted">Find something you love and it will wait for you here.</p>
-      <a href="%BASE%#shop" class="mt-6 inline-flex h-11 items-center gap-2 rounded-full bg-ink px-6 text-sm font-semibold text-white transition hover:bg-ink/85">Start shopping <svg class="icon size-4"><use href="#i-chevron-right"/></svg></a>
+      <a href="%BASE%#shop" class="mt-6 btn btn-ink">Start shopping <svg class="icon size-4" aria-hidden="true"><use href="#i-chevron-right"/></svg></a>
     </div>
     <ul data-cart-lines class="flex-1 divide-y divide-line overflow-y-auto overscroll-contain px-5" aria-label="Items in your cart"></ul>
     <div data-cart-foot class="border-t border-line px-5 pb-5 pt-4">
       <div data-coupon></div>
       <dl data-totals class="mt-4 space-y-2 text-sm"></dl>
-      <a href="checkout.html" class="mt-4 flex h-12 items-center justify-center gap-2 rounded-full bg-ink text-sm font-semibold text-white transition hover:bg-ink/85">Checkout <svg class="icon size-4"><use href="#i-chevron-right"/></svg></a>
-      <p class="mt-2.5 flex items-center justify-center gap-1.5 text-xs text-muted"><svg class="icon size-4"><use href="#i-banknote"/></svg> Cash on delivery: pay when your order arrives</p>
+      <a href="checkout.html" class="btn btn-ink mt-4 w-full">Checkout <svg class="icon size-4" aria-hidden="true"><use href="#i-chevron-right"/></svg></a>
+      <p class="mt-2.5 flex items-center justify-center gap-1.5 text-xs text-muted"><svg class="icon size-4" aria-hidden="true"><use href="#i-banknote"/></svg> Cash on delivery: pay when your order arrives</p>
     </div>
   </div>
 </dialog>

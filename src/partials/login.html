@@ -1,9 +1,7 @@
-
-<!-- ============ LOGIN (behaviour in js/login.js; there is no account system yet, so every sign-in is refused) ============ -->
 <dialog id="login-dialog" class="login-dialog" aria-labelledby="login-title">
   <div class="login-card relative isolate overflow-hidden">
     <div class="hero-noise pointer-events-none absolute inset-0 -z-10 opacity-[.07] mix-blend-screen" aria-hidden="true"></div>
-    <button type="button" data-login-close class="absolute right-4 top-4 z-10 grid size-10 place-items-center rounded-full text-[#e9cf9c]/70 transition hover:bg-white/5 hover:text-[#f6e3b8]" aria-label="Close sign in"><svg class="icon"><use href="#i-x"/></svg></button>
+    <button type="button" data-login-close class="absolute right-4 top-4 z-10 grid size-10 place-items-center rounded-full text-[#e9cf9c]/70 transition hover:bg-white/5 hover:text-[#f6e3b8]" aria-label="Close sign in"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></button>
 
     <header class="px-8 pb-2 pt-12 text-center">
       <p class="text-[.6875rem] font-semibold uppercase tracking-[.42em] text-[#e9cf9c]/70">Members</p>
@@ -15,7 +13,7 @@
 
     <form data-login-form novalidate class="grid gap-6 px-8 pb-10 pt-7">
       <p data-login-alert role="alert" hidden class="login-alert flex items-start gap-2.5 rounded-lg px-4 py-3 text-sm font-medium">
-        <svg class="icon mt-0.5 size-5"><use href="#i-circle-alert"/></svg>
+        <svg class="icon mt-0.5 size-5" aria-hidden="true"><use href="#i-circle-alert"/></svg>
         <span>Wrong credentials. Check your email and password and try again.</span>
       </p>
       <div>
@@ -32,8 +30,8 @@
           <svg class="icon login-icon pointer-events-none absolute left-4 top-1/2 mt-[.1875rem] size-[1.125rem] -translate-y-1/2" aria-hidden="true"><use href="#i-lock"/></svg>
           <input id="login-password" name="password" type="password" autocomplete="current-password" placeholder="Your password" class="login-input !pl-11 !pr-12">
           <button type="button" data-login-reveal class="login-icon absolute right-1.5 top-1/2 mt-[.1875rem] grid size-9 -translate-y-1/2 place-items-center rounded-full transition hover:!text-[#f6e3b8]" aria-label="Show password" aria-pressed="false">
-            <svg class="icon" data-eye><use href="#i-eye"/></svg>
-            <svg class="icon hidden" data-eye-off><use href="#i-eye-off"/></svg>
+            <svg class="icon" data-eye aria-hidden="true"><use href="#i-eye"/></svg>
+            <svg class="icon hidden" data-eye-off aria-hidden="true"><use href="#i-eye-off"/></svg>
           </button>
         </div>
         <p data-error-for="password" class="field-error"></p>

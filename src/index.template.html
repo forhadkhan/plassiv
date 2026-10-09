@@ -12,168 +12,189 @@
 
 <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:text-ink">Skip to content</a>
 
-<!-- ============ HERO ============ -->
 <!--NAV-->
 
-<header id="top" class="hero-mesh-fallback relative isolate overflow-hidden bg-[#2a0309] text-white h-[var(--hero-h)] [--hero-h:clamp(40rem,100svh,64rem)]">
-  <!-- live mesh background (js/hero.js); the CSS gradient above is the no-WebGL fallback -->
+<section id="top" aria-labelledby="hero-title" class="hero-mesh-fallback relative isolate overflow-hidden bg-[#2a0309] text-white h-[var(--hero-h)] [--hero-h:clamp(40rem,100svh,64rem)]">
   <canvas id="hero-mesh" class="absolute inset-0 z-0 size-full" aria-hidden="true"></canvas>
   <div class="hero-noise pointer-events-none absolute inset-0 z-[1] opacity-[.32] mix-blend-overlay" aria-hidden="true"></div>
-  <h1 class="sr-only">Plassiv — modern menswear</h1>
+  <h1 id="hero-title" class="sr-only">Plassiv — modern menswear</h1>
 
-  <!-- poster wordmark (sits behind the model) -->
-  <div class="container-x pointer-events-none absolute inset-x-0 top-[19%] z-0 hero-fade" aria-hidden="true">
+  <div class="hero-depth container-x pointer-events-none absolute inset-x-0 top-[19%] z-0 hero-fade" aria-hidden="true">
     <div id="hero-word" class="poster-wrap">
       <div class="poster poster-fit text-center">Plassiv</div>
       <canvas class="hidden h-auto w-full"></canvas>
     </div>
   </div>
 
-  <img src="assets/img/hero-model.webp" width="950" height="1188" alt="Man in a charcoal blazer over a black tee"
-       class="hero-rise pointer-events-none absolute bottom-0 left-1/2 z-10 h-[70%] w-auto max-w-none -translate-x-1/2 object-contain object-bottom sm:h-[76%] lg:h-[78%]" fetchpriority="high">
+  <div class="hero-rise pointer-events-none absolute bottom-0 left-1/2 z-10 h-[70%] -translate-x-1/2 sm:h-[76%] lg:h-[78%]">
+    <div class="hero-float relative h-full">
+      <img src="assets/img/hero-model.webp" width="900" height="1254" alt="Man in a beige pinstripe double-breasted suit with a brown tie, looking off to the side"
+           class="block h-full w-auto max-w-none object-contain object-bottom" fetchpriority="high">
+      <span class="hero-sheen" style="--cut:url(assets/img/hero-model.webp)" aria-hidden="true"></span>
+    </div>
+  </div>
 
-  <div class="absolute inset-x-0 bottom-0 z-[11] h-2/5 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+  <div class="absolute inset-x-0 bottom-0 z-[11] h-[46%] bg-gradient-to-t from-black/85 via-black/55 to-transparent sm:h-2/5 sm:from-black/80 sm:via-black/30"></div>
 
-  <!-- left copy -->
   <div class="container-x absolute inset-x-0 bottom-0 z-20 pb-8 lg:pb-14">
     <div class="hero-rise [animation-delay:.25s]">
       <p class="max-w-[16rem] text-[0.9375rem] leading-relaxed text-white/90 lg:max-w-[15.5rem]">Elegant, trendy, and comfortable dresses designed to make you feel confident every single day.</p>
-      <a href="#shop" class="group mt-5 inline-flex items-center gap-4 rounded-full bg-white py-1.5 pl-6 pr-1.5 text-[0.9375rem] font-semibold text-ink transition hover:bg-white/90">
+      <a href="#shop" class="btn btn-gold group mt-6">
         Shop Now
-        <span class="grid size-9 place-items-center rounded-full bg-ink text-white transition group-hover:translate-x-0.5"><svg class="icon size-4"><use href="#i-chevron-right"/></svg></span>
+        <svg aria-hidden="true" focusable="false" class="icon size-4 transition group-hover:translate-x-0.5"><use href="#i-chevron-right"/></svg>
       </a>
-      <p class="mt-9 font-display text-[1.875rem] font-bold leading-none tracking-tight">350K</p>
+      <p class="mt-9 font-serif text-[2.5rem] font-medium leading-none">350K</p>
       <p class="mt-1.5 text-xs text-white/80">Happy Customers</p>
       <div class="mt-2.5 flex -space-x-2" aria-hidden="true">
-        <img src="assets/img/t1.jpg" alt="" class="size-7 rounded-full object-cover ring-2 ring-black">
-        <img src="assets/img/t2.jpg" alt="" class="size-7 rounded-full object-cover ring-2 ring-black">
-        <img src="assets/img/t3.jpg" alt="" class="size-7 rounded-full object-cover ring-2 ring-black">
+        <img loading="lazy" decoding="async" src="assets/img/t1.jpg" alt="" class="size-7 rounded-full object-cover ring-2 ring-black">
+        <img loading="lazy" decoding="async" src="assets/img/t2.jpg" alt="" class="size-7 rounded-full object-cover ring-2 ring-black">
+        <img loading="lazy" decoding="async" src="assets/img/t3.jpg" alt="" class="size-7 rounded-full object-cover ring-2 ring-black">
       </div>
     </div>
   </div>
 
-  <!-- right: featured product chips (bleed off the edge) -->
   <div class="absolute bottom-14 left-[81.4%] right-0 z-20 hidden overflow-hidden lg:block hero-rise [animation-delay:.4s]">
     <ul class="flex w-max gap-4">
       <li class="w-[9.125rem]">
-        <img src="assets/img/chip-1.jpg" width="384" height="496" alt="Man in a mustard zip jacket over a grey tee" class="aspect-[48/62] w-full rounded-xl object-cover">
-        <p class="mt-3 text-sm font-bold">$99.80</p>
+        <img loading="lazy" decoding="async" src="assets/img/chip-1.jpg" width="384" height="512" alt="Crossed forearms in a dark jacket and white French cuffs, each fastened with a gold and amber cufflink." class="aspect-[48/62] w-full object-cover">
+        <p class="mt-3 font-serif text-xl font-medium">$99.80</p>
         <p class="mt-0.5 text-xs leading-snug text-white/80">Mustard Zip<br>Bomber Jacket</p>
       </li>
       <li class="w-[9.125rem]">
-        <img src="assets/img/chip-2.jpg" width="384" height="496" alt="White crew-neck tee hanging on a grey wall" class="aspect-[48/62] w-full rounded-xl object-cover">
-        <p class="mt-3 text-sm font-bold">$75.40</p>
+        <img loading="lazy" decoding="async" src="assets/img/chip-2.jpg" width="384" height="512" alt="A charcoal suit jacket laid flat on a dark wooden table, showing the notch lapel and flap pocket in soft light." class="aspect-[48/62] w-full object-cover">
+        <p class="mt-3 font-serif text-xl font-medium">$75.40</p>
         <p class="mt-0.5 text-xs leading-snug text-white/80">Essential White<br>Half Sleeve Tee</p>
       </li>
     </ul>
   </div>
-</header>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>New Season</span><i></i><span>Tailored Fit</span><i></i><span>Premium Fabrics</span><i></i><span>Free Shipping Over $150</span><i></i><span>Cash on Delivery</span><i></i>
+    <span>New Season</span><i></i><span>Tailored Fit</span><i></i><span>Premium Fabrics</span><i></i><span>Free Shipping Over $150</span><i></i><span>Cash on Delivery</span><i></i>
+    <span>New Season</span><i></i><span>Tailored Fit</span><i></i><span>Premium Fabrics</span><i></i><span>Free Shipping Over $150</span><i></i><span>Cash on Delivery</span><i></i>
+    <span>New Season</span><i></i><span>Tailored Fit</span><i></i><span>Premium Fabrics</span><i></i><span>Free Shipping Over $150</span><i></i><span>Cash on Delivery</span><i></i>
+  </div>
+</div>
 
 <main id="main">
 
-<!-- ============ COLLECTIONS ============ -->
 <section id="collections" class="container-x mt-20 scroll-mt-8 lg:mt-[9.5rem]" aria-labelledby="collections-title">
   <div class="reveal mx-auto max-w-2xl text-center">
-    <h2 id="collections-title" class="heading text-[clamp(2rem,2.8vw,2.5rem)]">Discover Our Exclusive Collections</h2>
-    <p class="mx-auto mt-4 max-w-md text-[0.9375rem] leading-relaxed text-muted">Explore our carefully curated collection of fashion pieces, thoughtfully designed for modern lifestyles, offering premium comfort, exceptional quality, and timeless style that elevates your everyday wardrobe with effortless elegance.</p>
+    <p class="eyebrow">The Collections</p>
+    <h2 id="collections-title" class="title mt-5 text-[clamp(2.5rem,4.2vw,3.75rem)]">Discover our <em>exclusive</em> collections</h2>
+    <span class="rule mt-7" aria-hidden="true"></span>
+    <p class="mx-auto mt-7 max-w-md text-[0.9375rem] leading-relaxed text-muted">Explore our carefully curated collection of fashion pieces, thoughtfully designed for modern lifestyles, offering premium comfort, exceptional quality, and timeless style that elevates your everyday wardrobe with effortless elegance.</p>
   </div>
-  <ul class="mt-10 grid grid-cols-2 gap-x-4 gap-y-8 lg:mt-12 lg:grid-cols-4 lg:gap-x-[1.125rem]">
+  <ul class="mt-12 grid grid-cols-2 gap-x-4 gap-y-10 lg:mt-16 lg:grid-cols-4 lg:gap-x-6">
     <li class="reveal">
       <a href="#shop" class="group block">
-        <span class="block overflow-hidden rounded-2xl"><img src="assets/img/col-1.jpg" width="816" height="880" alt="Classic black sunglasses with gradient lenses" class="aspect-[102/110] w-full object-cover transition duration-700 group-hover:scale-105"></span>
-        <span class="mt-4 block text-center text-sm font-semibold">Sunglasses</span>
+        <span class="mat"><span><img loading="lazy" decoding="async" src="assets/img/col-1.jpg" srcset="assets/img/col-1-408.jpg 408w, assets/img/col-1.jpg 816w" sizes="(min-width: 1024px) 25vw, 46vw" width="816" height="1020" alt="Tortoiseshell sunglasses resting on dark leather in low, moody light." class="aspect-[102/130] w-full object-cover transition duration-[1200ms] ease-out group-hover:scale-105"></span></span>
+        <span class="mt-5 block text-center"><span class="block font-serif text-sm italic text-gold">I</span><span class="mt-1 block font-serif text-2xl font-medium">Sunglasses</span></span>
       </a>
     </li>
     <li class="reveal" style="--d:80ms">
       <a href="#shop" class="group block">
-        <span class="block overflow-hidden rounded-2xl"><img src="assets/img/col-2.jpg" width="816" height="880" alt="Man in a grey blazer and sunglasses" class="aspect-[102/110] w-full object-cover transition duration-700 group-hover:scale-105"></span>
-        <span class="mt-4 block text-center text-sm font-semibold">Men’s Wear</span>
+        <span class="mat"><span><img loading="lazy" decoding="async" src="assets/img/col-2.jpg" srcset="assets/img/col-2-408.jpg 408w, assets/img/col-2.jpg 816w" sizes="(min-width: 1024px) 25vw, 46vw" width="816" height="1020" alt="Close-up of a deep teal wool suit jacket with a white shirt and a patterned pocket square." class="aspect-[102/130] w-full object-cover transition duration-[1200ms] ease-out group-hover:scale-105"></span></span>
+        <span class="mt-5 block text-center"><span class="block font-serif text-sm italic text-gold">II</span><span class="mt-1 block font-serif text-2xl font-medium">Men’s Wear</span></span>
       </a>
     </li>
     <li class="reveal" style="--d:160ms">
       <a href="#shop" class="group block">
-        <span class="block overflow-hidden rounded-2xl"><img src="assets/img/col-3.jpg" width="816" height="880" alt="Black smart watch on a white background" class="aspect-[102/110] w-full object-cover transition duration-700 group-hover:scale-105"></span>
-        <span class="mt-4 block text-center text-sm font-semibold">Smart Watch</span>
+        <span class="mat"><span><img loading="lazy" decoding="async" src="assets/img/col-3.jpg" srcset="assets/img/col-3-408.jpg 408w, assets/img/col-3.jpg 816w" sizes="(min-width: 1024px) 25vw, 46vw" width="816" height="1020" alt="A gold chronograph watch on a brown leather strap, set on a dark stone in drifting smoke." class="aspect-[102/130] w-full object-cover transition duration-[1200ms] ease-out group-hover:scale-105"></span></span>
+        <span class="mt-5 block text-center"><span class="block font-serif text-sm italic text-gold">III</span><span class="mt-1 block font-serif text-2xl font-medium">Watch</span></span>
       </a>
     </li>
     <li class="reveal" style="--d:240ms">
       <a href="#shop" class="group block">
-        <span class="block overflow-hidden rounded-2xl"><img src="assets/img/col-4.jpg" width="816" height="880" alt="Woven brown leather belts" class="aspect-[102/110] w-full object-cover transition duration-700 group-hover:scale-105"></span>
-        <span class="mt-4 block text-center text-sm font-semibold">Belt</span>
+        <span class="mat"><span><img loading="lazy" decoding="async" src="assets/img/col-4.jpg" srcset="assets/img/col-4-408.jpg 408w, assets/img/col-4.jpg 816w" sizes="(min-width: 1024px) 25vw, 46vw" width="816" height="1020" alt="Three coils of woven brown leather belt with a brushed steel buckle on a white roll against pale grey." class="aspect-[102/130] w-full object-cover transition duration-[1200ms] ease-out group-hover:scale-105"></span></span>
+        <span class="mt-5 block text-center"><span class="block font-serif text-sm italic text-gold">IV</span><span class="mt-1 block font-serif text-2xl font-medium">Belt</span></span>
       </a>
     </li>
   </ul>
 </section>
 
-<!-- ============ PRODUCTS ============ -->
 <section id="shop" class="container-x mt-20 scroll-mt-8 lg:mt-[9.5rem]" aria-labelledby="shop-title">
-  <div class="reveal flex flex-wrap items-end justify-between gap-x-8 gap-y-5">
+  <div class="reveal flex flex-wrap items-end justify-between gap-x-8 gap-y-6">
     <div>
-      <h2 id="shop-title" class="heading text-[clamp(2rem,2.8vw,2.5rem)]">Modern Fashion for Confident Men</h2>
-      <p class="mt-3 max-w-[28.5rem] text-[0.9375rem] leading-relaxed text-muted">Upgrade your wardrobe with timeless designs, premium fabrics, and perfect fits made for today’s lifestyle. Style that speaks before you do.</p>
+      <p class="eyebrow">The Edit</p>
+      <h2 id="shop-title" class="title mt-5 max-w-[34rem] text-[clamp(2.5rem,4.2vw,3.75rem)]">Modern fashion for <em>confident</em> men</h2>
+      <p class="mt-5 max-w-[28.5rem] text-[0.9375rem] leading-relaxed text-muted">Upgrade your wardrobe with timeless designs, premium fabrics, and perfect fits made for today’s lifestyle. Style that speaks before you do.</p>
     </div>
     <div class="flex items-center gap-3">
-      <a href="#shop" class="inline-flex h-10 items-center rounded-full bg-ink px-6 text-xs font-semibold text-white transition hover:bg-ink/85">View all</a>
-      <button type="button" id="prod-prev" class="grid size-10 place-items-center rounded-full border border-line transition hover:bg-ink hover:text-white disabled:pointer-events-none disabled:opacity-40" aria-label="Previous products"><svg class="icon size-4"><use href="#i-chevron-left"/></svg></button>
-      <button type="button" id="prod-next" class="grid size-10 place-items-center rounded-full border border-line transition hover:bg-ink hover:text-white disabled:pointer-events-none disabled:opacity-40" aria-label="Next products"><svg class="icon size-4"><use href="#i-chevron-right"/></svg></button>
+      <button type="button" id="prod-all" class="btn btn-line h-11 px-6" aria-expanded="false" aria-controls="prod-track">View all</button>
+      <button type="button" id="prod-prev" class="grid size-11 place-items-center border border-ink/30 transition hover:border-ink hover:bg-ink hover:text-white disabled:pointer-events-none disabled:opacity-40" aria-label="Previous products"><svg aria-hidden="true" focusable="false" class="icon size-4"><use href="#i-chevron-left"/></svg></button>
+      <button type="button" id="prod-next" class="grid size-11 place-items-center border border-ink/30 transition hover:border-ink hover:bg-ink hover:text-white disabled:pointer-events-none disabled:opacity-40" aria-label="Next products"><svg aria-hidden="true" focusable="false" class="icon size-4"><use href="#i-chevron-right"/></svg></button>
     </div>
   </div>
 
-  <ul id="prod-track" class="scrollbar-none mt-9 grid snap-x snap-mandatory auto-cols-[78%] grid-flow-col gap-x-[1.125rem] gap-y-7 overflow-x-auto scroll-smooth sm:auto-cols-[46%] lg:grid-flow-row lg:grid-cols-3 lg:overflow-visible">
+  <ul id="prod-track" class="scrollbar-none -mx-2 mt-10 grid scroll-px-2 px-2 py-2 snap-x snap-mandatory auto-cols-[78%] grid-flow-col gap-x-[1.125rem] gap-y-10 overflow-x-auto scroll-smooth sm:auto-cols-[46%] lg:auto-cols-[calc((100%-3rem)/3)] lg:gap-x-6 [&.is-all]:grid-flow-row [&.is-all]:grid-cols-2 [&.is-all]:overflow-visible lg:[&.is-all]:grid-cols-3">
     <!--PRODUCTS-->
   </ul>
 </section>
 
-<!-- ============ FEATURE ============ -->
-<section id="about" class="container-x mt-20 scroll-mt-8 lg:mt-[9.5rem]" aria-labelledby="about-title">
-  <div class="grid gap-10 lg:grid-cols-[48fr_52fr] lg:gap-0">
-    <div class="reveal overflow-hidden rounded-2xl">
-      <img src="assets/img/feat-main.jpg" width="1224" height="1560" alt="Two men in dark tailored suits and sunglasses" class="aspect-[204/260] w-full object-cover">
-    </div>
-    <div class="relative z-10 flex flex-col justify-between gap-12 lg:pl-6 lg:pt-12">
-      <div class="reveal">
-        <h2 id="about-title" class="heading max-w-[34rem] text-[clamp(1.75rem,2.5vw,2.25rem)] font-semibold">Elevate Your Everyday Style With Our Premium Streetwear Collection Designed For Bold Confidence</h2>
-        <p class="mt-4 max-w-[15.5rem] text-xs leading-relaxed text-muted">Discover modern essentials crafted for bold confidence and effortless everyday sophistication.</p>
+<section id="about" class="on-dark about-fallback relative isolate mt-8 scroll-mt-0 overflow-hidden bg-[#0c0305] text-[#fbf1dc] [--fade:14rem] lg:mt-16 lg:[--fade:22rem]" aria-labelledby="about-title">
+  <canvas id="about-art" class="absolute inset-0 -z-10 size-full" aria-hidden="true"></canvas>
+  <div class="container-x py-[calc(var(--fade)*.8+9rem)] lg:py-[calc(var(--fade)*.8+15rem)]">
+    <div class="grid items-center gap-14 lg:grid-cols-[46fr_54fr] lg:gap-20">
+      <div class="reveal frame">
+        <img loading="lazy" decoding="async" src="assets/img/feat-main.jpg" srcset="assets/img/feat-main-612.jpg 612w, assets/img/feat-main.jpg 1224w" sizes="(min-width: 1024px) 40vw, 92vw" width="1224" height="1560" alt="A man in a blue pinstripe suit reads in an armchair in a dark room, lit by a single shaft of light." class="aspect-[204/260] w-full object-cover">
       </div>
-      <div class="reveal w-full max-w-[26.6rem] lg:ml-auto lg:mr-2.5" style="--d:120ms">
-        <p class="mb-3 flex gap-5 text-sm font-semibold"><span>Timeless</span><span>Stylish</span></p>
-        <img src="assets/img/feat-small.jpg" width="852" height="708" alt="Two men in relaxed tailoring on a city street" class="aspect-[142/118] w-full rounded-2xl object-cover">
+      <div class="flex flex-col gap-12">
+        <div class="reveal">
+          <p class="eyebrow">The House</p>
+          <h2 id="about-title" class="title mt-5 max-w-[30rem] text-[clamp(2rem,3.2vw,2.75rem)]">Tailoring for the everyday, made with <em>quiet</em> confidence</h2>
+          <span class="rule mt-8 !mx-0" aria-hidden="true"></span>
+          <p class="mt-8 max-w-[24rem] text-[0.9375rem] leading-relaxed text-[#fbf1dc]/70">Considered essentials in fine fabrics, cut to last beyond the season.</p>
+        </div>
+        <div class="reveal w-full max-w-[26.6rem] lg:ml-auto" style="--d:120ms">
+          <p class="mb-4 flex gap-8 font-serif text-lg italic text-gold-light"><span>Timeless</span><span>Stylish</span></p>
+          <div class="frame frame-sm">
+            <img loading="lazy" decoding="async" src="assets/img/feat-small.jpg" srcset="assets/img/feat-small-426.jpg 426w, assets/img/feat-small.jpg 852w" sizes="(min-width: 1024px) 30vw, 92vw" width="852" height="708" alt="A tailor's hands arranging tweed cloth on a worn wooden cutting table beside shears and measuring tape." class="aspect-[142/118] w-full object-cover">
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ TESTIMONIALS ============ -->
-<section id="reviews" class="container-x mt-20 lg:mt-[9.5rem]" aria-labelledby="reviews-title">
-  <h2 id="reviews-title" class="sr-only">What our customers say</h2>
-  <div class="reveal flex items-center justify-center gap-4 lg:gap-12">
-    <button type="button" data-t-slot="prev" class="shrink-0 overflow-hidden rounded-xl opacity-100 transition-all duration-500" aria-label="Show previous review">
-      <img src="assets/img/t1.jpg" width="368" height="480" alt="Daniel Brooks" class="h-24 w-[4.5rem] object-cover sm:h-36 sm:w-28 lg:h-[11.375rem] lg:w-[8.75rem]">
-    </button>
-    <div data-t-slot="current" class="shrink-0 overflow-hidden rounded-xl transition-all duration-500">
-      <img src="assets/img/t2.jpg" width="664" height="744" alt="James Carter" class="h-40 w-32 object-cover sm:h-56 sm:w-48 lg:h-[17.5rem] lg:w-[15.625rem]">
+<section id="reviews" class="mt-8 bg-paper py-16 lg:mt-16 lg:py-28" aria-labelledby="reviews-title">
+  <div class="container-x">
+    <div class="reveal text-center">
+      <p class="eyebrow">Kind Words</p>
+      <h2 id="reviews-title" class="title mt-5 text-[clamp(2.5rem,4.2vw,3.75rem)]">What our <em>customers</em> say</h2>
     </div>
-    <button type="button" data-t-slot="next" class="shrink-0 overflow-hidden rounded-xl transition-all duration-500" aria-label="Show next review">
-      <img src="assets/img/t3.jpg" width="384" height="480" alt="Ryan Mitchell" class="h-24 w-[4.5rem] object-cover sm:h-36 sm:w-28 lg:h-[11.375rem] lg:w-[8.75rem]">
-    </button>
-  </div>
-
-  <!-- every review sits in the same grid cell, so the box is always as tall as the longest one -->
-  <figure class="reveal mx-auto mt-10 grid max-w-[75rem] text-center" aria-live="polite" id="t-figure">
-    <div data-t-slide class="col-start-1 row-start-1 transition-opacity duration-200">
-      <blockquote class="heading text-balance text-[clamp(1.5rem,2.5vw,2.25rem)] font-semibold leading-snug tracking-tight">
-        <p data-t-quote>“I’m truly impressed with the quality and perfect fit. The fabric feels premium, and I’ve received countless compliments wearing it. Amazing value for the price — I’ll definitely shop here again.”</p>
-      </blockquote>
-      <figcaption class="mt-6">
-        <span data-t-name class="block text-lg font-bold">James Carter</span>
-        <span class="mt-0.5 block text-xs text-muted">Happy Customer</span>
-      </figcaption>
+    <div class="reveal mt-12 flex items-end justify-center gap-4 lg:gap-12">
+      <button type="button" data-t-slot="prev" class="shrink-0 overflow-hidden opacity-100 transition-all duration-500" aria-label="Show previous review">
+        <img loading="lazy" decoding="async" src="assets/img/t1.jpg" width="368" height="480" alt="Portrait of Daniel Brooks, a grey-haired man in a dark jacket and tartan scarf" class="h-24 w-[4.5rem] object-cover sm:h-36 sm:w-28 lg:h-[11.375rem] lg:w-[8.75rem]">
+      </button>
+      <div data-t-slot="current" class="frame-ring shrink-0 overflow-hidden transition-all duration-500">
+        <img loading="lazy" decoding="async" src="assets/img/t2.jpg" width="664" height="830" alt="Portrait of James Carter, a man in a stone-coloured blazer and striped shirt" class="h-40 w-32 object-cover sm:h-56 sm:w-48 lg:h-[17.5rem] lg:w-[15.625rem]">
+      </div>
+      <button type="button" data-t-slot="next" class="shrink-0 overflow-hidden transition-all duration-500" aria-label="Show next review">
+        <img loading="lazy" decoding="async" src="assets/img/t3.jpg" width="664" height="830" alt="Portrait of Ryan Mitchell, a man in glasses and a burgundy sweater in window light" class="h-24 w-[4.5rem] object-cover sm:h-36 sm:w-28 lg:h-[11.375rem] lg:w-[8.75rem]">
+      </button>
     </div>
-  </figure>
 
-  <div class="mt-8 flex items-center justify-center gap-3.5">
-    <button type="button" id="t-prev" class="grid size-12 place-items-center rounded-full border border-line transition hover:bg-ink hover:text-white" aria-label="Previous review"><svg class="icon size-[1.125rem]"><use href="#i-chevron-left"/></svg></button>
-    <button type="button" id="t-next" class="grid size-12 place-items-center rounded-full border border-line transition hover:bg-ink hover:text-white" aria-label="Next review"><svg class="icon size-[1.125rem]"><use href="#i-chevron-right"/></svg></button>
+    <!-- every review sits in the same grid cell, so the box is always as tall as the longest one -->
+    <figure class="reveal mx-auto mt-6 grid max-w-[62rem] text-center" aria-live="polite" id="t-figure">
+      <div data-t-slide class="col-start-1 row-start-1 transition-opacity duration-200">
+        <span class="quote-mark block" aria-hidden="true">“</span>
+        <blockquote class="-mt-8 text-balance font-serif text-[clamp(1.625rem,2.8vw,2.5rem)] font-normal italic leading-snug">
+          <p data-t-quote>I’m truly impressed with the quality and perfect fit. The fabric feels premium, and I’ve received countless compliments wearing it. Amazing value for the price — I’ll definitely shop here again.</p>
+        </blockquote>
+        <figcaption class="mt-8">
+          <span data-t-name class="block text-xs font-semibold uppercase tracking-[.3em]">James Carter</span>
+          <span class="mt-2 block font-serif text-base italic text-gold">Happy Customer</span>
+        </figcaption>
+      </div>
+    </figure>
+
+    <div class="mt-10 flex items-center justify-center gap-3.5">
+      <button type="button" id="t-prev" class="grid size-12 place-items-center border border-ink/30 transition hover:border-ink hover:bg-ink hover:text-white" aria-label="Previous review"><svg aria-hidden="true" focusable="false" class="icon size-[1.125rem]"><use href="#i-chevron-left"/></svg></button>
+      <button type="button" id="t-next" class="relative grid size-12 place-items-center border border-ink/30 transition hover:border-ink hover:bg-ink hover:text-white" aria-label="Next review"><svg class="t-ring pointer-events-none absolute -inset-px size-[calc(100%+2px)]" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><rect x="1" y="1" width="46" height="46" pathLength="1"/></svg><svg aria-hidden="true" focusable="false" class="icon size-[1.125rem]"><use href="#i-chevron-right"/></svg></button>
+    </div>
   </div>
 </section>
 </main>
@@ -191,5 +212,6 @@
 <script type="module" src="js/search.js"></script>
 <script type="module" src="js/login.js"></script>
 <script type="module" src="js/footer-silk.js"></script>
+<script type="module" src="js/art.js"></script>
 </body>
 </html>

@@ -1,5 +1,4 @@
-  <div id="site-nav" class="site-nav fixed inset-x-0 top-0 z-40 bg-[#2a0309] text-white" %NAVTOP%>
-  <!-- same red satin as the hero (js/nav.js); it fades out while the hero itself is behind the bar -->
+<header id="site-nav" class="site-nav fixed inset-x-0 top-0 z-40 bg-[#2a0309] text-white" %NAVTOP%>
   <canvas id="nav-mesh" class="site-nav-bg absolute inset-0 size-full" aria-hidden="true"></canvas>
   <div class="site-nav-bg hero-noise pointer-events-none absolute inset-0 opacity-[.32] mix-blend-overlay" aria-hidden="true"></div>
   <nav class="site-nav-bar container-x relative z-10 grid grid-cols-[1fr_auto_1fr] items-center" aria-label="Primary">
@@ -11,20 +10,20 @@
       <li><a href="%BASE%#contact" class="opacity-90 transition hover:opacity-100">Contact</a></li>
     </ul>
     <button type="button" id="menu-btn" class="inline-flex size-10 items-center justify-center rounded-full md:hidden -ml-2" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
-      <svg class="icon" data-open><use href="#i-menu"/></svg>
-      <svg class="icon hidden" data-close><use href="#i-x"/></svg>
+      <svg class="icon" data-open aria-hidden="true"><use href="#i-menu"/></svg>
+      <svg class="icon hidden" data-close aria-hidden="true"><use href="#i-x"/></svg>
     </button>
-    <a href="%HOME%" class="font-display text-xl font-bold tracking-tight lg:text-2xl">Plassiv</a>
+    <a href="%HOME%" class="font-display text-lg font-semibold uppercase tracking-[.38em] lg:text-xl">Plassiv</a>
     <div class="flex items-center justify-end gap-4 lg:gap-5">
-      <button type="button" data-search-open class="transition hover:opacity-75" aria-label="Search" aria-haspopup="dialog" aria-controls="search-dialog"><svg class="icon"><use href="#i-search"/></svg></button>
-      <button type="button" data-login-open class="transition hover:opacity-75" aria-label="Sign in" aria-haspopup="dialog" aria-controls="login-dialog"><svg class="icon"><use href="#i-user"/></svg></button>
+      <button type="button" data-search-open class="transition hover:opacity-75" aria-label="Search" aria-haspopup="dialog" aria-controls="search-dialog"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg></button>
+      <button type="button" data-login-open class="transition hover:opacity-75" aria-label="Sign in" aria-haspopup="dialog" aria-controls="login-dialog"><svg class="icon" aria-hidden="true"><use href="#i-user"/></svg></button>
       <button type="button" data-cart-open class="relative -m-2 grid size-9 place-items-center transition hover:opacity-75" aria-label="Cart" aria-haspopup="dialog" aria-controls="cart-drawer">
-        <svg class="icon"><use href="#i-shopping-cart"/></svg>
+        <svg class="icon" aria-hidden="true"><use href="#i-shopping-cart"/></svg>
         <span data-cart-count class="absolute right-0 top-0 hidden h-[1.125rem] min-w-[1.125rem] place-items-center rounded-full bg-white px-1 text-[0.75rem] font-bold leading-none text-ink" aria-hidden="true"></span>
       </button>
     </div>
   </nav>
-  <div id="mobile-menu" class="fixed inset-0 z-0 hidden overflow-y-auto bg-black md:hidden">
+  <nav id="mobile-menu" aria-label="Mobile" class="fixed inset-0 z-0 hidden overflow-y-auto bg-black md:hidden">
     <canvas id="menu-silk" class="absolute inset-0 size-full" aria-hidden="true"></canvas>
     <ul class="menu-links container-x relative flex min-h-full flex-col justify-center py-28 text-right font-display text-4xl font-bold tracking-tight">
       <li class="w-full"><a href="%HOME%" class="block py-5">Home</a></li>
@@ -33,5 +32,5 @@
       <li class="w-full"><a href="%BASE%#about" class="block py-5">About</a></li>
       <li class="w-full"><a href="%BASE%#contact" class="block py-5">Contact</a></li>
     </ul>
-  </div>
-  </div>
+  </nav>
+</header>

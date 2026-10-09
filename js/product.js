@@ -1,10 +1,9 @@
-/* Product details page: product.html?p=<id> */
 import { ready, getProduct, allProducts, addItem, money, MAX_QTY } from './store.js';
 import { $, el, icon, optionText } from './ui.js';
 import { openCart } from './cart-drawer.js';
 
 const HEX = /^#[0-9a-f]{6}$/i;
-const pill = 'grid h-11 min-w-12 cursor-pointer place-items-center rounded-full border border-ink/50 px-4 text-sm font-medium transition hover:border-ink peer-checked:border-ink peer-checked:bg-ink peer-checked:text-white peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-ink peer-disabled:cursor-not-allowed peer-disabled:border-line peer-disabled:text-muted peer-disabled:line-through';
+const pill = 'grid h-11 min-w-12 cursor-pointer place-items-center border border-ink/30 px-4 text-sm font-medium tracking-wide transition hover:border-ink peer-checked:border-gold peer-checked:bg-ink peer-checked:text-gold-light peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-ink peer-disabled:cursor-not-allowed peer-disabled:border-line peer-disabled:text-muted peer-disabled:line-through';
 
 const radio = (name, value, label, { checked = false, disabled = false, extra = '' } = {}) =>
   el('label', { class: 'relative' },
@@ -13,7 +12,7 @@ const radio = (name, value, label, { checked = false, disabled = false, extra = 
     el('span', { class: 'sr-only' }, `${label}${extra}`));
 
 function swatch(c, checked) {
-  const dot = el('span', { class: 'block size-9 cursor-pointer rounded-full border border-ink/20 ring-ink ring-offset-2 transition peer-checked:ring-2 peer-focus-visible:outline-2 peer-focus-visible:outline-offset-[5px] peer-focus-visible:outline-brand', 'aria-hidden': 'true' });
+  const dot = el('span', { class: 'block size-9 cursor-pointer border border-ink/20 ring-gold ring-offset-2 ring-offset-paper transition peer-checked:ring-2 peer-focus-visible:outline-2 peer-focus-visible:outline-offset-[5px] peer-focus-visible:outline-brand', 'aria-hidden': 'true' });
   if (HEX.test(c.hex)) dot.style.backgroundColor = c.hex;
   return el('label', { class: 'relative', title: c.name },
     el('input', { type: 'radio', name: 'color', value: c.name, checked, class: 'peer sr-only' }),
@@ -24,11 +23,14 @@ function swatch(c, checked) {
 function relatedCard(p) {
   return el('li', {},
     el('article', { class: 'group relative' },
-      el('div', { class: 'overflow-hidden rounded-2xl' },
-        el('img', { src: p.image, alt: p.alt, width: String(p.width), height: String(p.height), loading: 'lazy', class: 'aspect-[3/4] w-full object-cover transition duration-700 group-hover:scale-105' })),
-      el('h3', { class: 'mt-3 text-[0.9375rem] text-muted' },
-        el('a', { href: `product.html?p=${encodeURIComponent(p.id)}`, class: 'after:absolute after:inset-0 after:rounded-2xl hover:text-ink' }, p.name)),
-      el('p', { class: 'mt-1 text-base font-bold' }, money(p.priceCents))));
+      el('span', { class: 'mat mat-sm' },
+        el('span', {},
+          el('img', { src: p.small, srcset: `${p.small} 640w, ${p.image} ${p.width}w`, sizes: '(min-width: 1024px) 22vw, 46vw', alt: p.alt, width: String(p.width), height: String(p.height), loading: 'lazy', class: 'aspect-[3/4] w-full object-cover transition duration-[1600ms] group-hover:scale-[1.04]' }))),
+      el('p', { class: 'mt-6 text-[0.625rem] font-semibold uppercase tracking-[.3em] text-brand' }, `${p.category} · No. ${p.id.replace(/^p/, '').padStart(2, '0')}`),
+      el('h3', { class: 'mt-2 font-serif text-2xl leading-tight' },
+        el('a', { href: `product.html?p=${encodeURIComponent(p.id)}`, class: 'after:absolute after:inset-0 hover:text-brand' }, p.name)),
+      el('span', { class: 'mt-3 block h-px w-10 bg-gold/70 transition-all duration-700 group-hover:w-16', 'aria-hidden': 'true' }),
+      el('p', { class: 'mt-3 text-xs uppercase tracking-[.2em] text-muted' }, money(p.priceCents))));
 }
 
 function showMissing() {
@@ -47,13 +49,13 @@ function render(p) {
 
   const img = $('[data-pdp-img]');
   Object.assign(img, { src: p.image, alt: p.alt, width: p.width, height: p.height });
-  $('[data-pdp-cat]').textContent = p.category;
+  $('[data-pdp-cat]').textContent = `${p.category} · No. ${p.id.replace(/^p/, '').padStart(2, '0')}`;
   $('#pdp-name').textContent = p.name;
   $('[data-pdp-price]').textContent = money(p.priceCents);
   $('[data-pdp-desc]').textContent = p.description;
   $('[data-pdp-sku]').textContent = p.sku;
   $('[data-pdp-details]').replaceChildren(...p.details.map((d) =>
-    el('li', { class: 'flex gap-2.5' }, icon('i-check', 'icon mt-0.5 size-4 text-brand'), d)));
+    el('li', { class: 'flex gap-3 border-b border-gold/25 pb-2.5' }, el('span', { class: 'mt-[.4375rem] size-1.5 shrink-0 rotate-45 bg-gold', 'aria-hidden': 'true' }), d)));
 
   $('[data-colors]').replaceChildren(...p.colors.map((c, i) => swatch(c, i === 0)));
   $('[data-color-name]').textContent = p.colors[0].name;

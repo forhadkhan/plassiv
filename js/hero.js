@@ -1,5 +1,7 @@
 /* Hero: live dark red / bright red satin mesh with golden sparkle noise (WebGL) and the PLASSIV wordmark as white gel with drifting gold flecks (2D canvas). */
 
+import { afterPaint } from './silk.js';
+
 const header = document.getElementById('top');
 const meshCanvas = document.getElementById('hero-mesh');
 const wordWrap = document.getElementById('hero-word');
@@ -28,7 +30,6 @@ if ('IntersectionObserver' in window) {
 }
 document.addEventListener('visibilitychange', kick);
 
-/* ---------- mesh background ---------- */
 
 const VERT = 'attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
 const FRAG = `
@@ -83,7 +84,6 @@ void main(){
   float tw = .5 + .5 * sin(uTime * 2.4 + r * 40.);
   c += gold * step(.992, r) * tw * (.2 + sheen * 1.3) * .8;
 
-  // fine golden film grain
   c += vec3(1., .78, .45) * (hash(gl_FragCoord.xy + fract(uTime) * 61.7) - .5) * .05;
   gl_FragColor = vec4(c, 1.);
 }`;
@@ -128,7 +128,6 @@ function startMesh(canvas) {
   kick();
 }
 
-/* ---------- gel wordmark ---------- */
 
 const WORD = 'PLASSIV';
 const LIGHT = (() => { const l = [-0.5, -0.62, 0.6]; const n = Math.hypot(...l); return l.map((v) => v / n); })();
@@ -333,6 +332,29 @@ function startGel(wrap) {
   kick();
 }
 
-startMesh(meshCanvas);
-Promise.race([document.fonts.load('400 100px Regione'), new Promise((r) => setTimeout(r, 2500))])
-  .then(() => startGel(wordWrap));
+afterPaint(() => {
+  startMesh(meshCanvas);
+  Promise.race([document.fonts.load('400 100px Regione'), new Promise((r) => setTimeout(r, 2500))])
+    .then(() => startGel(wordWrap));
+});
+
+/* pointer parallax: --px/--py in -1..1 on the hero, eased, only while the pointer is over it */
+const heroEl = document.getElementById('top');
+if (heroEl && matchMedia('(hover: hover) and (prefers-reduced-motion: no-preference)').matches) {
+  let tx = 0, ty = 0, x = 0, y = 0, raf = 0;
+  const step = () => {
+    x += (tx - x) * 0.06;
+    y += (ty - y) * 0.06;
+    heroEl.style.setProperty('--px', x.toFixed(3));
+    heroEl.style.setProperty('--py', y.toFixed(3));
+    raf = Math.abs(tx - x) + Math.abs(ty - y) > 0.002 ? requestAnimationFrame(step) : 0;
+  };
+  const go = () => { if (!raf) raf = requestAnimationFrame(step); };
+  heroEl.addEventListener('pointermove', (e) => {
+    const r = heroEl.getBoundingClientRect();
+    tx = ((e.clientX - r.left) / r.width - 0.5) * 2;
+    ty = ((e.clientY - r.top) / r.height - 0.5) * 2;
+    go();
+  }, { passive: true });
+  heroEl.addEventListener('pointerleave', () => { tx = ty = 0; go(); });
+}

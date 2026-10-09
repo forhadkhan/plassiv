@@ -17,11 +17,10 @@ const COUPONS = {
 
 export const money = (cents) => `${cents < 0 ? '-' : ''}$${Math.floor(Math.abs(cents) / 100).toLocaleString('en-US')}.${String(Math.abs(cents) % 100).padStart(2, '0')}`;
 
-/* ---------- storage: localStorage can throw (blocked, private mode, quota); memory keeps the page working ---------- */
+/* localStorage can throw (blocked, private mode, quota); memory keeps the page working */
 const memory = new Map();
 let persistent = true;
 try { localStorage.setItem('plassiv.probe', '1'); localStorage.removeItem('plassiv.probe'); } catch { persistent = false; }
-export const isPersistent = () => persistent;
 
 function readJSON(key) {
   let raw = memory.has(key) ? memory.get(key) : null;
@@ -50,11 +49,12 @@ function writeJSON(key, value) {
   }
 }
 
-/* ---------- catalogue ---------- */
+export const variant = (src, w) => src.replace(/\.jpg$/, `-${w}.jpg`);
+
 let products = new Map();
 export const ready = fetch('data/products.json')
   .then((r) => { if (!r.ok) throw new Error(`data/products.json: HTTP ${r.status}`); return r.json(); })
-  .then((list) => { products = new Map(list.map((p) => [p.id, p])); return products; });
+  .then((list) => { products = new Map(list.map((p) => [p.id, { ...p, small: variant(p.image, 640), thumb: variant(p.image, 320) }])); return products; });
 /* every page waits on `ready`, so a failed catalogue load would leave it on its loading state: say so instead */
 ready.catch(() => {
   const note = document.createElement('p');
@@ -66,8 +66,7 @@ ready.catch(() => {
 export const getProduct = (id) => products.get(id) ?? null;
 export const allProducts = () => [...products.values()];
 
-/* ---------- cart ---------- */
-export const lineKey = (l) => [l.id, l.size, l.color, l.fit].join('|');
+const lineKey = (l) => [l.id, l.size, l.color, l.fit].join('|');
 
 const toQty = (q) => {
   const n = Math.floor(Number(q));
@@ -87,7 +86,7 @@ function cleanLine(r) {
   return qty ? { id: p.id, size: r.size, color: r.color, fit, qty } : null;
 }
 
-export function getCart() {
+function getCart() {
   const raw = readJSON(KEY.cart);
   const lines = new Map();
   for (const r of Array.isArray(raw) ? raw : []) {
@@ -100,7 +99,7 @@ export function getCart() {
 }
 
 /* lines joined with catalogue data; price always comes from the catalogue, never from storage */
-export const cartItems = (lines = getCart()) => lines.map((l) => {
+const cartItems = (lines = getCart()) => lines.map((l) => {
   const p = products.get(l.id);
   return { ...l, key: lineKey(l), product: p, unit: p.priceCents, total: p.priceCents * l.qty };
 });
@@ -132,7 +131,6 @@ export function setQty(key, qty) {
 
 export const removeLine = (key) => saveCart(getCart().filter((l) => lineKey(l) !== key));
 
-/* ---------- coupons ---------- */
 export function getCoupon() {
   const code = readJSON(KEY.coupon);
   return typeof code === 'string' && Object.hasOwn(COUPONS, code) ? code : null;
@@ -182,7 +180,6 @@ export function removeCoupon() {
   return code ? `${code} removed.` : '';
 }
 
-/* ---------- totals ---------- */
 export function totals(lines = getCart(), code = getCoupon()) {
   const items = cartItems(lines);
   const subtotal = items.reduce((sum, i) => sum + i.total, 0);
@@ -207,7 +204,6 @@ export function totals(lines = getCart(), code = getCoupon()) {
   };
 }
 
-/* ---------- orders ---------- */
 const str = (v, max = 300) => (typeof v === 'string' ? v.slice(0, max) : '');
 const cents = (v) => (Number.isSafeInteger(v) && v >= 0 ? v : null);
 

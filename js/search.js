@@ -36,7 +36,7 @@ function search(query) {
 
 const chip = (label) => el('button', {
   type: 'button', text: label,
-  class: 'rounded-full border border-white/25 px-4 py-2 text-sm font-medium transition hover:border-white hover:bg-white hover:text-black',
+  class: 'border border-[#e9cf9c]/30 px-4 py-2 text-xs font-medium uppercase tracking-[.18em] transition hover:border-white hover:bg-white hover:text-black',
   onclick: () => { input.value = label; render(); input.focus(); },
 });
 const chips = () => {
@@ -45,11 +45,11 @@ const chips = () => {
 };
 
 const result = (p) => el('li', {},
-  el('a', { href: `product.html?p=${encodeURIComponent(p.id)}`, class: 'group flex items-center gap-4 rounded-2xl p-2.5 transition hover:bg-white/10 focus-visible:bg-white/10' },
-    el('img', { src: p.image, width: p.width, height: p.height, alt: '', loading: 'lazy', class: 'size-20 shrink-0 rounded-xl bg-white/10 object-cover lg:size-24' }),
+  el('a', { href: `product.html?p=${encodeURIComponent(p.id)}`, class: 'group flex items-center gap-4 p-2.5 transition hover:bg-white/10 focus-visible:bg-white/10' },
+    el('img', { src: p.thumb, width: p.width, height: p.height, alt: '', loading: 'lazy', class: 'size-20 shrink-0 bg-white/10 object-cover lg:size-24' }),
     el('span', { class: 'min-w-0 flex-1' },
       el('span', { class: 'block text-xs font-semibold uppercase tracking-wider text-white/60', text: p.category }),
-      el('span', { class: 'mt-1 block truncate font-display text-lg font-bold tracking-tight lg:text-xl', text: p.name }),
+      el('span', { class: 'mt-1 block truncate font-serif text-2xl font-medium leading-tight lg:text-[1.75rem]', text: p.name }),
       el('span', { class: 'mt-0.5 block text-base text-white/80', text: money(p.priceCents) })),
     icon('i-chevron-right', 'icon shrink-0 text-white/50 transition group-hover:translate-x-0.5 group-hover:text-white')));
 
@@ -69,7 +69,7 @@ function render() {
   const found = search(q);
   status.textContent = found.length ? `${found.length} ${found.length === 1 ? 'result' : 'results'}` : `No results for ${q}`;
   if (!found.length) {
-    out.append(el('p', { class: 'font-display text-2xl font-bold tracking-tight', text: `No results for “${q}”` }),
+    out.append(el('p', { class: 'font-serif text-3xl font-medium', text: `No results for “${q}”` }),
       el('p', { class: 'mt-2 text-white/70', text: 'Check the spelling or try one of these.' }), chips());
     return;
   }
@@ -78,7 +78,6 @@ function render() {
     el('ul', { class: 'mt-3 grid gap-x-8 gap-y-1 lg:grid-cols-2', 'aria-label': 'Search results' }, found.map(result)));
 }
 
-/* ---------- open / close ---------- */
 function open() {
   if (dialog.open) return;
   document.documentElement.style.overflow = 'hidden';

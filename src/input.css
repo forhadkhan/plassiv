@@ -15,9 +15,29 @@
   font-display: swap;
 }
 @font-face {
+  font-family: "Brilega Fadone";
+  src: url("../assets/fonts/brilega-fadone.otf") format("opentype");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
   font-family: "Sora";
   src: url("../assets/fonts/sora-latin-wght-normal.woff2") format("woff2");
   font-weight: 100 800;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Cormorant";
+  src: url("../assets/fonts/cormorant-latin-wght-normal.woff2") format("woff2");
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Cormorant";
+  src: url("../assets/fonts/cormorant-latin-wght-italic.woff2") format("woff2");
+  font-weight: 300 700;
+  font-style: italic;
   font-display: swap;
 }
 @font-face {
@@ -31,13 +51,24 @@
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Sora", "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-poster: "Regione", "Anton", "Impact", sans-serif;
+  --font-heading: "Brilega Fadone", "Cormorant", Georgia, "Times New Roman", serif;
+  --font-serif: "Cormorant", "Cormorant Garamond", Georgia, "Times New Roman", serif;
 
-  --color-brand: #345a41;
-  --color-brand-deep: #2c4f39;
-  --color-ink: #0f0f0f;
-  --color-muted: #6a6a6a;
-  --color-line: #e4e4e4;
+  --color-brand: #8a6420;
+  --color-brand-deep: #6f4f16;
+  --color-ink: #140b0c;
+  --color-muted: #6f655f;
+  --color-line: #e0d6c3;
   --color-danger: #b42318;
+  --color-paper: #f6f1e7;
+  --color-paper-deep: #efe7d8;
+  --color-gold: #b98a3e;
+  --color-gold-light: #e9c27a;
+  --color-wine: #2a0309;
+
+  /* luxury is square-cornered: the card and image radii collapse to a hairline softening */
+  --radius-xl: .125rem;
+  --radius-2xl: .125rem;
 
   --breakpoint-xs: 30rem;
 
@@ -58,8 +89,12 @@
 
 @layer base {
   html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-  body { font-family: var(--font-sans); color: var(--color-ink); background: #fff; }
+  body { font-family: var(--font-sans); color: var(--color-ink); background: var(--color-paper); }
+  ::selection { background: var(--color-gold-light); color: #1a0c02; }
   :focus-visible { outline: 2px solid currentColor; outline-offset: 3px; border-radius: 6px; }
+  /* Tailwind's reset leaves buttons on the default arrow; anything clickable shows the hand */
+  a[href], button:not(:disabled), summary, select, label[for], [role="button"]:not([aria-disabled="true"]), input:is([type="checkbox"], [type="radio"], [type="range"], [type="submit"]):not(:disabled) { cursor: pointer; }
+  button:disabled, [aria-disabled="true"] { cursor: not-allowed; }
 }
 
 @layer components {
@@ -67,6 +102,16 @@
   .icon-brand { fill: currentColor; stroke: none; }
   .container-x { width: 100%; max-width: 90rem; margin-inline: auto; padding-inline: clamp(1rem, 4.7vw, 4.25rem); }
   .heading { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; }
+  .title { font-family: var(--font-heading); font-weight: 400; letter-spacing: -0.01em; line-height: 1.05; text-wrap: balance; }
+  .title em { font-style: normal; font-weight: 400; color: var(--color-gold); }
+  .on-dark .title em, .title.on-dark em { color: var(--color-gold-light); }
+  .eyebrow { font-size: .6875rem; font-weight: 600; text-transform: uppercase; letter-spacing: .42em; color: var(--color-brand); }
+  .on-dark .eyebrow { color: rgb(233 207 156 / .75); }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: .625rem; height: 3rem; padding-inline: 2rem; font-size: .75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .22em; transition: background-color .3s, color .3s, border-color .3s; }
+  .btn-ink { background: var(--color-ink); color: #fff; }
+  .btn-ink:hover { background: var(--color-brand); }
+  .btn-line { border: 1px solid var(--color-ink); color: var(--color-ink); }
+  .btn-line:hover { background: var(--color-ink); color: #fff; }
   .poster { font-family: var(--font-poster); text-transform: uppercase; line-height: .8; letter-spacing: 0; white-space: nowrap; }
   .input { display: block; width: 100%; height: 2.75rem; margin-top: .375rem; padding-inline: .875rem; border: 1px solid rgb(15 15 15 / .5); border-radius: .75rem; background: #fff; font-size: 1rem; }
   textarea.input { height: auto; padding-block: .625rem; resize: vertical; }
@@ -83,6 +128,13 @@
   @keyframes rise { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: none; } }
   @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
   .hero-fade { animation: fade 1.2s ease both; }
+
+  /* the figure breathes, a gold light crosses its silhouette, and it follows the pointer a little (hero.js sets --px/--py) */
+  .hero-float { transform-origin: 50% 100%; animation: float 7s ease-in-out infinite alternate; translate: calc(var(--px, 0) * 1.1rem) calc(var(--py, 0) * .5rem); }
+  .hero-depth { translate: calc(var(--px, 0) * -.6rem) calc(var(--py, 0) * -.3rem); }
+  .hero-sheen { position: absolute; inset: 0; mask: var(--cut) center bottom / 100% 100% no-repeat; background: linear-gradient(100deg, transparent 40%, rgb(255 226 170 / .5) 50%, transparent 60%) 100% 0 / 250% 100% no-repeat; animation: sheen 9s ease-in-out 1.6s infinite; }
+  @keyframes float { to { transform: translateY(-.375rem) scale(1.015); } }
+  @keyframes sheen { 0% { background-position: 100% 0; } 40%, 100% { background-position: 0 0; } }
 }
 
 .scrollbar-none { scrollbar-width: none; }
@@ -94,8 +146,7 @@
 .wish[aria-pressed="true"] svg { fill: currentColor; }
 .wish { filter: drop-shadow(0 1px 3px rgb(0 0 0 / .35)); }
 
-/* cart drawer: a modal <dialog> pinned to the right edge; it only slides when motion is allowed */
-.cart-drawer { position: fixed; inset: 0 0 0 auto; margin: 0; width: min(100%, 27rem); max-width: none; height: 100dvh; max-height: none; padding: 0; border: 0; background: #fff; color: var(--color-ink); }
+.cart-drawer { position: fixed; inset: 0 0 0 auto; margin: 0; width: min(100%, 27rem); max-width: none; height: 100dvh; max-height: none; padding: 0; border: 0; background: var(--color-paper); color: var(--color-ink); }
 .cart-drawer::backdrop { background: rgb(15 15 15 / .5); }
 @media (prefers-reduced-motion: no-preference) {
   .cart-drawer { transform: translateX(100%); transition: transform .35s cubic-bezier(.2,.7,.2,1); }
@@ -106,23 +157,22 @@
 .no-spin { appearance: textfield; }
 .no-spin::-webkit-inner-spin-button, .no-spin::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
 
-/* hero: live mesh fallback (no WebGL) + film grain */
 .hero-mesh-fallback { background-image: radial-gradient(60% 70% at 18% 25%, #b3121c 0%, transparent 70%), radial-gradient(55% 60% at 85% 80%, #7d0b14 0%, transparent 70%), radial-gradient(40% 40% at 70% 15%, #e11d2e 0%, transparent 70%); }
 .hero-noise { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 220px; }
 #hero-word[data-ready] .poster { display: none; }
 #hero-word[data-ready] canvas { display: block; }
 
 /* footer: shows until WebGL paints over it, and stays if WebGL is unavailable */
-.footer-silk-fallback { background: linear-gradient(#fff, rgb(255 255 255 / 0) var(--fade, 22rem)), radial-gradient(120% 90% at 30% 20%, #3a0610 0%, #0a0204 60%, #000 100%); }
+.footer-silk-fallback { background: linear-gradient(var(--color-paper), rgb(246 241 231 / 0) var(--fade, 22rem)), radial-gradient(120% 90% at 30% 20%, #3a0610 0%, #0a0204 60%, #000 100%); }
+
+/* the same dissolve as the marble canvas, until WebGL paints (or if it is unavailable) */
+.about-fallback { background: linear-gradient(var(--color-paper), rgb(168 13 20 / .9) calc(var(--fade) * .45), transparent var(--fade)), linear-gradient(to top, var(--color-paper), rgb(168 13 20 / .9) calc(var(--fade) * .45), transparent var(--fade)), radial-gradient(70% 60% at 25% 30%, rgb(110 8 26 / .55), transparent 70%), #0c0305; }
 
 /* footer wordmark: size and nudge it so the glyph ink (not the text box) runs edge to edge, in line with the link row */
 .poster-ink { --k: 3.2611; text-align: left; }
 
-/* soft warm glow so the wordmark reads brighter against the red */
 #hero-word canvas { filter: drop-shadow(0 0 1.25rem rgb(255 214 150 / .38)); }
 
-/* site nav: fixed bar that hides while scrolling down and returns on scroll up (js/nav.js).
-   Over the hero (home page, top of the scroll) it is see-through and roomy; elsewhere it carries the hero's red satin. */
 .site-nav { --pad: .75rem; transition: transform .4s cubic-bezier(.2,.7,.2,1), box-shadow .3s; box-shadow: 0 .75rem 2rem -1rem rgb(42 3 9 / .55); }
 .site-nav-bar { padding-block: var(--pad); transition: padding .3s cubic-bezier(.2,.7,.2,1); }
 .site-nav-bg { transition: opacity .3s; }
@@ -158,7 +208,6 @@
   ::-webkit-scrollbar-corner { background: #000; }
 }
 
-/* search: full-screen dark sheet in the footer's black-and-wine palette */
 .search-dialog { position: fixed; inset: 0; width: 100%; max-width: none; height: 100dvh; max-height: none; margin: 0; padding: 0; border: 0; overflow-y: auto; overscroll-behavior: contain; color: #fff; background: #000; }
 .search-dialog::backdrop { background: #000; }
 .search-field input::-webkit-search-cancel-button, .search-field input::-webkit-search-decoration { appearance: none; display: none; }
@@ -166,7 +215,6 @@
   .search-dialog[open] { animation: fade .25s ease both; }
 }
 
-/* login: a black-and-gold card with a wine glow, over a solid wine veil at partial opacity */
 .login-dialog { width: min(100% - 2rem, 26rem); max-width: none; max-height: calc(100dvh - 2rem); margin: auto; padding: 0; border: 1px solid transparent; border-radius: .75rem; overflow-y: auto; overscroll-behavior: contain; color: #fbf1dc;
   background: linear-gradient(#0c0305, #0c0305) padding-box, linear-gradient(150deg, #f6e3b8 0%, #b98a3e 28%, #5a3a0e 55%, #d9b56e 80%, #f6e3b8 100%) border-box;
   box-shadow: 0 2.5rem 5rem -1rem rgb(0 0 0 / .7), 0 0 4rem -1rem rgb(196 18 31 / .35); }
@@ -195,3 +243,39 @@
   .login-shake { animation: login-shake .4s cubic-bezier(.36,.07,.19,.97) both; }
   @keyframes login-shake { 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
 }
+
+.mat { position: relative; display: block; padding: 1rem; background: var(--color-paper); border: 1px solid transparent; border-image: linear-gradient(135deg, var(--color-gold), var(--color-gold-light) 40%, var(--color-gold) 75%, #8a6226) 1; transition: box-shadow .5s ease, filter .5s ease; }
+.mat::before { content: ""; position: absolute; inset: .3125rem; border: 1px solid rgb(185 138 62 / .45); pointer-events: none; }
+.mat::after { content: ""; position: absolute; inset: -.4375rem; pointer-events: none; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M7 .5 13.5 7 7 13.5.5 7Z' fill='%23f6f1e7' stroke='%23b98a3e'/%3E%3Cpath d='M7 3.6 10.4 7 7 10.4 3.6 7Z' fill='%23b98a3e'/%3E%3C/svg%3E") 0 0 / .875rem .875rem no-repeat, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M7 .5 13.5 7 7 13.5.5 7Z' fill='%23f6f1e7' stroke='%23b98a3e'/%3E%3Cpath d='M7 3.6 10.4 7 7 10.4 3.6 7Z' fill='%23b98a3e'/%3E%3C/svg%3E") 100% 0 / .875rem .875rem no-repeat, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M7 .5 13.5 7 7 13.5.5 7Z' fill='%23f6f1e7' stroke='%23b98a3e'/%3E%3Cpath d='M7 3.6 10.4 7 7 10.4 3.6 7Z' fill='%23b98a3e'/%3E%3C/svg%3E") 0 100% / .875rem .875rem no-repeat, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M7 .5 13.5 7 7 13.5.5 7Z' fill='%23f6f1e7' stroke='%23b98a3e'/%3E%3Cpath d='M7 3.6 10.4 7 7 10.4 3.6 7Z' fill='%23b98a3e'/%3E%3C/svg%3E") 100% 100% / .875rem .875rem no-repeat; transition: transform .5s ease; }
+.mat > span { position: relative; display: block; overflow: hidden; outline: 1px solid rgb(185 138 62 / .7); outline-offset: 3px; }
+.mat-sm { padding: .625rem; }
+.mat-sm::before { inset: .1875rem; }
+.edit-cue { position: absolute; inset: auto 0 0; padding: .875rem 0; background: rgb(42 3 9 / .9); color: var(--color-gold-light); font-size: .625rem; font-weight: 600; letter-spacing: .32em; text-align: center; text-transform: uppercase; transform: translateY(100%); transition: transform .7s cubic-bezier(.2,.7,.2,1); }
+.group:hover .edit-cue, .group:focus-within .edit-cue { transform: none; }
+.group:hover .mat { box-shadow: 0 1.25rem 2.25rem -1.5rem rgb(42 3 9 / .5); filter: saturate(1.08); }
+.frame { position: relative; }
+.frame::before { content: ""; position: absolute; inset: -.875rem -.875rem .875rem .875rem; border: 1px solid rgb(233 194 122 / .55); pointer-events: none; z-index: 0; transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+.frame > img { position: relative; z-index: 1; }
+.frame-sm::before { inset: -.625rem -.625rem .625rem .625rem; }
+.on-dark .frame::before { border-color: rgb(233 194 122 / .28); }
+.on-dark .frame > img { filter: saturate(.7) brightness(.82) contrast(1.04); }
+.frame:hover::before { transform: translate(-.375rem, .375rem); }
+.frame-ring { box-shadow: 0 0 0 .25rem var(--color-paper), 0 0 0 .3125rem var(--color-gold); }
+.quote-mark { font-family: var(--font-serif); font-size: 8rem; line-height: 1; height: 5rem; color: var(--color-gold); opacity: .55; }
+.btn-gold { color: #1a0c02; background: linear-gradient(110deg, #f6e3b8 0%, #e2b866 30%, #b98a3e 55%, #e2b866 80%, #f6e3b8 100%) 0 0 / 220% 100%; transition: background-position .7s cubic-bezier(.2,.7,.2,1), box-shadow .3s; box-shadow: inset 0 1px 0 rgb(255 255 255 / .5); }
+.btn-gold:hover { background-position: 100% 0; box-shadow: 0 .75rem 1.75rem -.75rem rgb(233 194 122 / .7), inset 0 1px 0 rgb(255 255 255 / .6); }
+
+/* four copies so the ticker never runs dry on wide screens */
+.marquee { overflow: hidden; background: #0c0305; border-block: 1px solid rgb(233 194 122 / .35); color: var(--color-gold-light); }
+.marquee-track { display: flex; width: max-content; align-items: center; gap: 3rem; padding-block: 1.5rem; padding-right: 3rem; font-family: var(--font-serif); font-size: 1.625rem; font-style: italic; letter-spacing: .06em; white-space: nowrap; animation: marquee 55s linear infinite; }
+.marquee-track i { width: .5rem; height: .5rem; background: currentColor; transform: rotate(45deg); flex: none; opacity: .8; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+@media (min-width: 1024px) { .marquee-track { gap: 4rem; padding-right: 4rem; padding-block: 1.75rem; font-size: 2.25rem; } .marquee-track i { width: .625rem; height: .625rem; } }
+@media (prefers-reduced-motion: reduce) { .marquee-track { animation-duration: 110s; } }
+.on-dark :is(.title, p) { text-shadow: 0 0 1.5rem rgb(0 0 0 / .75); }   /* keeps copy legible over the marble's veins */
+
+.t-ring rect { fill: none; stroke: var(--color-gold); stroke-width: 2; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.t-auto .t-ring rect { animation: t-ring 6s linear forwards; }
+.t-paused .t-ring rect { animation-play-state: paused; }
+@keyframes t-ring { to { stroke-dashoffset: 0; } }

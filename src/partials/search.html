@@ -1,11 +1,10 @@
-<!-- ============ SEARCH (filled by js/search.js) ============ -->
 <dialog id="search-dialog" class="search-dialog" aria-label="Search the shop">
   <canvas id="search-silk" class="fixed inset-0 size-full" aria-hidden="true"></canvas>
   <div class="container-x relative pb-16 pt-5 lg:pt-8">
     <form role="search" data-search-form class="search-field flex items-center gap-3 border-b border-white/25 pb-3 transition-colors focus-within:border-white lg:gap-4 lg:pb-4">
       <svg class="icon size-6 shrink-0 text-white/70" aria-hidden="true"><use href="#i-search"/></svg>
       <input id="search-input" type="search" name="q" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" aria-label="Search products" placeholder="Search blazers, jackets, shirts" class="min-w-0 flex-1 bg-transparent font-display text-2xl font-bold tracking-tight text-white outline-none placeholder:text-white/40 lg:text-4xl">
-      <button type="button" data-search-close class="-mr-2 grid size-11 shrink-0 place-items-center rounded-full transition hover:bg-white/10" aria-label="Close search"><svg class="icon"><use href="#i-x"/></svg></button>
+      <button type="button" data-search-close class="-mr-2 grid size-11 shrink-0 place-items-center rounded-full transition hover:bg-white/10" aria-label="Close search"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></button>
     </form>
     <p id="search-status" class="sr-only" role="status"></p>
     <div id="search-results" class="mt-8 lg:mt-10"></div>

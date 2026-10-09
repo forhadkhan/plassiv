@@ -2,7 +2,6 @@
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
-  /* mobile menu */
   const menuBtn = $('#menu-btn'), menu = $('#mobile-menu');
   const setMenu = (open) => {
     menu.classList.toggle('hidden', !open);
@@ -17,7 +16,6 @@
   addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
   matchMedia('(min-width: 48rem)').addEventListener('change', (e) => { if (e.matches) setMenu(false); });
 
-  /* scroll reveal */
   const revealEls = $$('.reveal');
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver((entries) => {
@@ -28,22 +26,30 @@
     revealEls.forEach((el) => el.classList.add('in'));
   }
 
-  /* wishlist hearts */
   $$('.wish').forEach((b) => b.addEventListener('click', () => {
     b.setAttribute('aria-pressed', String(b.getAttribute('aria-pressed') !== 'true'));
   }));
 
-  /* product track arrows, index only (the track only scrolls below the lg grid) */
+  /* product track: arrows scroll it; "View all" lays every product out as a grid instead */
   if ($('#prod-track')) {
-    const track = $('#prod-track'), prev = $('#prod-prev'), next = $('#prod-next');
+    const track = $('#prod-track'), prev = $('#prod-prev'), next = $('#prod-next'), all = $('#prod-all');
     const syncArrows = () => {
       const max = track.scrollWidth - track.clientWidth - 2;
-      prev.disabled = track.scrollLeft <= 2;
-      next.disabled = max <= 0 || track.scrollLeft >= max;
+      const flat = track.classList.contains('is-all');
+      prev.disabled = flat || track.scrollLeft <= 2;
+      next.disabled = flat || max <= 0 || track.scrollLeft >= max;
     };
-    const step = () => (track.firstElementChild?.getBoundingClientRect().width ?? 300) + 18;
+    const step = () => (track.firstElementChild?.getBoundingClientRect().width ?? 300) + 24;
     prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
     next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
+    all.addEventListener('click', () => {
+      const open = track.classList.toggle('is-all');
+      track.scrollLeft = 0;
+      all.setAttribute('aria-expanded', String(open));
+      all.textContent = open ? 'Show less' : 'View all';
+      $$('.reveal', track).forEach((el) => el.classList.add('in'));
+      syncArrows();
+    });
     track.addEventListener('scroll', syncArrows, { passive: true });
     addEventListener('resize', syncArrows);
     syncArrows();
@@ -61,7 +67,9 @@
     const proto = $('[data-t-slide]', fig);
     const slides = T.map((t) => {
       const el = proto.cloneNode(true);
-      $('[data-t-quote]', el).textContent = t.quote; $('[data-t-name]', el).textContent = t.name;
+      // the big gold mark above the quote stands in for the quotation marks
+      $('[data-t-quote]', el).textContent = t.quote.replace(/^[“"]|[”"]$/g, '');
+      $('[data-t-name]', el).textContent = t.name;
       return el;
     });
     proto.replaceWith(...slides);
@@ -75,14 +83,39 @@
         el.classList.toggle('opacity-0', !on); el.classList.toggle('invisible', !on); el.setAttribute('aria-hidden', String(!on));
       });
     };
+    /* autoplay: the gold ring around the next button is the timer (CSS animation), and its end advances the slide.
+       It pauses while the pointer or focus is in the section, or the section / tab is out of view. */
+    const nextBtn = $('#t-next');
+    const ring = $('.t-ring rect', nextBtn);
+    const section = $('#reviews');
+    const still = matchMedia('(prefers-reduced-motion: reduce)');
+    const hold = { pointer: false, focus: false, offscreen: true, hidden: document.hidden };
+    const syncHold = () => nextBtn.classList.toggle('t-paused', Object.values(hold).some(Boolean));
+    const restart = () => {
+      nextBtn.classList.remove('t-auto');
+      if (still.matches) return;
+      void ring.getBoundingClientRect();   // reflow so the ring animation starts over
+      nextBtn.classList.add('t-auto');
+    };
     const go = (n) => {
       i = wrap(n);
       render();
+      restart();
     };
+    ring.addEventListener('animationend', () => go(i + 1));
+    section.addEventListener('pointerenter', () => { hold.pointer = true; syncHold(); });
+    section.addEventListener('pointerleave', () => { hold.pointer = false; syncHold(); });
+    section.addEventListener('focusin', () => { hold.focus = true; syncHold(); });
+    section.addEventListener('focusout', () => { hold.focus = false; syncHold(); });
+    document.addEventListener('visibilitychange', () => { hold.hidden = document.hidden; syncHold(); });
+    new IntersectionObserver(([e]) => { hold.offscreen = !e.isIntersecting; syncHold(); }).observe(section);
+    still.addEventListener('change', restart);
     $('#t-prev').addEventListener('click', () => go(i - 1));
     $('#t-next').addEventListener('click', () => go(i + 1));
     slot.prev.addEventListener('click', () => go(i - 1));
     slot.next.addEventListener('click', () => go(i + 1));
     render();
+    restart();
+    syncHold();
   }
 })();

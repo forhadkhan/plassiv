@@ -38,7 +38,7 @@ export function renderTotals(dl, t, totalLabel = 'Total') {
     t.discount > 0 && row(`Discount (${t.coupon})`, `−${money(t.discount)}`, 'text-brand font-medium'),
     row('Shipping', t.shipping ? money(t.shipping) : 'Free'),
     t.freeShippingGap > 0 && el('div', {}, el('dt', { class: 'sr-only' }, 'Free shipping'), el('dd', { class: 'text-xs text-muted' }, `Add ${money(t.freeShippingGap)} more for free shipping.`)),
-    row(totalLabel, money(t.total), 'border-t border-line pt-3 text-base font-bold'),
+    row(totalLabel, money(t.total), 'border-t border-line pt-3 font-serif text-xl font-medium'),
   ].filter(Boolean));
 }
 
@@ -49,15 +49,15 @@ export function mountCoupon(root) {
   const id = `coupon-${++couponSeq}`;
   const input = el('input', {
     id, type: 'text', autocomplete: 'off', autocapitalize: 'characters', spellcheck: 'false', maxlength: '32',
-    class: 'h-11 min-w-0 flex-1 rounded-full border border-ink/50 bg-white px-4 text-sm uppercase placeholder:normal-case placeholder:text-muted focus-visible:border-ink',
+    class: 'h-11 min-w-0 flex-1 border border-ink/30 bg-white px-4 text-sm uppercase placeholder:normal-case placeholder:text-muted focus-visible:border-ink',
     placeholder: 'Enter code', 'aria-describedby': `${id}-msg`,
   });
-  const apply = el('button', { type: 'button', class: 'h-11 rounded-full border border-ink px-5 text-sm font-semibold transition hover:bg-ink hover:text-white' }, 'Apply');
+  const apply = el('button', { type: 'button', class: 'h-11 border border-ink px-5 text-xs font-semibold uppercase tracking-[.18em] transition hover:bg-ink hover:text-white' }, 'Apply');
   const form = el('div', { class: 'mt-1.5 flex gap-2' }, input, apply);
   const chipCode = el('span', { class: 'font-semibold' });
   const chipLabel = el('span', { class: 'text-muted' });
   const remove = el('button', { type: 'button', class: 'ml-auto text-xs font-semibold underline underline-offset-2 hover:no-underline' }, 'Remove');
-  const chip = el('div', { class: 'mt-1.5 hidden items-center gap-2 rounded-full bg-brand/10 py-2 pl-3 pr-4 text-sm' }, icon('i-tag', 'icon size-4 text-brand'), chipCode, chipLabel, remove);
+  const chip = el('div', { class: 'mt-1.5 hidden items-center gap-2 bg-gold/10 py-2 pl-3 pr-4 text-sm' }, icon('i-tag', 'icon size-4 text-brand'), chipCode, chipLabel, remove);
   const msg = el('p', { id: `${id}-msg`, role: 'status', class: 'mt-1.5 text-xs empty:hidden' });
 
   const say = (text, ok = true) => {

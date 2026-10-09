@@ -57,7 +57,7 @@ function showSummary(failed) {
 
 function summaryLine(i) {
   return el('li', { class: 'flex gap-3.5 py-3.5 first:pt-0' },
-    el('img', { src: i.product.image, alt: '', width: '56', height: '72', loading: 'lazy', class: 'h-[4.5rem] w-14 shrink-0 rounded-lg object-cover' }),
+    el('img', { src: i.product.thumb, alt: '', width: '56', height: '72', loading: 'lazy', class: 'h-[4.5rem] w-14 shrink-0 object-cover' }),
     el('div', { class: 'min-w-0 flex-1 text-sm' },
       el('p', { class: 'font-semibold leading-snug' }, i.product.name),
       el('p', { class: 'mt-0.5 text-xs text-muted' }, optionText(i)),

@@ -11,32 +11,32 @@
 <body class="overflow-x-hidden antialiased">
 <!--SPRITE-->
 
-<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:text-ink">Skip to content</a>
+<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-sm focus:bg-white focus:px-4 focus:py-2 focus:text-ink">Skip to content</a>
 
 <!--NAV-->
 <div class="nav-spacer bg-[#2a0309]" aria-hidden="true"></div>
 
 <main id="main" class="container-x pt-6 lg:pt-10">
-  <a href="index.html#shop" class="inline-flex items-center gap-1 text-xs text-muted transition hover:text-ink"><svg class="icon size-3.5"><use href="#i-chevron-left"/></svg>Continue shopping</a>
-  <h1 class="heading mt-4 text-[clamp(2rem,3.3vw,2.75rem)]">Checkout</h1>
+  <a href="index.html#shop" class="inline-flex items-center gap-1 text-xs text-muted transition hover:text-ink"><svg class="icon size-3.5" aria-hidden="true"><use href="#i-chevron-left"/></svg>Continue shopping</a>
+  <h1 class="title mt-4 text-[clamp(2.25rem,4vw,3.5rem)]">Check<em>out</em></h1>
 
   <section data-checkout-empty class="hidden py-12 text-center lg:py-20" aria-labelledby="empty-title">
-    <span class="mx-auto grid size-16 place-items-center rounded-full bg-brand/10 text-brand"><svg class="icon size-7"><use href="#i-shopping-cart"/></svg></span>
-    <h2 id="empty-title" class="heading mt-6 text-2xl">Your cart is empty</h2>
+    <span class="mx-auto grid size-16 place-items-center rounded-full border border-gold/50 bg-paper-deep text-brand"><svg class="icon size-7" aria-hidden="true"><use href="#i-shopping-cart"/></svg></span>
+    <h2 id="empty-title" class="title mt-6 text-3xl">Your cart is empty</h2>
     <p class="mx-auto mt-3 max-w-sm text-sm text-muted">Add a few pieces to your cart and come back here to check out.</p>
-    <a href="index.html#shop" class="mt-7 inline-flex h-11 items-center gap-2 rounded-full bg-ink px-6 text-sm font-semibold text-white transition hover:bg-ink/85">Start shopping <svg class="icon size-4"><use href="#i-chevron-right"/></svg></a>
+    <a href="index.html#shop" class="mt-7 btn btn-ink">Start shopping <svg class="icon size-4" aria-hidden="true"><use href="#i-chevron-right"/></svg></a>
   </section>
 
   <form data-checkout class="mt-8 hidden grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_25rem] lg:gap-14" novalidate>
     <div class="space-y-10">
-      <div data-error-summary class="hidden rounded-2xl border border-danger/40 bg-danger/5 p-4 sm:p-5" tabindex="-1" aria-labelledby="error-summary-title">
-        <h2 id="error-summary-title" class="flex items-center gap-2 text-sm font-bold text-danger"><svg class="icon size-[1.125rem]"><use href="#i-circle-alert"/></svg><span></span></h2>
+      <div data-error-summary role="group" class="hidden border border-danger/40 bg-danger/5 p-4 sm:p-5" tabindex="-1" aria-labelledby="error-summary-title">
+        <h2 id="error-summary-title" class="flex items-center gap-2 text-sm font-bold text-danger"><svg class="icon size-[1.125rem]" aria-hidden="true"><use href="#i-circle-alert"/></svg><span></span></h2>
         <ul class="mt-2 list-disc space-y-1 pl-9 text-sm"></ul>
       </div>
       <p class="text-xs text-muted">Fields marked <span class="text-danger">*</span> are required.</p>
 
       <fieldset class="-mt-6 min-w-0">
-        <legend class="font-display text-lg font-bold">Contact</legend>
+        <legend class="font-serif text-2xl font-medium">Contact</legend>
         <div class="mt-4 grid gap-5 sm:grid-cols-2">
           <div class="sm:col-span-2">
             <label for="f-name" class="text-sm font-semibold">Full name <span class="text-danger" aria-hidden="true">*</span></label>
@@ -58,7 +58,7 @@
       </fieldset>
 
       <fieldset class="min-w-0">
-        <legend class="font-display text-lg font-bold">Delivery address</legend>
+        <legend class="font-serif text-2xl font-medium">Delivery address</legend>
         <div class="mt-4 grid gap-5 sm:grid-cols-2">
           <div class="sm:col-span-2">
             <label for="f-address" class="text-sm font-semibold">Street address <span class="text-danger" aria-hidden="true">*</span></label>
@@ -88,24 +88,24 @@
       </fieldset>
 
       <fieldset class="min-w-0">
-        <legend class="font-display text-lg font-bold">Payment</legend>
-        <label class="mt-4 flex cursor-pointer gap-3.5 rounded-2xl border-2 border-ink p-4">
+        <legend class="font-serif text-2xl font-medium">Payment</legend>
+        <label class="mt-4 flex cursor-pointer gap-3.5 border border-gold bg-white/50 p-4">
           <input type="radio" name="payment" value="cod" checked class="mt-0.5 size-[1.125rem] accent-brand" aria-labelledby="cod-label" aria-describedby="cod-note">
           <span>
-            <span id="cod-label" class="flex items-center gap-2 text-sm font-semibold"><svg class="icon size-[1.125rem] text-brand"><use href="#i-banknote"/></svg>Cash on Delivery</span>
+            <span id="cod-label" class="flex items-center gap-2 text-sm font-semibold"><svg class="icon size-[1.125rem] text-brand" aria-hidden="true"><use href="#i-banknote"/></svg>Cash on Delivery</span>
             <span id="cod-note" class="mt-1 block text-xs leading-relaxed text-muted">Pay when your order arrives. Have the exact amount ready for the courier; no card or online payment needed.</span>
           </span>
         </label>
       </fieldset>
     </div>
 
-    <aside class="self-start rounded-2xl border border-line p-5 lg:sticky lg:top-24 lg:p-6" aria-labelledby="summary-title">
-      <h2 id="summary-title" class="font-display text-lg font-bold">Order summary</h2>
+    <aside class="self-start border border-line bg-white/40 p-5 lg:sticky lg:top-24 lg:p-6" aria-labelledby="summary-title">
+      <h2 id="summary-title" class="font-serif text-2xl font-medium">Order summary</h2>
       <ul data-summary-lines class="mt-4 divide-y divide-line" aria-label="Items"></ul>
       <div data-coupon class="mt-5 border-t border-line pt-5"></div>
       <dl data-summary-totals class="mt-5 space-y-2 text-sm"></dl>
-      <button type="submit" class="mt-6 flex h-13 w-full items-center justify-center gap-2.5 rounded-full bg-ink text-sm font-semibold text-white transition hover:bg-ink/85 disabled:cursor-wait disabled:opacity-60">
-        <svg class="icon size-[1.125rem]"><use href="#i-shield-check"/></svg><span data-submit-label>Place order</span>
+      <button type="submit" class="btn btn-ink mt-6 h-13 w-full disabled:cursor-wait disabled:opacity-60">
+        <svg class="icon size-[1.125rem]" aria-hidden="true"><use href="#i-shield-check"/></svg><span data-submit-label>Place order</span>
       </button>
       <p class="mt-3 text-center text-xs leading-relaxed text-muted">Demo shop: your order is saved in this browser only and is not sent to any server.</p>
     </aside>
