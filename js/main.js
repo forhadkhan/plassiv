@@ -114,6 +114,20 @@
     $('#t-next').addEventListener('click', () => go(i + 1));
     slot.prev.addEventListener('click', () => go(i - 1));
     slot.next.addEventListener('click', () => go(i + 1));
+    /* swipe on touch screens: left shows the next review, right the previous; vertical scrolling stays native */
+    section.style.touchAction = 'pan-y';
+    let start = null, swiped = false;
+    section.addEventListener('pointerdown', (e) => { start = e.pointerType === 'mouse' ? null : { x: e.clientX, y: e.clientY }; swiped = false; });
+    section.addEventListener('pointercancel', () => { start = null; });
+    section.addEventListener('pointerup', (e) => {
+      if (!start) return;
+      const dx = e.clientX - start.x, dy = e.clientY - start.y;
+      start = null;
+      if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+      swiped = true;
+      go(i + (dx < 0 ? 1 : -1));
+    });
+    section.addEventListener('click', (e) => { if (swiped) { swiped = false; e.stopPropagation(); e.preventDefault(); } }, true);
     render();
     restart();
     syncHold();
