@@ -1,9 +1,9 @@
 /* Hero model: hover him (mouse), or tap him (touch), and he turns to look at you. The photo shatters into a few thousand
-   triangles that tumble off, gather into a spinning ball and, on the other side of it, fall back into place as the
-   camera-facing photo (after Szenia Zadvornykh's "THREE Text Animation #5": every face of the mesh flies to a point on a
-   sphere on its own axis, delayed by its distance from the centre). Every triangle carries its own piece of the photo, so
-   both ends are exactly the two photos. A timeline value t (0 = original, 1 = camera-facing) drives everything, so he can
-   change his mind half-way and the shards fly back. Without WebGL2 it is a plain cross-fade. The OS reduced-motion setting is deliberately not consulted: this is the
+   triangles that burst outward, tumbling, and fall back into place as the camera-facing photo (after Szenia Zadvornykh's
+   "THREE Text Animation #5": every face of the mesh flies off on its own axis, delayed by its distance from the centre).
+   Every triangle carries its own piece of the photo, so both ends are exactly the two photos. A timeline value t
+   (0 = original, 1 = camera-facing) drives everything, so he can change his mind half-way and the shards fly back.
+   Without WebGL2 it is a plain cross-fade. The OS reduced-motion setting is deliberately not consulted: this is the
    signature effect of the page, so it plays for everyone. */
 
 import { afterPaint } from './silk.js';
@@ -15,7 +15,7 @@ const base = fig?.querySelector('img');
 if (hero && fig && canvas && base && !navigator.connection?.saveData) afterPaint(start);
 
 const W = 900, H = 1254;             // photo space (the two photos are registered in it)
-const COLS = 45, ROWS = 63;          // the mesh: ~20px cells, two triangles each
+const COLS = 150, ROWS = 209;        // the mesh: ~6px cells, two triangles each (micro shards)
 
 /* No attributes: triangle number and corner come from gl_VertexID. Grid nodes are nudged by a hash so the shards are
    irregular, but the nodes are shared, so at rest the mesh is seamless; the border nodes stay put. */
@@ -23,7 +23,7 @@ const VERT = `#version 300 es
 precision highp float;
 const int COLS = ${COLS}, ROWS = ${ROWS};
 const vec2 PH = vec2(${W}., ${H}.), CEN = vec2(450., 610.);
-const float R = 400., D = 1800.;     // radius of the ball, and the camera distance (photo px)
+const float D = 1800.;               // the camera distance (photo px)
 uniform float uT;
 uniform vec4 uFig;                   // where the photo sits in the canvas (canvas uv: x, y, width, height)
 out vec2 vUv; flat out float vNew; out vec3 vLit;
@@ -51,21 +51,18 @@ void main(){
   vec2 mid = (p0 + p1 + p2) / 3., pk = k == 0 ? p0 : k == 1 ? p1 : p2;
 
   vec3 r = rnd(vec2(float(tri), 1.3));
-  // outer triangles leave first and land first; the delays are short enough that for a moment they are all in the ball
-  float delay = (1. - clamp(length((mid - CEN) / (PH * .5)) / 1.15, 0., 1.)) * .12 + r.x * .04;
+  // the middle of the photo goes first and the edges follow, close enough together that it reads as one burst
+  float delay = (1. - clamp(length((mid - CEN) / (PH * .5)) / 1.15, 0., 1.)) * .14 + r.x * .04;
   float u = clamp((uT - delay) / .84, 0., 1.);
-  float a = smoothstep(0., .3, u) - smoothstep(.7, 1., u);                     // 0 at home, 1 in the ball
+  float a = smoothstep(0., .5, u) - smoothstep(.5, 1., u);                     // 0 at home, 1 at the far end of its flight
   float ang = 6.2832 * (1. + floor(r.y * 2.)) * (r.z < .5 ? -1. : 1.) * smoothstep(0., 1., u);   // whole turns: upright again at home
   vec3 ax = normalize(rnd(vec2(float(tri), 5.9)) * 2. - 1. + .001);
 
-  // its place on the ball: a fibonacci sphere in triangle order, so the ball is the photo wrapped round it; the ball spins
-  float n = float(COLS * ROWS * 2), yy = 1. - 2. * (float(tri) + .5) / n, rr = sqrt(1. - yy * yy), th = float(tri) * 2.39996;
-  float ph = 6.2832 * smoothstep(0., 1., uT);
-  vec3 e = vec3(cos(th) * rr, -yy, sin(th) * rr) * R;
-  e = vec3(e.x * cos(ph) + e.z * sin(ph), e.y, -e.x * sin(ph) + e.z * cos(ph));
-
-  vec3 off = spin(vec3(pk - mid, 0.) * (1. - .22 * a), ax, ang);
-  vec3 P = mix(vec3(mid, 0.), vec3(CEN, 0.) + e, a) + off;
+  // where it scatters to: flung out from the middle of the photo, with some depth, then it comes back as the other photo
+  vec2 dir = normalize(mid - CEN + (r.xy - .5) * 60. + .001);
+  vec3 away = vec3(mid + dir * (140. + r.x * 320.) + (rnd(vec2(float(tri), 8.1)).xy - .5) * 140., (r.z - .5) * 700.);
+  vec3 off = spin(vec3(pk - mid, 0.) * (1. - .45 * a), ax, ang);
+  vec3 P = mix(vec3(mid, 0.), away, a) + off;
   float s = D / (D - P.z);
   vec2 q = CEN + (P.xy - CEN) * s;
 
@@ -185,7 +182,7 @@ function run(side, front) {
     if (!live || document.hidden) { prev = 0; return; }
     const dt = Math.min(0.05, prev ? (now - prev) / 1000 : 0.016);
     prev = now;
-    const dur = target > x ? 2.8 : 2.2;
+    const dur = target > x ? 1.1 : .9;
     x = target > x ? Math.min(target, x + dt / dur) : Math.max(target, x - dt / dur);
     paint(eased(x));
     if (x === target) {
