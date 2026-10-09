@@ -49,7 +49,7 @@ const result = (p) => el('li', {},
     el('img', { src: p.thumb, width: p.width, height: p.height, alt: '', loading: 'lazy', class: 'size-20 shrink-0 bg-white/10 object-cover lg:size-24' }),
     el('span', { class: 'min-w-0 flex-1' },
       el('span', { class: 'block text-xs font-semibold uppercase tracking-wider text-white/60', text: p.category }),
-      el('span', { class: 'mt-1 block truncate font-serif text-2xl font-medium leading-tight lg:text-[1.75rem]', text: p.name }),
+      el('span', { class: 'mt-1 line-clamp-2 font-serif text-2xl font-medium leading-tight lg:text-[1.75rem]', text: p.name }),
       el('span', { class: 'mt-0.5 block text-base text-white/80', text: money(p.priceCents) })),
     icon('i-chevron-right', 'icon shrink-0 text-white/50 transition group-hover:translate-x-0.5 group-hover:text-white')));
 

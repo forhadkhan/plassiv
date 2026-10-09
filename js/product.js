@@ -68,7 +68,9 @@ function render(p) {
     $('[data-fit-group]').classList.remove('hidden');
   }
 
-  $('[data-related-list]').replaceChildren(...allProducts().filter((o) => o.id !== p.id).map(relatedCard));
+  const others = allProducts().filter((o) => o.id !== p.id);
+  const related = [...others.filter((o) => o.category === p.category), ...others.filter((o) => o.category !== p.category)].slice(0, 8);
+  $('[data-related-list]').replaceChildren(...related.map(relatedCard));
   $('[data-related]').classList.remove('hidden');
   $('[data-pdp]').classList.replace('hidden', 'grid');
 }
