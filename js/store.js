@@ -49,7 +49,7 @@ function writeJSON(key, value) {
   }
 }
 
-export const variant = (src, w) => src.replace(/\.jpg$/, `-${w}.jpg`);
+export const variant = (src, w) => src.replace(/\.webp$/, `-${w}.webp`);
 
 let products = new Map();
 export const ready = fetch('data/products.json')
