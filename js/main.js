@@ -58,9 +58,9 @@
   /* testimonials (index only) */
   if ($('#t-figure')) {
     const T = [
-      { name: 'Daniel Brooks', img: 'assets/img/t1.jpg', quote: '“The blazer fits like it was tailored for me. I wore it to a wedding and got compliments all night. Easily my best purchase this year.”' },
-      { name: 'James Carter', img: 'assets/img/t2.jpg', quote: '“I’m truly impressed with the quality and perfect fit. The fabric feels premium, and I’ve received countless compliments wearing it. Amazing value for the price — I’ll definitely shop here again.”' },
-      { name: 'Ryan Mitchell', img: 'assets/img/t3.jpg', quote: '“Fast delivery, great packaging, and the denim jacket feels even better in person. Plassiv is now my go-to for everyday style.”' },
+      { name: 'Daniel Brooks', img: 'assets/img/t1-500.webp', quote: '“The blazer fits like it was tailored for me. I wore it to a wedding and got compliments all night. Easily my best purchase this year.”' },
+      { name: 'James Carter', img: 'assets/img/t2-500.webp', quote: '“I’m truly impressed with the quality and perfect fit. The fabric feels premium, and I’ve received countless compliments wearing it. Amazing value for the price — I’ll definitely shop here again.”' },
+      { name: 'Ryan Mitchell', img: 'assets/img/t3-500.webp', quote: '“Fast delivery, great packaging, and the denim jacket feels even better in person. Plassiv is now my go-to for everyday style.”' },
     ];
     const slot = { prev: $('[data-t-slot=prev]'), current: $('[data-t-slot=current]'), next: $('[data-t-slot=next]') };
     const fig = $('#t-figure');
@@ -75,7 +75,7 @@
     proto.replaceWith(...slides);
     let i = 1;
     const wrap = (n) => (n + T.length) % T.length;
-    const paint = (el, t) => { const im = $('img', el); im.src = t.img; im.alt = t.name; };
+    const paint = (el, t) => { const im = $('img', el); im.alt = t.name; if (window.seqImg) seqImg(im, t.img); else im.src = t.img; };
     const render = () => {
       paint(slot.prev, T[wrap(i - 1)]); paint(slot.current, T[i]); paint(slot.next, T[wrap(i + 1)]);
       slides.forEach((el, n) => {

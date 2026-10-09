@@ -16,9 +16,21 @@ def money(cents):
     return f"${cents // 100:,}.{cents % 100:02d}"
 
 
+BLANK = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+LAZY_IMG = re.compile(r'<img loading="lazy" decoding="async" src="([^"]+)"(?: srcset="([^"]+)")?')
+
+
+def defer_images(html):
+    """Swap each lazy image's real source into data-src / data-srcset; js/lazy.js loads them nearest-first, a few at a time."""
+    def swap(m):
+        src, srcset = m.groups()
+        return f'<img decoding="async" src="{BLANK}" data-src="{src}"' + (f' data-srcset="{srcset}"' if srcset else "")
+    return LAZY_IMG.sub(swap, html)
+
+
 def card(i, p):
     name = escape(p["name"])
-    small = escape(p["image"].replace(".jpg", "-640.jpg"))
+    small = escape(p["image"].replace(".webp", "-640.webp"))
     no = p["id"].lstrip("p").zfill(2)
     # the name link stretches over the whole card; the wishlist button sits above it (z-10) so it stays separate
     return f'''    <li class="reveal snap-start" style="--d:{(i % 3) * 80}ms">
@@ -73,7 +85,7 @@ for page, (base, home, navtop) in PAGES.items():
     out = out.replace("<!--SPRITE-->", (SRC / "sprite.html").read_text()) \
              .replace("    <!--PRODUCTS-->", "\n".join(card(i, p) for i, p in enumerate(PRODUCTS))) \
              .replace("%BASE%", base).replace("%HOME%", home).replace("%NAVTOP%", navtop)
-    (ROOT / f"{page}.html").write_text(out)
+    (ROOT / f"{page}.html").write_text(defer_images(out))
     print(f"{page}.html written", len(out), "bytes")
 
 (ROOT / "robots.txt").write_text("User-agent: *\nDisallow: /\n")

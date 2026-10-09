@@ -12,7 +12,7 @@ const hero = document.getElementById('top');
 const fig = hero?.querySelector('.hero-float');
 const canvas = document.getElementById('hero-gaze');
 const base = fig?.querySelector('img');
-if (hero && fig && canvas && base && !navigator.connection?.saveData) afterPaint(start);
+if (hero && fig && canvas && base && !navigator.connection?.saveData && !/^(slow-)?2g$/.test(navigator.connection?.effectiveType ?? '')) afterPaint(start);
 
 const W = 900, H = 1254;             // photo space (the two photos are registered in it)
 const COLS = 150, ROWS = 209;        // the mesh: ~6px cells, two triangles each (micro shards)

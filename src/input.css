@@ -10,13 +10,13 @@
 }
 @font-face {
   font-family: "Regione";
-  src: url("../assets/fonts/regione.ttf") format("truetype");
+  src: url("../assets/fonts/regione.woff2") format("woff2");
   font-weight: 400;
   font-display: swap;
 }
 @font-face {
   font-family: "Brilega Fadone";
-  src: url("../assets/fonts/brilega-fadone.otf") format("opentype");
+  src: url("../assets/fonts/brilega-fadone.woff2") format("woff2");
   font-weight: 400;
   font-display: swap;
 }
@@ -285,3 +285,10 @@
 .t-auto .t-ring rect { animation: t-ring 6s linear forwards; }
 .t-paused .t-ring rect { animation-play-state: paused; }
 @keyframes t-ring { to { stroke-dashoffset: 0; } }
+
+/* images that js/lazy.js loads later: a faint tint holds the space (the box is sized by width/height), then the photo fades in */
+img[data-src] { background-color: color-mix(in srgb, currentColor 7%, transparent); }
+@keyframes img-in { from { opacity: 0; } }
+@media (prefers-reduced-motion: no-preference) {
+  img.is-loaded { animation: img-in .6s ease both; }
+}
