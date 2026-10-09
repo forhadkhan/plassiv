@@ -38,6 +38,26 @@ def place_gaze(src):
     pad = Image.new('RGBA', (W + 120, H), (0, 0, 0, 0)); pad.alpha_composite(g, (OX + 60, 0))
     return pad.crop((60, 0, 60 + W, H))
 
+def register(old, new):
+    """The gaze photo was shot a little differently (a bit wider, a bit lower), so scale and shift alone leave the body
+    sliding during the turn. Fit an affine to the suit (rows under the chin) and warp the gaze photo onto it.
+    Returns the registered photo and the 2x3 matrix W (old-space point -> placed-photo point)."""
+    def gray(im):
+        a = np.asarray(im, np.float32)
+        g = cv2.cvtColor(np.clip(a[..., :3] * (a[..., 3:] / 255.), 0, 255).astype(np.uint8), cv2.COLOR_RGB2GRAY)
+        return cv2.GaussianBlur(g, (0, 0), 2).astype(np.float32)
+    ao, an = (np.asarray(i)[..., 3] for i in (old, new))
+    mask = np.zeros((H, W), np.uint8)
+    mask[470:] = ((ao[470:] > 200) & (an[470:] > 200)) * 255
+    mask = cv2.erode(mask, np.ones((15, 15), np.uint8))
+    M = np.eye(2, 3, dtype=np.float32)
+    _, M = cv2.findTransformECC(gray(old), gray(new), M, cv2.MOTION_AFFINE,
+                                (cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 300, 1e-6), mask, 5)
+    a = np.asarray(new, np.float32) / 255.; a[..., :3] *= a[..., 3:]                 # premultiplied, so edges stay clean
+    a = cv2.warpAffine(a, M, (W, H), flags=cv2.INTER_LINEAR | cv2.WARP_INVERSE_MAP)
+    a[..., :3] = a[..., :3] / np.maximum(a[..., 3:], 1e-4)
+    return Image.fromarray(np.clip(a * 255 + .5, 0, 255).astype(np.uint8), 'RGBA'), M
+
 def idw(pts, shape, r0=230., p=2.0):
     """smooth displacement field from (position, displacement) pairs; fades to zero far from every landmark"""
     yy, xx = np.mgrid[0:shape[0], 0:shape[1]].astype(np.float32)
@@ -48,7 +68,8 @@ def idw(pts, shape, r0=230., p=2.0):
     return num / den[..., None]
 
 def bake(gaze_path, preview=None):
-    old = load(OLD); new = place_gaze(load(gaze_path))
+    old = load(OLD); new, M = register(old, place_gaze(load(gaze_path)))
+    Mi = cv2.invertAffineTransform(M)                                            # placed-photo point -> registered point
     def flat(im):
         a = np.asarray(im, np.float32); return a[..., :3] * (a[..., 3:] / 255.)
     go, gn = (cv2.cvtColor(np.clip(flat(i), 0, 255).astype(np.uint8), cv2.COLOR_RGB2GRAY) for i in (old, new))
@@ -60,7 +81,7 @@ def bake(gaze_path, preview=None):
         body = cv2.calcOpticalFlowFarneback(a, b, None, .5, 6, 45, 6, 7, 1.5, 0) * wb[..., None]
         pts = []
         for (ox, oy), (gx, gy) in HEAD:
-            ox2, oy2 = gx * S + OX, gy * S
+            ox2, oy2 = Mi @ np.array([gx * S + OX, gy * S, 1.], np.float32)
             pts.append(((ox, oy), (ox2 - ox, oy2 - oy)) if fwd else ((ox2, oy2), (ox - ox2, oy - oy2)))
         fields.append(cv2.GaussianBlur(body + idw(pts, (H, W)) * (1 - wb)[..., None], (0, 0), 3))
     small = [cv2.resize(f, (W // 4, H // 4), interpolation=cv2.INTER_AREA) for f in fields]
