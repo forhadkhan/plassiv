@@ -15,6 +15,7 @@ Plassiv is a menswear storefront built as a static site: plain HTML, CSS and Jav
 - **Cart drawer** with quantity controls, coupons (`FLAT15` and others in `js/store.js`), free shipping over $150 and a live total. A cart changed in another tab updates the first one.
 - **Checkout** with inline validation, an error summary that takes focus, and Cash on Delivery. **Order page** at `order.html?id=PL-XXXXXX`.
 - **Accessibility:** skip link, landmarks, one `h1` per page, labelled controls, focus-trapped dialogs, live regions for cart and search status, visible focus rings and 24px-minimum touch targets.
+- **Loads well on a slow connection:** see [Loading and performance](#loading-and-performance).
 - **Motion** is gated on `prefers-reduced-motion`; WebGL surfaces fall back to CSS gradients when WebGL is unavailable.
 
 ## Tech stack
@@ -66,9 +67,21 @@ python3 -m http.server 5180
 
 ### Editing content
 
-- **Products:** edit `data/products.json`. Each product needs `image` (`pN.jpg`) plus `pN-640.jpg` and `pN-320.jpg` beside it; the home page cards and the cart use those sizes.
+- **Products:** edit `data/products.json`. Each product needs `image` (`pN.webp`) plus `pN-640.webp` and `pN-320.webp` beside it; the home page cards and the cart use those sizes.
 - **Site URL** (canonical, Open Graph, JSON-LD): set `SITE_URL` when building, for example `SITE_URL=https://example.com/shop/ npm run build`.
 - **Hero second photo:** `python3 scripts/bake-gaze.py <photo.png>` needs `numpy`, `opencv-python-headless` and `pillow`.
+
+## Loading and performance
+
+The page is built to show its first screen quickly on a slow link and then fill in the rest one piece at a time.
+
+- **First paint:** CSS, the hero photo and the two fonts used above the fold (Regione, Inter) are the only things hinted early. The other fonts are found through the CSS.
+- **Images:** all photos are WebP (about half the size of the JPEGs they replaced). Product photos come in three sizes, `pN.webp`, `pN-640.webp` and `pN-320.webp`; the testimonials have `-112` and `-500` sizes. The existing ones are WebP at quality 78, resized to 640 and 320 px wide.
+- **Lazy and in order:** images below the first screen start as a blank pixel with `data-src` (the build script does the swap). `js/lazy.js` loads them as they come near the viewport, nearest first, one or two at a time. It watches how long each one takes and goes down to one at a time when the link is slow. Images inside the swipeable product track load a few cards ahead of the swipe. Failed images are retried twice.
+- **Scripts:** `js/boot.js` starts the modules that draw the first screen (`data-now`), then loads the others (`data-later`) one at a time, when the browser is idle, after the page has loaded. A tap on search or sign-in before its module arrives loads it and repeats the tap.
+- **Saving data:** with Data Saver on, or on a 2G link, the hero hover photo (`js/gaze.js`) is skipped and the lazy queue loads one image at a time.
+- **No JavaScript:** the below-the-fold photos do not appear, because they are swapped in by script.
+- **Original JPEGs and fonts** are only in git history now. The fonts are `.woff2` files made from the original `.ttf` and `.otf`.
 
 ## Deployment
 
