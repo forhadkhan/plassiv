@@ -124,6 +124,7 @@
 .hero-gaze { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transition: opacity .16s linear; pointer-events: none; }
 .hero-float.gaze > .hero-gaze { opacity: 1; }
 .hero-float.gaze > img { opacity: 0; transition: opacity 0s .14s; }
+.hero-float.gaze > .hero-sheen { opacity: 0; transition: opacity .2s; }   /* its glint is cut to the old silhouette, so it would shine on empty air mid-dissolve */
 
 /* scroll reveal — only when JS is on and motion is allowed */
 @media (prefers-reduced-motion: no-preference) {
