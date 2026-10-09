@@ -53,7 +53,7 @@ void main(){
   vec2 cell = floor(gl_FragCoord.xy);
   float rnd = hash(cell);
   float tw = .5 + .5 * sin(uTime * 2.2 + rnd * 40.);
-  c += gold * step(.9985, rnd) * tw * (.1 + (core + glow) * .8);
+  c += gold * step(.985, rnd) * tw * (.1 + (core + glow) * .8);
 
   c += vec3(1., .72, .3) * (hash(gl_FragCoord.xy + fract(uTime) * 61.7) - .5) * .025;
 
