@@ -3,7 +3,8 @@
    camera-facing photo (after Szenia Zadvornykh's "THREE Text Animation #5": every face of the mesh flies to a point on a
    sphere on its own axis, delayed by its distance from the centre). Every triangle carries its own piece of the photo, so
    both ends are exactly the two photos. A timeline value t (0 = original, 1 = camera-facing) drives everything, so he can
-   change his mind half-way and the shards fly back. Without WebGL2 it is a plain cross-fade; with reduced motion a quick one. */
+   change his mind half-way and the shards fly back. Without WebGL2 it is a plain cross-fade. The OS reduced-motion setting is deliberately not consulted: this is the
+   signature effect of the page, so it plays for everyone. */
 
 import { afterPaint } from './silk.js';
 
@@ -15,7 +16,6 @@ if (hero && fig && canvas && base && !navigator.connection?.saveData) afterPaint
 
 const W = 900, H = 1254;             // photo space (the two photos are registered in it)
 const COLS = 45, ROWS = 63;          // the mesh: ~20px cells, two triangles each
-const still = matchMedia('(prefers-reduced-motion: reduce)');
 
 /* No attributes: triangle number and corner come from gl_VertexID. Grid nodes are nudged by a hash so the shards are
    irregular, but the nodes are shared, so at rest the mesh is seamless; the border nodes stay put. */
@@ -24,7 +24,7 @@ precision highp float;
 const int COLS = ${COLS}, ROWS = ${ROWS};
 const vec2 PH = vec2(${W}., ${H}.), CEN = vec2(450., 610.);
 const float R = 400., D = 1800.;     // radius of the ball, and the camera distance (photo px)
-uniform float uT, uCalm;
+uniform float uT;
 uniform vec4 uFig;                   // where the photo sits in the canvas (canvas uv: x, y, width, height)
 out vec2 vUv; flat out float vNew; out vec3 vLit;
 
@@ -56,7 +56,6 @@ void main(){
   float u = clamp((uT - delay) / .84, 0., 1.);
   float a = smoothstep(0., .3, u) - smoothstep(.7, 1., u);                     // 0 at home, 1 in the ball
   float ang = 6.2832 * (1. + floor(r.y * 2.)) * (r.z < .5 ? -1. : 1.) * smoothstep(0., 1., u);   // whole turns: upright again at home
-  if (uCalm > .5) { a = 0.; ang = 0.; }
   vec3 ax = normalize(rnd(vec2(float(tri), 5.9)) * 2. - 1. + .001);
 
   // its place on the ball: a fibonacci sphere in triangle order, so the ball is the photo wrapped round it; the ball spins
@@ -82,11 +81,10 @@ void main(){
 const FRAG = `#version 300 es
 precision highp float;
 uniform sampler2D uA, uB;
-uniform float uT, uCalm;
 in vec2 vUv; flat in float vNew; in vec3 vLit;
 out vec4 o;
 void main(){
-  vec4 t = mix(texture(uA, vUv), texture(uB, vUv), uCalm > .5 ? uT : vNew);   // premultiplied
+  vec4 t = mix(texture(uA, vUv), texture(uB, vUv), vNew);   // premultiplied
   if (t.a < .02) discard;
   float shade = mix(1., .38 + .95 * vLit.x, vLit.z);                          // flat shading, only once it has left home
   o = vec4(t.rgb * shade + vec3(1., .78, .42) * vLit.y * vLit.z * .6 * t.a, t.a);
@@ -146,17 +144,17 @@ function run(side, front) {
     gl.enable(gl.DEPTH_TEST); gl.depthFunc(gl.LEQUAL);
 
     const U = (n) => gl.getUniformLocation(prog, n);
-    const uT = U('uT'), uCalm = U('uCalm'), uFig = U('uFig');
+    const uT = U('uT'), uFig = U('uFig');
     gl.uniform1i(U('uA'), 0); gl.uniform1i(U('uB'), 1);
     /* the canvas is larger than the photo, so shards can fly out past his outline: say where the photo sits in it */
     place = () => {
       const c = canvas.getBoundingClientRect(), f = base.getBoundingClientRect();
       gl.uniform4f(uFig, (f.left - c.left) / c.width, (f.top - c.top) / c.height, f.width / c.width, f.height / c.height);
     };
-    paint = (t, calm = still.matches) => {
+    paint = (t) => {
       gl.viewport(0, 0, canvas.width, canvas.height);
       gl.clearColor(0, 0, 0, 0); gl.clearDepth(1); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-      gl.uniform1f(uT, t); gl.uniform1f(uCalm, calm ? 1 : 0);
+      gl.uniform1f(uT, t);
       gl.drawArrays(gl.TRIANGLES, 0, COLS * ROWS * 6);
     };
     canvas.addEventListener('webglcontextlost', (e) => { e.preventDefault(); fig.classList.remove('gaze'); live = false; });
@@ -187,7 +185,7 @@ function run(side, front) {
     if (!live || document.hidden) { prev = 0; return; }
     const dt = Math.min(0.05, prev ? (now - prev) / 1000 : 0.016);
     prev = now;
-    const dur = still.matches ? .4 : target > x ? 2.8 : 2.2;
+    const dur = target > x ? 2.8 : 2.2;
     x = target > x ? Math.min(target, x + dt / dur) : Math.max(target, x - dt / dur);
     paint(eased(x));
     if (x === target) {
