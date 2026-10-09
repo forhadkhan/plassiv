@@ -1,5 +1,5 @@
 /* Hero model: hover him (mouse), or tap him (touch), and he turns to look at you. The photo shatters into a few thousand
-   triangles that burst outward, tumbling, and fall back into place as the camera-facing photo (after Szenia Zadvornykh's
+   triangles that scatter a little, tumbling in place, and settle again as the camera-facing photo (after Szenia Zadvornykh's
    "THREE Text Animation #5": every face of the mesh flies off on its own axis, delayed by its distance from the centre).
    Every triangle carries its own piece of the photo, so both ends are exactly the two photos. A timeline value t
    (0 = original, 1 = camera-facing) drives everything, so he can change his mind half-way and the shards fly back.
@@ -23,7 +23,6 @@ const VERT = `#version 300 es
 precision highp float;
 const int COLS = ${COLS}, ROWS = ${ROWS};
 const vec2 PH = vec2(${W}., ${H}.), CEN = vec2(450., 610.);
-const float D = 1800.;               // the camera distance (photo px)
 uniform float uT;
 uniform vec4 uFig;                   // where the photo sits in the canvas (canvas uv: x, y, width, height)
 out vec2 vUv; flat out float vNew; out vec3 vLit;
@@ -58,13 +57,12 @@ void main(){
   float ang = 6.2832 * (1. + floor(r.y * 2.)) * (r.z < .5 ? -1. : 1.) * smoothstep(0., 1., u);   // whole turns: upright again at home
   vec3 ax = normalize(rnd(vec2(float(tri), 5.9)) * 2. - 1. + .001);
 
-  // where it scatters to: flung out from the middle of the photo, with some depth, then it comes back as the other photo
+  // where it drifts to: only a short hop from its own place, flat (no depth, no perspective), then it settles as the other photo
   vec2 dir = normalize(mid - CEN + (r.xy - .5) * 60. + .001);
-  vec3 away = vec3(mid + dir * (140. + r.x * 320.) + (rnd(vec2(float(tri), 8.1)).xy - .5) * 140., (r.z - .5) * 700.);
+  vec3 away = vec3(mid + dir * (14. + r.x * 40.) + (rnd(vec2(float(tri), 8.1)).xy - .5) * 50., 0.);
   vec3 off = spin(vec3(pk - mid, 0.) * (1. - .45 * a), ax, ang);
   vec3 P = mix(vec3(mid, 0.), away, a) + off;
-  float s = D / (D - P.z);
-  vec2 q = CEN + (P.xy - CEN) * s;
+  vec2 q = P.xy;
 
   vec3 nrm = spin(vec3(0., 0., 1.), ax, ang);
   vec3 L = normalize(vec3(-.45, .55, .7)), Hh = normalize(L + vec3(0., 0., 1.));
