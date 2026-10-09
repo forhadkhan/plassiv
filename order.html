@@ -69,18 +69,18 @@
   <canvas id="nav-mesh" class="site-nav-bg absolute inset-0 size-full" aria-hidden="true"></canvas>
   <div class="site-nav-bg hero-noise pointer-events-none absolute inset-0 opacity-[.32] mix-blend-overlay" aria-hidden="true"></div>
   <nav class="site-nav-bar container-x relative z-10 grid grid-cols-[1fr_auto_1fr] items-center" aria-label="Primary">
-    <ul class="hidden items-center gap-8 text-[0.9375rem] font-medium md:flex">
+    <ul class="hidden items-center gap-5 text-[0.9375rem] font-medium lg:flex lg:gap-8">
       <li><a href="index.html" class="opacity-90 transition hover:opacity-100">Home</a></li>
       <li><a href="index.html#shop" class="opacity-90 transition hover:opacity-100">Shop</a></li>
       <li><a href="index.html#collections" class="opacity-90 transition hover:opacity-100">Collections</a></li>
       <li><a href="index.html#about" class="opacity-90 transition hover:opacity-100">About</a></li>
       <li><a href="index.html#contact" class="opacity-90 transition hover:opacity-100">Contact</a></li>
     </ul>
-    <button type="button" id="menu-btn" class="inline-flex size-10 items-center justify-center rounded-full md:hidden -ml-2" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+    <button type="button" id="menu-btn" class="inline-flex size-10 items-center justify-center rounded-full lg:hidden -ml-2" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
       <svg class="icon" data-open aria-hidden="true"><use href="#i-menu"/></svg>
       <svg class="icon hidden" data-close aria-hidden="true"><use href="#i-x"/></svg>
     </button>
-    <a href="index.html" class="font-display text-lg font-semibold uppercase tracking-[.38em] lg:text-xl">Plassiv</a>
+    <a href="index.html" class="font-display text-lg font-semibold uppercase tracking-[.3em] lg:text-xl lg:tracking-[.38em]">Plassiv</a>
     <div class="flex items-center justify-end gap-4 lg:gap-5">
       <button type="button" data-search-open class="transition hover:opacity-75" aria-label="Search" aria-haspopup="dialog" aria-controls="search-dialog"><svg class="icon" aria-hidden="true"><use href="#i-search"/></svg></button>
       <button type="button" data-login-open class="transition hover:opacity-75" aria-label="Sign in" aria-haspopup="dialog" aria-controls="login-dialog"><svg class="icon" aria-hidden="true"><use href="#i-user"/></svg></button>
@@ -90,7 +90,7 @@
       </button>
     </div>
   </nav>
-  <nav id="mobile-menu" aria-label="Mobile" class="fixed inset-0 z-0 hidden overflow-y-auto bg-black md:hidden">
+  <nav id="mobile-menu" aria-label="Mobile" class="fixed inset-0 z-0 hidden overflow-y-auto bg-black lg:hidden">
     <canvas id="menu-silk" class="absolute inset-0 size-full" aria-hidden="true"></canvas>
     <ul class="menu-links container-x relative flex min-h-full flex-col justify-center py-28 text-right font-display text-4xl font-bold tracking-tight">
       <li class="w-full"><a href="index.html" class="block py-5">Home</a></li>
@@ -167,7 +167,7 @@
   <div class="container-x relative pb-16 pt-5 lg:pt-8">
     <form role="search" data-search-form class="search-field flex items-center gap-3 border-b border-white/25 pb-3 transition-colors focus-within:border-white lg:gap-4 lg:pb-4">
       <svg class="icon size-6 shrink-0 text-white/70" aria-hidden="true"><use href="#i-search"/></svg>
-      <input id="search-input" type="search" name="q" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" aria-label="Search products" placeholder="Search blazers, jackets, shirts" class="min-w-0 flex-1 bg-transparent font-display text-2xl font-bold tracking-tight text-white outline-none placeholder:text-white/40 lg:text-4xl">
+      <input id="search-input" type="search" name="q" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" aria-label="Search products" placeholder="Search the collection" class="min-w-0 flex-1 bg-transparent font-display text-2xl font-bold tracking-tight text-white outline-none placeholder:text-white/40 lg:text-4xl">
       <button type="button" data-search-close class="-mr-2 grid size-11 shrink-0 place-items-center rounded-full transition hover:bg-white/10" aria-label="Close search"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></button>
     </form>
     <p id="search-status" class="sr-only" role="status"></p>
