@@ -89,6 +89,6 @@ The site is plain files, so any static host works. GitHub Pages serves the repos
 
 ## Credits
 
-Photographs, fonts and licences are listed in [CREDITS.md](CREDITS.md). The hero model photo and the two Edit-section photos (cream blazer, denim jacket) were supplied by the site owner. Check the licences of the two display fonts, Regione and Brilega Fadone, before using the site commercially.
+Photographs, fonts and licences are listed in [CREDITS.md](CREDITS.md). The hero model photo and the two Edit-section photos (cream blazer, denim jacket) were supplied by the site owner. The two display fonts, Regione and Brilega Fadone, came from 1001fonts.com; check their licences before using the site commercially (see the Fonts section of CREDITS.md).
 
 Designed and developed by [Forhad Khan](https://forhadkhan.com).

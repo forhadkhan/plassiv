@@ -1,4 +1,6 @@
-# Image credits
+# Credits
+
+## Images
 
 All photos come from [Unsplash](https://unsplash.com) and are used under the
 [Unsplash License](https://unsplash.com/license): free for commercial and non-commercial use, no
@@ -34,3 +36,15 @@ The hero cutout (`hero-model.webp`) is a background-removed image supplied by th
 Smaller `-320`/`-640`/half-size copies of these files are resized derivatives. Brand and social images in `assets/brand/` are original work.
 
 Earlier picks (Unsplash photo ids): `p5.webp` 1586233520155-e03f7ada9c77, `p14.webp` cMz5kGMmdnw, `p15.webp` xmXWuC6nKKI, `p16.webp` rH16wMV8ImM, `p18.webp` xfNeB1stZ_0, `p19.webp` MJIIEUlQH60.
+
+## Fonts
+
+Files in `assets/fonts/` are `.woff2`.
+
+| Font | Used for | Source |
+|---|---|---|
+| Regione | the "Plassiv" wordmark | downloaded from [1001fonts.com](https://www.1001fonts.com/); converted from the original `.ttf` to `.woff2` |
+| Brilega Fadone | section titles | downloaded from [1001fonts.com](https://www.1001fonts.com/); converted from the original `.otf` to `.woff2` |
+| Cormorant, Inter, Sora, Anton | body, headings and fallbacks | open-source families (SIL Open Font License) |
+
+The licence terms shown on 1001fonts.com for Regione and Brilega Fadone were not recorded. The same fonts are offered on other sites (dafont, FontSpace) as free for personal use only, so check the terms on the 1001fonts.com download pages before any commercial use.
