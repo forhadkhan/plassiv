@@ -2,13 +2,13 @@
   {
     "id": "p1",
     "sku": "PLV-BLZ-001",
-    "name": "Elegant Peach Blazer",
+    "name": "Elegant Cream Blazer",
     "category": "Blazers",
     "priceCents": 15080,
     "image": "assets/img/p1.jpg",
     "width": 1112,
-    "height": 1192,
-    "alt": "Man in a cream blazer and trousers against a peach studio backdrop",
+    "height": 1483,
+    "alt": "A cream three-piece suit jacket hangs from a single hanger against a dark, moody staircase in soft side light.",
     "description": "A softly structured single-breasted blazer in a light stone weave. Easy enough for weekends, sharp enough for the office.",
     "details": [
       "Fabric: 55% linen, 45% cotton, half-lined",
@@ -16,15 +16,39 @@
       "Two-button front, flap pockets, functional cuffs",
       "Care: dry clean only"
     ],
-    "sizes": ["S", "M", "L", "XL", "XXL"],
-    "soldOut": ["S", "XXL"],
-    "colors": [
-      { "name": "Stone Cream", "hex": "#ddd6c8" },
-      { "name": "Peach", "hex": "#e8c4a8" },
-      { "name": "Sand", "hex": "#c9b48f" },
-      { "name": "Navy", "hex": "#25324a" }
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
     ],
-    "fits": ["Regular", "Slim"]
+    "soldOut": [
+      "S",
+      "XXL"
+    ],
+    "colors": [
+      {
+        "name": "Stone Cream",
+        "hex": "#ddd6c8"
+      },
+      {
+        "name": "Peach",
+        "hex": "#e8c4a8"
+      },
+      {
+        "name": "Sand",
+        "hex": "#c9b48f"
+      },
+      {
+        "name": "Navy",
+        "hex": "#25324a"
+      }
+    ],
+    "fits": [
+      "Regular",
+      "Slim"
+    ]
   },
   {
     "id": "p2",
@@ -34,8 +58,8 @@
     "priceCents": 12080,
     "image": "assets/img/p2.jpg",
     "width": 1112,
-    "height": 1192,
-    "alt": "Man in a light-wash denim jacket",
+    "height": 1483,
+    "alt": "A man in a light-wash denim jacket sits with fingertips together against a black studio backdrop, lit from one side.",
     "description": "The trucker jacket you will reach for all year. Light-wash rigid denim that softens and fades with every wear.",
     "details": [
       "Fabric: 100% cotton denim, 13 oz",
@@ -43,12 +67,29 @@
       "Button front, two chest flap pockets, adjustable waist tabs",
       "Care: machine wash cold inside out, line dry"
     ],
-    "sizes": ["S", "M", "L", "XL", "XXL"],
-    "soldOut": ["XL"],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "soldOut": [
+      "XL"
+    ],
     "colors": [
-      { "name": "Light Wash", "hex": "#9fb6cc" },
-      { "name": "Mid Wash", "hex": "#5b7898" },
-      { "name": "Black Denim", "hex": "#2b2d31" }
+      {
+        "name": "Light Wash",
+        "hex": "#9fb6cc"
+      },
+      {
+        "name": "Mid Wash",
+        "hex": "#5b7898"
+      },
+      {
+        "name": "Black Denim",
+        "hex": "#2b2d31"
+      }
     ],
     "fits": []
   },
@@ -60,8 +101,8 @@
     "priceCents": 16055,
     "image": "assets/img/p3.jpg",
     "width": 1112,
-    "height": 1192,
-    "alt": "Bearded man in a black leather biker jacket and sunglasses",
+    "height": 1483,
+    "alt": "A bearded man in round glasses and a black leather jacket with a shearling collar sits against a deep black backdrop.",
     "description": "A biker jacket cut from supple lambskin, with an asymmetric zip and a quilted lining that keeps its shape.",
     "details": [
       "Fabric: 100% lambskin leather, polyester lining",
@@ -69,12 +110,30 @@
       "Asymmetric zip, zipped cuffs, three outer pockets",
       "Care: specialist leather clean only"
     ],
-    "sizes": ["S", "M", "L", "XL", "XXL"],
-    "soldOut": ["M", "XXL"],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "soldOut": [
+      "M",
+      "XXL"
+    ],
     "colors": [
-      { "name": "Black", "hex": "#1c1c1c" },
-      { "name": "Cognac", "hex": "#8a4b2a" },
-      { "name": "Dark Brown", "hex": "#4a3226" }
+      {
+        "name": "Black",
+        "hex": "#1c1c1c"
+      },
+      {
+        "name": "Cognac",
+        "hex": "#8a4b2a"
+      },
+      {
+        "name": "Dark Brown",
+        "hex": "#4a3226"
+      }
     ],
     "fits": []
   },
@@ -86,8 +145,8 @@
     "priceCents": 10020,
     "image": "assets/img/p4.jpg",
     "width": 1112,
-    "height": 1424,
-    "alt": "Man in a relaxed sage green linen shirt",
+    "height": 1483,
+    "alt": "A man with braided hair looks down in an olive casual shirt, hands in pockets, against a mottled olive studio backdrop.",
     "description": "A breathable linen shirt in a muted sage. Wear it buttoned up, open over a tee, or tucked with tailoring.",
     "details": [
       "Fabric: 100% European linen, garment washed",
@@ -95,15 +154,38 @@
       "Camp collar, mother-of-pearl buttons",
       "Care: machine wash 30°C, hang to dry"
     ],
-    "sizes": ["S", "M", "L", "XL", "XXL"],
-    "soldOut": ["L"],
-    "colors": [
-      { "name": "Sage", "hex": "#a3ad8f" },
-      { "name": "Olive", "hex": "#6b6f45" },
-      { "name": "Off White", "hex": "#efece4" },
-      { "name": "Sky", "hex": "#a9c3d9" }
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
     ],
-    "fits": ["Regular", "Slim"]
+    "soldOut": [
+      "L"
+    ],
+    "colors": [
+      {
+        "name": "Sage",
+        "hex": "#a3ad8f"
+      },
+      {
+        "name": "Olive",
+        "hex": "#6b6f45"
+      },
+      {
+        "name": "Off White",
+        "hex": "#efece4"
+      },
+      {
+        "name": "Sky",
+        "hex": "#a9c3d9"
+      }
+    ],
+    "fits": [
+      "Regular",
+      "Slim"
+    ]
   },
   {
     "id": "p5",
@@ -113,8 +195,8 @@
     "priceCents": 10066,
     "image": "assets/img/p5.jpg",
     "width": 1112,
-    "height": 1424,
-    "alt": "Young man in a green and tan check overshirt over a black tee",
+    "height": 1483,
+    "alt": "A man in a green and white check flannel shirt leans on a wooden rail and looks toward the camera.",
     "description": "A brushed cotton flannel in a green and tan check, heavy enough to layer as an overshirt on cooler days.",
     "details": [
       "Fabric: 100% brushed cotton flannel",
@@ -122,14 +204,35 @@
       "Two button-flap chest pockets",
       "Care: machine wash cold, tumble dry low"
     ],
-    "sizes": ["S", "M", "L", "XL", "XXL"],
-    "soldOut": ["S", "XL"],
-    "colors": [
-      { "name": "Forest Check", "hex": "#4d5a3c" },
-      { "name": "Rust Check", "hex": "#9a4f2e" },
-      { "name": "Navy Check", "hex": "#2c3a55" }
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
     ],
-    "fits": ["Regular", "Slim"]
+    "soldOut": [
+      "S",
+      "XL"
+    ],
+    "colors": [
+      {
+        "name": "Forest Check",
+        "hex": "#4d5a3c"
+      },
+      {
+        "name": "Rust Check",
+        "hex": "#9a4f2e"
+      },
+      {
+        "name": "Navy Check",
+        "hex": "#2c3a55"
+      }
+    ],
+    "fits": [
+      "Regular",
+      "Slim"
+    ]
   },
   {
     "id": "p6",
@@ -139,8 +242,8 @@
     "priceCents": 15080,
     "image": "assets/img/p6.jpg",
     "width": 1112,
-    "height": 1424,
-    "alt": "Man in a beige blazer set, navy knit and sunglasses",
+    "height": 1483,
+    "alt": "A man in a tan three-piece suit reclines in a pale pink armchair against dark wood panelling.",
     "description": "A lightweight blazer and trouser set in warm beige, made for summer weddings, travel and long city evenings.",
     "details": [
       "Fabric: 70% cotton, 30% linen, unlined",
@@ -148,13 +251,547 @@
       "Set includes blazer and matching trousers",
       "Care: dry clean recommended"
     ],
-    "sizes": ["S", "M", "L", "XL", "XXL"],
-    "soldOut": ["XXL"],
-    "colors": [
-      { "name": "Beige", "hex": "#cbb69a" },
-      { "name": "Taupe", "hex": "#9c8b78" },
-      { "name": "Ivory", "hex": "#f1ebdf" }
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
     ],
-    "fits": ["Regular", "Slim"]
+    "soldOut": [
+      "XXL"
+    ],
+    "colors": [
+      {
+        "name": "Beige",
+        "hex": "#cbb69a"
+      },
+      {
+        "name": "Taupe",
+        "hex": "#9c8b78"
+      },
+      {
+        "name": "Ivory",
+        "hex": "#f1ebdf"
+      }
+    ],
+    "fits": [
+      "Regular",
+      "Slim"
+    ]
+  },
+  {
+    "id": "p7",
+    "sku": "PLV-KNT-007",
+    "name": "Ivory Roll-Neck Sweater",
+    "category": "Knitwear",
+    "priceCents": 9800,
+    "image": "assets/img/p7.jpg",
+    "width": 1112,
+    "height": 1483,
+    "alt": "Side profile of a man in a white roll-neck sweater against a bright, plain white wall.",
+    "description": "A fine-gauge roll-neck in soft merino blend. Sits close to the neck, layers cleanly under a coat.",
+    "details": [
+      "Fabric: 70% merino wool, 30% silk",
+      "Fit: regular, ribbed cuffs and hem",
+      "Care: hand wash cold or dry clean"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "soldOut": [
+      "XXL"
+    ],
+    "colors": [
+      {
+        "name": "Ivory",
+        "hex": "#eae3d3"
+      },
+      {
+        "name": "Camel",
+        "hex": "#b58f66"
+      },
+      {
+        "name": "Charcoal",
+        "hex": "#3a3a3c"
+      }
+    ],
+    "fits": [
+      "Regular",
+      "Slim"
+    ]
+  },
+  {
+    "id": "p8",
+    "sku": "PLV-TRS-008",
+    "name": "Tailored Blue Wool Trousers",
+    "category": "Trousers",
+    "priceCents": 11200,
+    "image": "assets/img/p8.jpg",
+    "width": 1112,
+    "height": 1483,
+    "alt": "A man ties the laces of tan brogues with tweed panels, in blue trousers and patterned socks, on a striped rug.",
+    "description": "Sharp, high-twist wool trousers with a clean break at the shoe. Cut straight through the leg.",
+    "details": [
+      "Fabric: 100% virgin wool, half-lined",
+      "Fit: straight leg, mid rise",
+      "Flat front, side adjusters, hook-and-bar closure",
+      "Care: dry clean only"
+    ],
+    "sizes": [
+      "30",
+      "32",
+      "34",
+      "36",
+      "38"
+    ],
+    "soldOut": [
+      "30"
+    ],
+    "colors": [
+      {
+        "name": "Teal Blue",
+        "hex": "#1b4a5c"
+      },
+      {
+        "name": "Navy",
+        "hex": "#1c2638"
+      },
+      {
+        "name": "Charcoal",
+        "hex": "#3d3f43"
+      }
+    ],
+    "fits": [
+      "Regular",
+      "Slim"
+    ]
+  },
+  {
+    "id": "p9",
+    "sku": "PLV-BLZ-009",
+    "name": "Midnight Evening Blazer",
+    "category": "Blazers",
+    "priceCents": 17900,
+    "image": "assets/img/p9.jpg",
+    "width": 1112,
+    "height": 1483,
+    "alt": "A man in a black wool coat sits in warm low light against a wall of stacked brown wood blocks.",
+    "description": "A slim black blazer with soft shoulders and a deep, quiet drape. Made for dinners that run late.",
+    "details": [
+      "Fabric: 98% wool, 2% elastane, fully lined",
+      "Fit: slim through the chest, natural shoulder",
+      "Single-breasted, two-button front, notch lapel",
+      "Care: dry clean only"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "soldOut": [
+      "S"
+    ],
+    "colors": [
+      {
+        "name": "Black",
+        "hex": "#111012"
+      },
+      {
+        "name": "Wine",
+        "hex": "#4a0a16"
+      }
+    ],
+    "fits": [
+      "Regular",
+      "Slim"
+    ]
+  },
+  {
+    "id": "p10",
+    "sku": "PLV-CTS-010",
+    "name": "Camel Wool Overcoat",
+    "category": "Coats",
+    "priceCents": 24500,
+    "image": "assets/img/p10.jpg",
+    "width": 1112,
+    "height": 1483,
+    "alt": "A man in a camel overcoat stands in front of a pale arched doorway in soft daylight.",
+    "description": "A long, unfussy overcoat in a brushed wool blend. The colour goes with everything in the wardrobe.",
+    "details": [
+      "Fabric: 80% wool, 20% cashmere, quilted lining",
+      "Fit: relaxed, falls just below the knee",
+      "Single-breasted, notch lapel, welt pockets",
+      "Care: dry clean only"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "soldOut": [
+      "XXL",
+      "S"
+    ],
+    "colors": [
+      {
+        "name": "Camel",
+        "hex": "#b0907a"
+      },
+      {
+        "name": "Charcoal",
+        "hex": "#3a3a3c"
+      }
+    ],
+    "fits": [
+      "Regular"
+    ]
+  },
+  {
+    "id": "p11",
+    "sku": "PLV-SHT-011",
+    "name": "Crisp White Poplin Shirt",
+    "category": "Shirts",
+    "priceCents": 8400,
+    "image": "assets/img/p11.jpg",
+    "width": 1112,
+    "height": 1483,
+    "alt": "A man in a white shirt with black braces and glasses sits against a brick wall in warm low light.",
+    "description": "The one white shirt worth owning: a dense cotton poplin with a soft, structured collar.",
+    "details": [
+      "Fabric: 100% long-staple cotton poplin",
+      "Fit: tailored, single-button cuff",
+      "Mother-of-pearl effect buttons",
+      "Care: machine wash 30°C, iron warm"
+    ],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "soldOut": [],
+    "colors": [
+      {
+        "name": "White",
+        "hex": "#f4f2ec"
+      },
+      {
+        "name": "Pale Blue",
+        "hex": "#cfdbe6"
+      }
+    ],
+    "fits": [
+      "Regular",
+      "Slim"
+    ]
+  },
+  {
+    "id": "p12",
+    "sku": "PLV-SUN-012",
+    "name": "Noir Aviator Sunglasses",
+    "category": "Sunglasses",
+    "priceCents": 13500,
+    "image": "assets/img/p12.jpg",
+    "width": 1112,
+    "height": 1483,
+    "alt": "Black aviator-style sunglasses with dark gradient lenses rest on dark fabric, softly lit from the side.",
+    "description": "A lightweight acetate aviator with graduated grey lenses and a double bridge.",
+    "details": [
+      "Frame: black acetate, metal temples",
+      "Lenses: grey gradient, UV400",
+      "Includes case and cloth"
+    ],
+    "sizes": [
+      "One size"
+    ],
+    "soldOut": [],
+    "colors": [
+      {
+        "name": "Black",
+        "hex": "#111111"
+      },
+      {
+        "name": "Gunmetal",
+        "hex": "#4b4d52"
+      }
+    ],
+    "fits": []
+  },
+  {
+    "id": "p13",
+    "sku": "PLV-SUN-013",
+    "name": "Matte Square Sunglasses",
+    "category": "Sunglasses",
+    "priceCents": 11800,
+    "image": "assets/img/p13.jpg",
+    "width": 1112,
+    "height": 1483,
+    "alt": "A close detail of matte black square-frame sunglasses with dark lenses on a dark surface, shallow depth of field.",
+    "description": "A bold square frame in matte acetate. Wide enough to make a statement without shouting.",
+    "details": [
+      "Frame: matte black acetate",
+      "Lenses: smoked, polarised, UV400",
+      "Includes case and cloth"
+    ],
+    "sizes": [
+      "One size"
+    ],
+    "soldOut": [],
+    "colors": [
+      {
+        "name": "Matte Black",
+        "hex": "#1a1a1a"
+      },
+      {
+        "name": "Smoke",
+        "hex": "#55524f"
+      }
+    ],
+    "fits": []
+  },
+  {
+    "id": "p14",
+    "sku": "PLV-SUN-014",
+    "name": "Tortoiseshell Acetate Sunglasses",
+    "category": "Sunglasses",
+    "priceCents": 12500,
+    "image": "assets/img/p14.jpg",
+    "width": 1112,
+    "height": 1483,
+    "alt": "Dark tortoiseshell sunglasses with brown lenses on black leather under low directional light.",
+    "description": "A classic keyhole shape in dark tortoiseshell, with warm brown lenses and metal-trimmed hinges.",
+    "details": [
+      "Frame: tortoiseshell acetate",
+      "Lenses: brown gradient, UV400",
+      "Includes case and cloth"
+    ],
+    "sizes": [
+      "One size"
+    ],
+    "soldOut": [],
+    "colors": [
+      {
+        "name": "Tortoise",
+        "hex": "#4a2f1c"
+      },
+      {
+        "name": "Havana",
+        "hex": "#7a4e2d"
+      }
+    ],
+    "fits": []
+  },
+  {
+    "id": "p15",
+    "sku": "PLV-BLT-015",
+    "name": "Black Leather Belt, Gold Buckle",
+    "category": "Belts",
+    "priceCents": 7800,
+    "image": "assets/img/p15.jpg",
+    "width": 1112,
+    "height": 1483,
+    "alt": "Close-up of a black leather belt with a polished gold buckle worn with a grey knit and black trousers.",
+    "description": "A smooth black calfskin belt finished with a polished gold-tone pin buckle.",
+    "details": [
+      "Material: full-grain calf leather, 3.5 cm wide",
+      "Buckle: gold-tone brass, single pin",
+      "Care: wipe with a dry cloth"
+    ],
+    "sizes": [
+      "30",
+      "32",
+      "34",
+      "36",
+      "38"
+    ],
+    "soldOut": [
+      "38"
+    ],
+    "colors": [
+      {
+        "name": "Black",
+        "hex": "#0f0f0f"
+      }
+    ],
+    "fits": []
+  },
+  {
+    "id": "p16",
+    "sku": "PLV-BLT-016",
+    "name": "Cognac Woven Leather Belt",
+    "category": "Belts",
+    "priceCents": 8200,
+    "image": "assets/img/p16.jpg",
+    "width": 1112,
+    "height": 1483,
+    "alt": "Cognac woven leather belt with a brushed steel buckle wrapped around a white studio roll.",
+    "description": "Hand-woven leather in a warm cognac, with a brushed steel buckle. Stretches nothing, softens with wear.",
+    "details": [
+      "Material: hand-woven calf leather, 3.2 cm wide",
+      "Buckle: brushed steel, single pin",
+      "Care: wipe with a dry cloth"
+    ],
+    "sizes": [
+      "30",
+      "32",
+      "34",
+      "36",
+      "38"
+    ],
+    "soldOut": [],
+    "colors": [
+      {
+        "name": "Cognac",
+        "hex": "#8a4b25"
+      },
+      {
+        "name": "Chestnut",
+        "hex": "#5e3320"
+      }
+    ],
+    "fits": []
+  },
+  {
+    "id": "p17",
+    "sku": "PLV-BLT-017",
+    "name": "Distressed Brown Leather Belt",
+    "category": "Belts",
+    "priceCents": 6900,
+    "image": "assets/img/p17.jpg",
+    "width": 1112,
+    "height": 1483,
+    "alt": "A dark brown leather belt with a steel buckle lies coiled on a wooden surface in warm, directional light.",
+    "description": "A heavy, rugged belt in thick vegetable-tanned leather with a steel roller buckle.",
+    "details": [
+      "Material: vegetable-tanned leather, 4 cm wide",
+      "Buckle: steel roller, single pin",
+      "Care: condition occasionally with leather balm"
+    ],
+    "sizes": [
+      "30",
+      "32",
+      "34",
+      "36",
+      "38"
+    ],
+    "soldOut": [
+      "30"
+    ],
+    "colors": [
+      {
+        "name": "Dark Brown",
+        "hex": "#3d2f25"
+      }
+    ],
+    "fits": []
+  },
+  {
+    "id": "p18",
+    "sku": "PLV-WTC-018",
+    "name": "Minimal Rose Gold Watch",
+    "category": "Watches",
+    "priceCents": 18900,
+    "image": "assets/img/p18.jpg",
+    "width": 1112,
+    "height": 1483,
+    "alt": "Hand holding a minimal rose-gold watch with a plain white dial and taupe leather strap.",
+    "description": "A thin, quiet watch: rose gold case, a plain white dial and a soft taupe leather strap.",
+    "details": [
+      "Case: 38 mm, stainless steel, rose-gold plating",
+      "Movement: Japanese quartz",
+      "Strap: Italian leather, 20 mm",
+      "Water resistant to 3 ATM"
+    ],
+    "sizes": [
+      "One size"
+    ],
+    "soldOut": [],
+    "colors": [
+      {
+        "name": "Rose Gold",
+        "hex": "#c79a82"
+      },
+      {
+        "name": "Taupe",
+        "hex": "#a8998a"
+      }
+    ],
+    "fits": []
+  },
+  {
+    "id": "p19",
+    "sku": "PLV-WTC-019",
+    "name": "Obsidian Black Watch",
+    "category": "Watches",
+    "priceCents": 19900,
+    "image": "assets/img/p19.jpg",
+    "width": 1112,
+    "height": 1483,
+    "alt": "Man in a black tee wearing a minimal black-dial watch on a black leather strap, hand resting at his jaw.",
+    "description": "An all-black minimal watch with a matte dial and a black leather strap. Understated by design.",
+    "details": [
+      "Case: 40 mm, black PVD stainless steel",
+      "Movement: Japanese quartz",
+      "Strap: black leather, 20 mm",
+      "Water resistant to 5 ATM"
+    ],
+    "sizes": [
+      "One size"
+    ],
+    "soldOut": [],
+    "colors": [
+      {
+        "name": "Black",
+        "hex": "#0e0e0e"
+      },
+      {
+        "name": "Tan Strap",
+        "hex": "#a47a55"
+      }
+    ],
+    "fits": []
+  },
+  {
+    "id": "p20",
+    "sku": "PLV-WTC-020",
+    "name": "Steel Heritage Watch",
+    "category": "Watches",
+    "priceCents": 22500,
+    "image": "assets/img/p20.jpg",
+    "width": 1112,
+    "height": 1483,
+    "alt": "A steel wristwatch with a dark dial on a brown leather strap, worn on a wrist at the cuff of a grey jacket.",
+    "description": "A polished steel case on a brown leather strap. Reads best against a tailored cuff.",
+    "details": [
+      "Case: 40 mm, polished stainless steel",
+      "Movement: automatic, 38-hour reserve",
+      "Strap: brown leather, 20 mm",
+      "Water resistant to 5 ATM"
+    ],
+    "sizes": [
+      "One size"
+    ],
+    "soldOut": [],
+    "colors": [
+      {
+        "name": "Steel",
+        "hex": "#b8bcc0"
+      },
+      {
+        "name": "Brown Strap",
+        "hex": "#5a3a24"
+      }
+    ],
+    "fits": []
   }
 ]
