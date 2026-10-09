@@ -21,7 +21,7 @@ void main(){ vUv = vec2(p.x * .5 + .5, .5 - p.y * .5); gl_Position = vec4(p, 0.,
 const FRAG = `#version 300 es
 precision highp float;
 uniform sampler2D uSide, uFront, uFlow;
-uniform float uA, uB, uM;
+uniform float uA, uB, uM, uL;
 in vec2 vUv; out vec4 o;
 // the flow map holds two fields stacked: side -> front on the top half, front -> side on the bottom half
 vec2 flow(float half_, vec2 uv){
@@ -29,8 +29,10 @@ vec2 flow(float half_, vec2 uv){
   return (texture(uFlow, q).rg * 255. - 128.) * .5 / vec2(${W}., ${H}.);
 }
 void main(){
-  vec4 a = texture(uSide,  vUv - uA * flow(0., vUv));
-  vec4 b = texture(uFront, vUv - uB * flow(1., vUv));
+  // he also leans in a touch as he turns: the whole figure grows a hair about its base, so it isn't only a face that moves
+  vec2 uv = vec2(.5, 1.) + (vUv - vec2(.5, 1.)) / (1. + .014 * uL);
+  vec4 a = texture(uSide,  uv - uA * flow(0., uv));
+  vec4 b = texture(uFront, uv - uB * flow(1., uv));
   vec4 c = a * (1. - uM) + b * uM;
   // half-way the two outlines must read as one solid head, not two ghosts: take the union of their coverage
   float k = 4. * uM * (1. - uM); k *= k;
@@ -95,13 +97,14 @@ function run(side, front, flow) {
     gl.uniform1i(gl.getUniformLocation(prog, 'uSide'), 0);
     gl.uniform1i(gl.getUniformLocation(prog, 'uFront'), 1);
     gl.uniform1i(gl.getUniformLocation(prog, 'uFlow'), 2);
-    const uA = gl.getUniformLocation(prog, 'uA'), uB = gl.getUniformLocation(prog, 'uB'), uM = gl.getUniformLocation(prog, 'uM');
+    const uA = gl.getUniformLocation(prog, 'uA'), uB = gl.getUniformLocation(prog, 'uB'), uM = gl.getUniformLocation(prog, 'uM'), uL = gl.getUniformLocation(prog, 'uL');
     paint = (t, calm = still.matches) => {
       gl.viewport(0, 0, canvas.width, canvas.height);
       gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
       // each photo is warped toward the other; with reduced motion neither is, and it is a plain blend
       gl.uniform1f(uA, calm ? 0 : Math.min(t, 1.04));
       gl.uniform1f(uB, calm ? 0 : Math.max(0, 1 - t));
+      gl.uniform1f(uL, calm ? 0 : ease(0, 1, t));
       gl.uniform1f(uM, calm ? Math.min(1, Math.max(0, t)) : ease(.18, .82, t));
       gl.drawArrays(gl.TRIANGLES, 0, 3);
     };
@@ -129,7 +132,7 @@ function run(side, front, flow) {
     const dt = Math.min(0.033, prev ? (now - prev) / 1000 : 0.016);
     prev = now;
     const look = target > x;
-    const k = still.matches ? 420 : look ? 150 : 52, zeta = still.matches ? 1 : look ? 0.74 : 1;
+    const k = still.matches ? 420 : look ? 105 : 46, zeta = still.matches ? 1 : look ? 0.8 : 1;
     v += (k * (target - x) - 2 * zeta * Math.sqrt(k) * v) * dt;
     x += v * dt;
     if (Math.abs(target - x) < 0.0015 && Math.abs(v) < 0.01) { x = target; v = 0; }
@@ -153,6 +156,7 @@ function run(side, front, flow) {
     timer = setTimeout(() => { pend = null; aim(to); }, delay);
   };
 
+  size(); paint(0);   // warm up the GPU now, while the canvas is still invisible, so the first hover doesn't hitch
   new ResizeObserver(() => { if (fig.classList.contains('gaze')) { size(); paint(x); } }).observe(canvas);
   document.addEventListener('visibilitychange', () => { if (!document.hidden && !raf && x !== target) raf = requestAnimationFrame(frame); });
 
